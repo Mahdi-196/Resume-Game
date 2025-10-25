@@ -115,317 +115,327 @@ export const InteractiveDetectiveBoard = ({ onInteraction, onBoardClick, showCon
       <group ref={previewGroupRef}>
       {/* Header Bar - Top of board */}
       <mesh position={[0, 2.8, 0.03]}>
-        <planeGeometry args={[11, 0.8]} />
+        <planeGeometry args={[11, 0.7]} />
         <meshStandardMaterial color="#1a0d00" />
       </mesh>
       <Text
         position={[0, 2.8, 0.04]}
-        fontSize={0.35}
+        fontSize={0.32}
         color="#FFD700"
         anchorX="center"
         anchorY="middle"
+        font="/fonts/Courier-New-Bold.woff"
       >
         CASE FILE: MAHDI GHALEB
       </Text>
 
-      {/* Push pins */}
-      <mesh position={[-4.5, 2.2, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[4.5, 2.2, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[-4.2, 0.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[4.2, 0.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[-4.5, -1.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[4.5, -1.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[-1.5, 1.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[1.5, 1.5, 0.03]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
-      </mesh>
-
-      {/* Red yarn strings - web pattern */}
-      <mesh position={[-3, 1.8, 0.02]} rotation={[0, 0, -0.3]}>
-        <boxGeometry args={[3.5, 0.02, 0.01]} />
+      {/* Red yarn strings - connecting case files */}
+      <mesh position={[-3.2, 1.2, 0.02]} rotation={[0, 0, 0.15]}>
+        <boxGeometry args={[0.015, 2.8, 0.01]} />
         <meshStandardMaterial color="#cc0000" />
       </mesh>
-      <mesh position={[3, 1.8, 0.02]} rotation={[0, 0, 0.3]}>
-        <boxGeometry args={[3.5, 0.02, 0.01]} />
+      <mesh position={[3.2, 1.2, 0.02]} rotation={[0, 0, -0.15]}>
+        <boxGeometry args={[0.015, 2.8, 0.01]} />
         <meshStandardMaterial color="#cc0000" />
       </mesh>
-      <mesh position={[-3, 0, 0.02]} rotation={[0, 0, -0.2]}>
-        <boxGeometry args={[4, 0.02, 0.01]} />
+      <mesh position={[0, 1.9, 0.02]}>
+        <boxGeometry args={[6.5, 0.015, 0.01]} />
         <meshStandardMaterial color="#cc0000" />
       </mesh>
-      <mesh position={[3, 0, 0.02]} rotation={[0, 0, 0.2]}>
-        <boxGeometry args={[4, 0.02, 0.01]} />
-        <meshStandardMaterial color="#cc0000" />
-      </mesh>
-      <mesh position={[-2, -1, 0.02]} rotation={[0, 0, -0.15]}>
-        <boxGeometry args={[3, 0.02, 0.01]} />
-        <meshStandardMaterial color="#cc0000" />
-      </mesh>
-      <mesh position={[2, -1, 0.02]} rotation={[0, 0, 0.15]}>
-        <boxGeometry args={[3, 0.02, 0.01]} />
+      <mesh position={[0, 0.4, 0.02]}>
+        <boxGeometry args={[6.5, 0.015, 0.01]} />
         <meshStandardMaterial color="#cc0000" />
       </mesh>
 
-      {/* Photo 1 - Top left (Polaroid style) */}
-      <mesh position={[-4.5, 2, 0.02]} rotation={[0, 0, -0.08]}>
-        <planeGeometry args={[1.3, 1.5]} />
-        <meshStandardMaterial color="#F5F5F5" />
+      {/* Case File 1 - ABOUT ME (Top Left) */}
+      <mesh position={[-3.2, 1.2, 0.03]}>
+        <planeGeometry args={[2.2, 1.3]} />
+        <meshStandardMaterial color="#F5F5DC" />
       </mesh>
-      <mesh position={[-4.5, 2.1, 0.03]} rotation={[0, 0, -0.08]}>
-        <planeGeometry args={[1.1, 1.1]} />
-        <meshStandardMaterial color="#404040" />
-      </mesh>
-      <Text
-        position={[-4.5, 1.3, 0.04]}
-        fontSize={0.12}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, -0.08]}
-      >
-        PROFILE
-      </Text>
-
-      {/* Photo 2 - Top right */}
-      <mesh position={[4.5, 2, 0.02]} rotation={[0, 0, 0.1]}>
-        <planeGeometry args={[1.3, 1.5]} />
-        <meshStandardMaterial color="#F5F5F5" />
-      </mesh>
-      <mesh position={[4.5, 2.1, 0.03]} rotation={[0, 0, 0.1]}>
-        <planeGeometry args={[1.1, 1.1]} />
-        <meshStandardMaterial color="#404040" />
+      <mesh position={[-3.2, 1.7, 0.04]}>
+        <planeGeometry args={[2.1, 0.3]} />
+        <meshStandardMaterial color="#8B0000" />
       </mesh>
       <Text
-        position={[4.5, 1.3, 0.04]}
-        fontSize={0.12}
-        color="#333333"
+        position={[-3.2, 1.7, 0.05]}
+        fontSize={0.14}
+        color="#FFFFFF"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, 0.1]}
       >
-        LOCATION
+        CASE FILE #001
       </Text>
-
-      {/* Sticky note 1 - Yellow */}
-      <mesh position={[-4.2, 0.3, 0.02]} rotation={[0, 0, -0.05]}>
-        <planeGeometry args={[1.2, 1.2]} />
-        <meshStandardMaterial color="#FFEB3B" />
-      </mesh>
       <Text
-        position={[-4.2, 0.6, 0.03]}
-        fontSize={0.15}
-        color="#333333"
+        position={[-3.2, 1.35, 0.05]}
+        fontSize={0.18}
+        color="#1a0d00"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, -0.05]}
       >
-        SKILLS:
+        ABOUT ME
       </Text>
       <Text
-        position={[-4.2, 0.3, 0.03]}
-        fontSize={0.1}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, -0.05]}
-      >
-        React
-      </Text>
-      <Text
-        position={[-4.2, 0.15, 0.03]}
-        fontSize={0.1}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, -0.05]}
-      >
-        TypeScript
-      </Text>
-      <Text
-        position={[-4.2, 0, 0.03]}
-        fontSize={0.1}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, -0.05]}
-      >
-        AWS
-      </Text>
-
-      {/* Sticky note 2 - Yellow */}
-      <mesh position={[4.2, 0.3, 0.02]} rotation={[0, 0, 0.07]}>
-        <planeGeometry args={[1.2, 1.2]} />
-        <meshStandardMaterial color="#FFEB3B" />
-      </mesh>
-      <Text
-        position={[4.2, 0.5, 0.03]}
-        fontSize={0.12}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, 0.07]}
-      >
-        EXPERIENCE
-      </Text>
-      <Text
-        position={[4.2, 0.2, 0.03]}
+        position={[-3.2, 1.05, 0.05]}
         fontSize={0.09}
         color="#333333"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, 0.07]}
       >
-        5+ Years
+        Full-Stack Dev
       </Text>
-
-      {/* Newspaper clipping 1 */}
-      <mesh position={[-4.5, -1.7, 0.02]} rotation={[0, 0, -0.12]}>
-        <planeGeometry args={[1.8, 1.2]} />
-        <meshStandardMaterial color="#F5F5DC" />
-      </mesh>
       <Text
-        position={[-4.5, -1.3, 0.03]}
-        fontSize={0.12}
-        color="#000000"
+        position={[-3.2, 0.9, 0.05]}
+        fontSize={0.09}
+        color="#333333"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, -0.12]}
+      >
+        3D Enthusiast
+      </Text>
+      <Text
+        position={[-3.2, 0.75, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Problem Solver
+      </Text>
+      {/* Push pin */}
+      <mesh position={[-3.2, 1.85, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
+      </mesh>
+
+      {/* Case File 2 - EDUCATION (Top Right) */}
+      <mesh position={[3.2, 1.2, 0.03]}>
+        <planeGeometry args={[2.2, 1.3]} />
+        <meshStandardMaterial color="#F5F5DC" />
+      </mesh>
+      <mesh position={[3.2, 1.7, 0.04]}>
+        <planeGeometry args={[2.1, 0.3]} />
+        <meshStandardMaterial color="#8B0000" />
+      </mesh>
+      <Text
+        position={[3.2, 1.7, 0.05]}
+        fontSize={0.14}
+        color="#FFFFFF"
+        anchorX="center"
+        anchorY="middle"
+      >
+        CASE FILE #002
+      </Text>
+      <Text
+        position={[3.2, 1.35, 0.05]}
+        fontSize={0.18}
+        color="#1a0d00"
+        anchorX="center"
+        anchorY="middle"
+      >
+        EDUCATION
+      </Text>
+      <Text
+        position={[3.2, 1.05, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Computer Science
+      </Text>
+      <Text
+        position={[3.2, 0.9, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Self-Taught Dev
+      </Text>
+      <Text
+        position={[3.2, 0.75, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Lifelong Learner
+      </Text>
+      {/* Push pin */}
+      <mesh position={[3.2, 1.85, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
+      </mesh>
+
+      {/* Case File 3 - SKILLS (Bottom Left) */}
+      <mesh position={[-3.2, -0.35, 0.03]}>
+        <planeGeometry args={[2.2, 1.3]} />
+        <meshStandardMaterial color="#FFEB3B" />
+      </mesh>
+      <mesh position={[-3.2, 0.15, 0.04]}>
+        <planeGeometry args={[2.1, 0.3]} />
+        <meshStandardMaterial color="#1a0d00" />
+      </mesh>
+      <Text
+        position={[-3.2, 0.15, 0.05]}
+        fontSize={0.14}
+        color="#FFD700"
+        anchorX="center"
+        anchorY="middle"
+      >
+        CASE FILE #003
+      </Text>
+      <Text
+        position={[-3.2, -0.2, 0.05]}
+        fontSize={0.18}
+        color="#1a0d00"
+        anchorX="center"
+        anchorY="middle"
+      >
+        SKILLS
+      </Text>
+      <Text
+        position={[-3.2, -0.5, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        React • TypeScript
+      </Text>
+      <Text
+        position={[-3.2, -0.65, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Three.js • Node.js
+      </Text>
+      <Text
+        position={[-3.2, -0.8, 0.05]}
+        fontSize={0.09}
+        color="#333333"
+        anchorX="center"
+        anchorY="middle"
+      >
+        AWS • Docker
+      </Text>
+      {/* Push pin */}
+      <mesh position={[-3.2, 0.3, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
+      </mesh>
+
+      {/* Case File 4 - PROJECTS (Bottom Right) */}
+      <mesh position={[3.2, -0.35, 0.03]}>
+        <planeGeometry args={[2.2, 1.3]} />
+        <meshStandardMaterial color="#F5F5DC" />
+      </mesh>
+      <mesh position={[3.2, 0.15, 0.04]}>
+        <planeGeometry args={[2.1, 0.3]} />
+        <meshStandardMaterial color="#8B0000" />
+      </mesh>
+      <Text
+        position={[3.2, 0.15, 0.05]}
+        fontSize={0.14}
+        color="#FFFFFF"
+        anchorX="center"
+        anchorY="middle"
+      >
+        CASE FILE #004
+      </Text>
+      <Text
+        position={[3.2, -0.2, 0.05]}
+        fontSize={0.18}
+        color="#1a0d00"
+        anchorX="center"
+        anchorY="middle"
       >
         PROJECTS
       </Text>
       <Text
-        position={[-4.5, -1.6, 0.03]}
-        fontSize={0.08}
+        position={[3.2, -0.5, 0.05]}
+        fontSize={0.09}
         color="#333333"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, -0.12]}
       >
         E-Commerce
       </Text>
       <Text
-        position={[-4.5, -1.8, 0.03]}
-        fontSize={0.08}
+        position={[3.2, -0.65, 0.05]}
+        fontSize={0.09}
         color="#333333"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, -0.12]}
       >
-        Dashboard
+        Chat Application
       </Text>
       <Text
-        position={[-4.5, -2, 0.03]}
-        fontSize={0.08}
+        position={[3.2, -0.8, 0.05]}
+        fontSize={0.09}
         color="#333333"
         anchorX="center"
         anchorY="middle"
-        rotation={[0, 0, -0.12]}
       >
-        Chat App
+        Analytics Dashboard
       </Text>
-
-      {/* Newspaper clipping 2 */}
-      <mesh position={[4.5, -1.7, 0.02]} rotation={[0, 0, 0.1]}>
-        <planeGeometry args={[1.8, 1.2]} />
-        <meshStandardMaterial color="#F5F5DC" />
+      {/* Push pin */}
+      <mesh position={[3.2, 0.3, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
       </mesh>
-      <Text
-        position={[4.5, -1.3, 0.03]}
-        fontSize={0.12}
-        color="#000000"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, 0.1]}
-      >
-        CONTACT
-      </Text>
-      <Text
-        position={[4.5, -1.6, 0.03]}
-        fontSize={0.08}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, 0.1]}
-      >
-        Available
-      </Text>
-      <Text
-        position={[4.5, -1.85, 0.03]}
-        fontSize={0.08}
-        color="#333333"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, 0.1]}
-      >
-        For Hire
-      </Text>
 
       {/* Center card - Main call to action */}
-      <mesh position={[0, 0, 0.02]} rotation={[0, 0, 0.02]}>
-        <planeGeometry args={[3.5, 2]} />
-        <meshStandardMaterial color="#FFFACD" />
+      <mesh position={[0, -1.8, 0.03]}>
+        <planeGeometry args={[4, 1.2]} />
+        <meshStandardMaterial color="#1a0d00" />
       </mesh>
-      <mesh position={[0, 0, 0.021]}>
-        <planeGeometry args={[3.3, 1.8]} />
-        <meshStandardMaterial color="#000000" />
-      </mesh>
-      <mesh position={[0, 0, 0.022]}>
-        <planeGeometry args={[3.1, 1.6]} />
+      <mesh position={[0, -1.8, 0.04]}>
+        <planeGeometry args={[3.85, 1.05]} />
         <meshStandardMaterial color="#FFFACD" />
       </mesh>
       <Text
-        position={[0, 0.6, 0.03]}
-        fontSize={0.3}
+        position={[0, -1.55, 0.05]}
+        fontSize={0.24}
         color="#8B0000"
         anchorX="center"
         anchorY="middle"
       >
-        SUSPECT FILE
+        CLASSIFIED FILES
       </Text>
       <Text
-        position={[0, 0.15, 0.03]}
-        fontSize={0.22}
-        color="#000000"
+        position={[0, -1.85, 0.05]}
+        fontSize={0.18}
+        color="#1a0d00"
         anchorX="center"
         anchorY="middle"
       >
         MAHDI GHALEB
       </Text>
-      <mesh position={[0, -0.35, 0.025]}>
-        <planeGeometry args={[2.5, 0.5]} />
+      <mesh position={[0, -2.15, 0.045]}>
+        <planeGeometry args={[3, 0.35]} />
         <meshStandardMaterial color="#8B0000" />
       </mesh>
       <Text
-        position={[0, -0.35, 0.03]}
-        fontSize={0.16}
+        position={[0, -2.15, 0.05]}
+        fontSize={0.13}
         color="#FFFFFF"
         anchorX="center"
         anchorY="middle"
       >
-        CLICK TO INVESTIGATE
+        [ CLICK TO INVESTIGATE ]
       </Text>
+      {/* Corner push pins for center card */}
+      <mesh position={[-1.9, -1.2, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
+      </mesh>
+      <mesh position={[1.9, -1.2, 0.06]}>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial color="#cc0000" metalness={0.3} roughness={0.4} />
+      </mesh>
       </group>
     </group>
 

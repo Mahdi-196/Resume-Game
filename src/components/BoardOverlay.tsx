@@ -77,45 +77,85 @@ export const BoardOverlay = ({ isOpen, onClose }: BoardOverlayProps) => {
               }
             `}</style>
 
-            {/* Row 1: Contact & Skills */}
-            {/* Contact Card */}
-            <div className="col-span-12 md:col-span-4 relative">
+            {/* Row 1: About Me & Education */}
+            {/* About Me Card */}
+            <div className="col-span-12 md:col-span-6 relative">
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
                    style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
-              <div className="p-3 shadow-2xl transform hover:scale-105 transition-transform border-2"
+              <div className="p-4 shadow-2xl transform hover:scale-105 transition-transform border-2"
                    style={{
                      backgroundColor: '#D2B48C',
                      borderColor: '#654321',
                      boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
                      backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(101,67,33,0.12) 31px, rgba(101,67,33,0.12) 32px)'
                    }}>
-                <h3 className="text-base font-bold mb-2 border-b-2 pb-1 font-mono" style={{ color: '#654321', borderColor: '#654321' }}>
-                  📋 CONTACT
-                </h3>
-                <div className="space-y-1 font-mono text-xs" style={{ color: '#3d2817' }}>
-                  <p><strong>Name:</strong> Mahdi Ghaleb</p>
-                  <p><strong>Email:</strong> mahdi@example.com</p>
-                  <p><strong>Location:</strong> Remote</p>
-                  <p><strong>LinkedIn:</strong> /in/mahdighaleb</p>
-                  <p><strong>GitHub:</strong> /mahdighaleb</p>
+                <div className="flex items-center gap-2 mb-2 border-b-2 pb-1" style={{ borderColor: '#654321' }}>
+                  <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold">CASE FILE #001</div>
+                  <h3 className="text-base font-bold font-mono" style={{ color: '#654321' }}>ABOUT ME</h3>
+                </div>
+                <div className="space-y-2 font-mono text-xs" style={{ color: '#3d2817' }}>
+                  <p className="leading-relaxed">
+                    Full-stack developer passionate about creating immersive web experiences.
+                    Specializing in modern web technologies and 3D graphics.
+                  </p>
+                  <div className="pt-2 border-t" style={{ borderColor: '#654321' }}>
+                    <p><strong>Name:</strong> Mahdi Ghaleb</p>
+                    <p><strong>Email:</strong> mahdi@example.com</p>
+                    <p><strong>Location:</strong> Remote</p>
+                    <p><strong>LinkedIn:</strong> /in/mahdighaleb</p>
+                    <p><strong>GitHub:</strong> /mahdighaleb</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Education Card */}
+            <div className="col-span-12 md:col-span-6 relative">
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
+                   style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
+              <div className="p-4 shadow-2xl transform hover:scale-105 transition-transform border-2"
+                   style={{
+                     backgroundColor: '#D2B48C',
+                     borderColor: '#654321',
+                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(101,67,33,0.12) 31px, rgba(101,67,33,0.12) 32px)'
+                   }}>
+                <div className="flex items-center gap-2 mb-2 border-b-2 pb-1" style={{ borderColor: '#654321' }}>
+                  <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold">CASE FILE #002</div>
+                  <h3 className="text-base font-bold font-mono" style={{ color: '#654321' }}>EDUCATION</h3>
+                </div>
+                <div className="space-y-3 font-mono text-xs" style={{ color: '#3d2817' }}>
+                  <div>
+                    <h4 className="font-bold" style={{ color: '#654321' }}>Bachelor of Computer Science</h4>
+                    <p className="text-xs opacity-80">University Name • 2018-2022</p>
+                    <p className="mt-1">Focus: Software Engineering, Web Development</p>
+                  </div>
+                  <div className="pt-2 border-t" style={{ borderColor: '#654321' }}>
+                    <h4 className="font-bold mb-1" style={{ color: '#654321' }}>Certifications & Learning</h4>
+                    <ul className="space-y-0.5">
+                      <li>• AWS Certified Developer</li>
+                      <li>• Self-taught in Three.js & 3D Graphics</li>
+                      <li>• Continuous learner via online platforms</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Skills Card */}
-            <div className="col-span-12 md:col-span-8 relative">
+            <div className="col-span-12 relative">
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
                    style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
-              <div className="p-3 shadow-2xl transform hover:scale-105 transition-transform border-2"
+              <div className="p-4 shadow-2xl transform hover:scale-105 transition-transform border-2"
                    style={{
-                     backgroundColor: '#D2B48C',
+                     backgroundColor: '#FFEB3B',
                      borderColor: '#654321',
-                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
-                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(101,67,33,0.12) 31px, rgba(101,67,33,0.12) 32px)'
+                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)'
                    }}>
-                <h3 className="text-base font-bold mb-2 border-b-2 pb-1 font-mono" style={{ color: '#654321', borderColor: '#654321' }}>
-                  🔧 TECHNICAL SKILLS
-                </h3>
+                <div className="flex items-center gap-2 mb-3 border-b-2 pb-1" style={{ borderColor: '#654321' }}>
+                  <div className="bg-black text-yellow-400 px-2 py-1 text-xs font-bold">CASE FILE #003</div>
+                  <h3 className="text-base font-bold font-mono" style={{ color: '#654321' }}>TECHNICAL SKILLS</h3>
+                </div>
                 <div className="grid grid-cols-3 gap-3 text-xs font-mono">
                   <div>
                     <h4 className="font-bold mb-1" style={{ color: '#654321' }}>FRONTEND</h4>
@@ -148,18 +188,35 @@ export const BoardOverlay = ({ isOpen, onClose }: BoardOverlayProps) => {
               </div>
             </div>
 
-            {/* Row 2: AWS Architecture - Large Card */}
+            {/* Row 2: Projects Header */}
             <div className="col-span-12 relative">
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
                    style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
-              <div className="p-3 shadow-2xl transform hover:scale-[1.01] transition-transform border-2"
+              <div className="p-3 shadow-2xl border-2 text-center"
+                   style={{
+                     backgroundColor: '#1a0d00',
+                     borderColor: '#654321',
+                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)'
+                   }}>
+                <div className="flex items-center justify-center gap-2">
+                  <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold">CASE FILE #004</div>
+                  <h3 className="text-lg font-bold font-mono" style={{ color: '#FFD700' }}>PROJECTS</h3>
+                </div>
+              </div>
+            </div>
+
+            {/* AWS Architecture Project */}
+            <div className="col-span-12 relative">
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
+                   style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
+              <div className="p-4 shadow-2xl transform hover:scale-[1.01] transition-transform border-2"
                    style={{
                      backgroundColor: '#D2B48C',
                      borderColor: '#654321',
                      boxShadow: '0 8px 32px rgba(0,0,0,0.6)'
                    }}>
                 <h3 className="text-base font-bold mb-2 border-b-2 pb-1 font-mono" style={{ color: '#654321', borderColor: '#654321' }}>
-                  ☁️ AWS ARCHITECTURE DIAGRAM
+                  ☁️ AWS SERVERLESS ARCHITECTURE
                 </h3>
                 <div className="p-2 border-2 rounded" style={{ backgroundColor: '#FFF', borderColor: '#654321' }}>
                   {/* Replace with your actual AWS diagram */}
@@ -261,61 +318,6 @@ export const BoardOverlay = ({ isOpen, onClose }: BoardOverlayProps) => {
                   <span className="text-xs px-2 py-0.5 rounded font-mono" style={{ backgroundColor: '#8B7355', color: '#FFF' }}>GraphQL</span>
                   <span className="text-xs px-2 py-0.5 rounded font-mono" style={{ backgroundColor: '#8B7355', color: '#FFF' }}>Kafka</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Row 4: Experience */}
-            {/* Experience 1 */}
-            <div className="col-span-12 md:col-span-6 relative">
-              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
-                   style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
-              <div className="p-3 shadow-2xl transform hover:scale-105 transition-transform border-2"
-                   style={{
-                     backgroundColor: '#D2B48C',
-                     borderColor: '#654321',
-                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
-                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(101,67,33,0.12) 31px, rgba(101,67,33,0.12) 32px)'
-                   }}>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-sm font-bold font-mono" style={{ color: '#654321' }}>
-                    SENIOR FULL-STACK DEVELOPER
-                  </h4>
-                  <span className="text-xs font-mono whitespace-nowrap ml-2" style={{ color: '#654321' }}>2021-Present</span>
-                </div>
-                <p className="font-semibold mb-2 font-mono text-xs" style={{ color: '#654321' }}>TechCorp Solutions</p>
-                <ul className="space-y-1 text-xs font-mono" style={{ color: '#3d2817' }}>
-                  <li>• Led 3D web app development with Three.js & R3F</li>
-                  <li>• Reduced AWS costs 80% via serverless architecture</li>
-                  <li>• Improved app performance 40% through optimization</li>
-                  <li>• Mentored team of 5 junior developers</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Experience 2 */}
-            <div className="col-span-12 md:col-span-6 relative">
-              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-600 rounded-full shadow-lg z-10"
-                   style={{ boxShadow: '0 2px 8px rgba(220,0,0,0.8)' }}></div>
-              <div className="p-3 shadow-2xl transform hover:scale-105 transition-transform border-2"
-                   style={{
-                     backgroundColor: '#D2B48C',
-                     borderColor: '#654321',
-                     boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
-                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(101,67,33,0.12) 31px, rgba(101,67,33,0.12) 32px)'
-                   }}>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-sm font-bold font-mono" style={{ color: '#654321' }}>
-                    FULL-STACK DEVELOPER
-                  </h4>
-                  <span className="text-xs font-mono whitespace-nowrap ml-2" style={{ color: '#654321' }}>2019-2021</span>
-                </div>
-                <p className="font-semibold mb-2 font-mono text-xs" style={{ color: '#654321' }}>StartUp Innovations</p>
-                <ul className="space-y-1 text-xs font-mono" style={{ color: '#3d2817' }}>
-                  <li>• Built SaaS platform serving 10k+ users</li>
-                  <li>• Implemented CI/CD, reduced deploy time 90%</li>
-                  <li>• Designed RESTful and GraphQL APIs</li>
-                  <li>• Collaborated on UX improvements</li>
-                </ul>
               </div>
             </div>
 
