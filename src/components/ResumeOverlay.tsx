@@ -1,7 +1,6 @@
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import leoImage from '@/assets/leo-cat.jpg';
 
 interface ResumeOverlayProps {
   content: string | null;
@@ -604,11 +603,9 @@ export const ResumeOverlay = ({ content, onClose }: ResumeOverlayProps) => {
             </div>
 
             <div className="flex justify-center">
-              <img 
-                src={leoImage} 
-                alt="Leo the Cat" 
-                className="w-48 h-48 rounded-full object-cover border-4 border-detective-brass"
-              />
+              <div className="w-48 h-48 rounded-full bg-detective-wood border-4 border-detective-brass flex items-center justify-center">
+                <div className="text-6xl">🐱</div>
+              </div>
             </div>
 
             <div className="space-y-4 text-detective-paper">

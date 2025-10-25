@@ -29,16 +29,24 @@ export const BoardOverlay = ({ isOpen, onClose }: BoardOverlayProps) => {
       {/* Close button */}
       <button
         onClick={onClose}
-        className="fixed top-6 right-6 z-50 w-10 h-10 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-all hover:scale-110 flex items-center justify-center pointer-events-auto"
+        className="fixed top-6 right-6 z-50 w-10 h-10 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-all hover:scale-110 flex items-center justify-center pointer-events-auto animate-fade-in"
         style={{
-          boxShadow: '0 4px 6px rgba(0,0,0,0.5)'
+          boxShadow: '0 4px 6px rgba(0,0,0,0.5)',
+          animation: 'fadeIn 0.4s ease-in forwards',
+          animationDelay: '0.2s',
+          opacity: 0
         }}
       >
         <X className="h-5 w-5 text-white" />
       </button>
 
       {/* Instructions */}
-      <div className="fixed top-6 left-6 z-50 bg-black/70 text-detective-glow px-3 py-2 rounded border border-detective-brass pointer-events-none">
+      <div className="fixed top-6 left-6 z-50 bg-black/70 text-detective-glow px-3 py-2 rounded border border-detective-brass pointer-events-none"
+           style={{
+             animation: 'fadeIn 0.4s ease-in forwards',
+             animationDelay: '0.2s',
+             opacity: 0
+           }}>
         <p className="text-xs font-mono">Press ESC or click ✕ to exit</p>
       </div>
 
@@ -48,11 +56,26 @@ export const BoardOverlay = ({ isOpen, onClose }: BoardOverlayProps) => {
         <div className="relative w-[85vw] max-w-[1400px] h-[75vh] overflow-y-auto pointer-events-auto"
              style={{
                scrollbarWidth: 'thin',
-               scrollbarColor: '#D4AF37 rgba(0,0,0,0.3)'
+               scrollbarColor: '#D4AF37 rgba(0,0,0,0.3)',
+               animation: 'fadeIn 0.5s ease-in forwards',
+               animationDelay: '0.3s',
+               opacity: 0
              }}>
 
           {/* Evidence Cards Grid */}
           <div className="grid grid-cols-12 gap-3 p-4">
+            <style>{`
+              @keyframes fadeIn {
+                from {
+                  opacity: 0;
+                  transform: translateY(10px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            `}</style>
 
             {/* Row 1: Contact & Skills */}
             {/* Contact Card */}
