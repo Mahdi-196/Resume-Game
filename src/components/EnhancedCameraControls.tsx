@@ -6,6 +6,7 @@ interface EnhancedCameraControlsProps {
   isTransitioning: boolean;
   showBoardContent?: boolean;
   isDetectiveMode?: boolean;
+  introComplete?: boolean;
 }
 
 interface CameraControlsRef {
@@ -20,7 +21,7 @@ interface CameraControlsRef {
 }
 
 export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCameraControlsProps>(
-  ({ isTransitioning, showBoardContent = false, isDetectiveMode = false }, ref) => {
+  ({ isTransitioning, showBoardContent = false, isDetectiveMode = false, introComplete = false }, ref) => {
     const { camera, gl } = useThree();
     const moveState = useRef({
       forward: false,
@@ -261,7 +262,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
         gl.domElement.removeEventListener('click', handleClick);
         document.removeEventListener('pointerlockchange', handlePointerLockChange);
       };
-    }, [camera, gl, isTransitioning, isDetectiveMode]);
+    }, [camera, gl, isTransitioning, isDetectiveMode, introComplete, showBoardContent]);
 
     useFrame(() => {
       if (isTransitioning || showBoardContent) return;
@@ -298,9 +299,9 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       const newPosition = camera.position.clone().add(direction);
       newPosition.x = Math.max(-50, Math.min(50, newPosition.x));
 
-      // In detective mode, lock Y to ground level (eye height)
+      // In detective mode, lock Y to eye level height
       if (isDetectiveMode) {
-        newPosition.y = 1.7;
+        newPosition.y = 2.3;
       } else {
         newPosition.y = Math.max(0.5, Math.min(30, newPosition.y));
       }

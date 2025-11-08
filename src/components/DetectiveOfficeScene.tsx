@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { OfficeRoom } from './OfficeRoom';
 import { ExecutiveDesk } from './ExecutiveDesk';
 import { OfficeWindow } from './OfficeWindow';
@@ -8,6 +7,7 @@ import { Bookshelf } from './Bookshelf';
 import { VictorianDoor } from './VictorianDoor';
 import { VictorianChandelier } from './VictorianChandelier';
 import { FirstPersonDetectiveBody } from './FirstPersonDetectiveBody';
+import { DetectiveCharacter } from './DetectiveCharacter';
 
 interface DetectiveOfficeSceneProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -20,19 +20,21 @@ interface DetectiveOfficeSceneProps {
   overlayVisible?: boolean;
   onBoardContentClose?: () => void;
   isDetectiveMode?: boolean;
+  showIntroDetective?: boolean;
 }
 
 export const DetectiveOfficeScene = ({
   onInteraction,
   lampOn,
-  cameraControlsRef,
+  cameraControlsRef: _cameraControlsRef,
   onBoardClick,
   onCaseFileClick,
   showBoardContent = false,
   selectedCaseFile = null,
   overlayVisible = false,
   onBoardContentClose,
-  isDetectiveMode = false
+  isDetectiveMode = false,
+  showIntroDetective = false
 }: DetectiveOfficeSceneProps) => {
   return (
     <>
@@ -76,6 +78,49 @@ export const DetectiveOfficeScene = ({
 
       {/* Victorian Chandelier - lowered 10% for smaller room */}
       <VictorianChandelier position={[0, 8.1, 2]} isLit={lampOn} />
+
+      {/* Detective character visible during intro animation */}
+      {showIntroDetective && (
+        <group>
+          <DetectiveCharacter
+            position={[0, 0, 0]}
+            onInteraction={onInteraction}
+            scale={1}
+            autoRotate={false}
+          />
+          {/* Spotlight on detective during intro */}
+          <spotLight
+            position={[3, 5, 5]}
+            target-position={[0, 2, 0]}
+            intensity={3}
+            angle={0.6}
+            penumbra={0.5}
+            color="#ffd700"
+            castShadow
+          />
+        </group>
+      )}
+
+      {/* Detective character - always visible for customization */}
+      {!showIntroDetective && (
+        <group>
+          <DetectiveCharacter
+            position={[0, 0, 3]}
+            onInteraction={onInteraction}
+            scale={2}
+            autoRotate={true}
+          />
+          {/* Spotlight to make character more visible */}
+          <spotLight
+            position={[2, 4, 5]}
+            target-position={[0, 2, 3]}
+            intensity={2}
+            angle={0.5}
+            penumbra={0.5}
+            color="#ffffff"
+          />
+        </group>
+      )}
 
       {/* First-person detective body view (visible when in detective mode) */}
       {isDetectiveMode && <FirstPersonDetectiveBody />}

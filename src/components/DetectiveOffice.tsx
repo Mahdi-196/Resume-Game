@@ -32,15 +32,21 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
   const [lampOn, setLampOn] = useState(true);
   const [showBoardContent, setShowBoardContent] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isDetectiveMode, setIsDetectiveMode] = useState(false);
+  const [isDetectiveMode, setIsDetectiveMode] = useState(true); // Default ON
   const [originalCameraState, setOriginalCameraState] = useState<{
     position: THREE.Vector3;
     target: THREE.Vector3;
   } | null>(null);
   const [wasPointerLocked, setWasPointerLocked] = useState(false);
 
+  // Intro animation states
+  const [introComplete, setIntroComplete] = useState(false);
+  const [showIntroDetective, setShowIntroDetective] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const hasPlayedIntro = useRef(false);
+
   const cameraControlsRef = useRef<CameraControlsRef>(null);
-  const detectivePosition = new THREE.Vector3(-2, 1.7, 3); // Detective eye height position
+  const detectivePosition = new THREE.Vector3(0, 2.3, 0); // Detective eye height position
 
   // Expose zoomOutFromBoard method to parent via ref
   useImperativeHandle(ref, () => ({
@@ -196,8 +202,108 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     setIsTransitioning(false);
   };
 
+  // Intro animation - zoom from third person into detective character
+  const playIntroAnimation = async () => {
+    if (hasPlayedIntro.current || !cameraControlsRef.current) return;
+
+    hasPlayedIntro.current = true;
+    setIsTransitioning(true);
+
+    console.log('Starting intro animation');
+
+    // Detective at (0, 0, 0) - Camera positioned behind and to side
+    const thirdPersonPos = new THREE.Vector3(-2.5, 2.5, 4);
+    const thirdPersonTarget = new THREE.Vector3(0, 2.1, 0);
+
+    // Set initial third person view
+    await cameraControlsRef.current.setLookAt(
+      thirdPersonPos.x, thirdPersonPos.y, thirdPersonPos.z,
+      thirdPersonTarget.x, thirdPersonTarget.y, thirdPersonTarget.z,
+      false
+    );
+
+    console.log('Camera positioned, fading in...');
+
+    // Fade in from black
+    setFadeOut(true);
+
+    // Hold third-person view
+    await new Promise(resolve => setTimeout(resolve, 2500));
+
+    console.log('Zooming to first person...');
+
+    // First person position
+    const firstPersonPos = new THREE.Vector3(0, 2.3, 0);
+    const firstPersonTarget = new THREE.Vector3(0, 2.3, 5);
+
+    // Smooth zoom to first person
+    await cameraControlsRef.current.setLookAt(
+      firstPersonPos.x, firstPersonPos.y, firstPersonPos.z,
+      firstPersonTarget.x, firstPersonTarget.y, firstPersonTarget.z,
+      true
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // Hide detective mesh
+    setShowIntroDetective(false);
+    setIntroComplete(true);
+    setIsTransitioning(false);
+
+    console.log('Intro animation complete');
+  };
+
+  // Play intro animation on mount
   useEffect(() => {
+    const checkAndStart = () => {
+      if (cameraControlsRef.current && !hasPlayedIntro.current) {
+        console.log('Camera controls ready, starting intro');
+        playIntroAnimation();
+        return true;
+      }
+      return false;
+    };
+
+    if (!checkAndStart()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (checkAndStart() || attempts > 30) {
+          clearInterval(interval);
+          if (attempts > 30) {
+            console.error('Camera controls never initialized');
+            setShowIntroDetective(false);
+            setIntroComplete(true);
+            setFadeOut(true);
+          }
+        }
+      }, 100);
+
+      return () => clearInterval(interval);
+    }
+  }, []);
+
+  useEffect(() => {
+    const skipIntro = () => {
+      if (!introComplete && cameraControlsRef.current) {
+        console.log('Skipping intro');
+        cameraControlsRef.current.setLookAt(0, 2.3, 0, 0, 2.3, 5, false);
+        setShowIntroDetective(false);
+        setIntroComplete(true);
+        setFadeOut(true);
+        setIsTransitioning(false);
+        hasPlayedIntro.current = true;
+      }
+    };
+
     const handleKeyPress = (event: KeyboardEvent) => {
+      // Skip intro on any key
+      if (!introComplete && event.key !== 'F5') {
+        event.preventDefault();
+        skipIntro();
+        return;
+      }
+
       if (event.key === 'Tab') {
         event.preventDefault();
         handleToggleDetectiveMode();
@@ -217,15 +323,25 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       }
     };
 
+    const handleClick = () => {
+      if (!introComplete) {
+        skipIntro();
+      }
+    };
+
     window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showBoardContent, isTransitioning, originalCameraState, isDetectiveMode]);
+    window.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+      window.removeEventListener('click', handleClick);
+    };
+  }, [showBoardContent, isTransitioning, originalCameraState, isDetectiveMode, introComplete]);
 
   return (
     <div className="w-full h-screen bg-noir-shadow">
-      <Canvas 
-        shadows 
-        camera={{ position: [0, 2, 5], fov: 75 }}
+      <Canvas
+        shadows
+        camera={{ position: [-2.5, 2.5, 4], fov: 75 }}
         onCreated={({ gl }) => {
           gl.domElement.style.cursor = 'crosshair';
         }}
@@ -235,6 +351,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
           isTransitioning={isTransitioning}
           showBoardContent={showBoardContent}
           isDetectiveMode={isDetectiveMode}
+          introComplete={introComplete}
         />
         <Lighting lampOn={lampOn} />
         <DetectiveOfficeScene
@@ -248,6 +365,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
           overlayVisible={overlayVisible}
           onBoardContentClose={handleBoardContentClose}
           isDetectiveMode={isDetectiveMode}
+          showIntroDetective={showIntroDetective}
         />
       </Canvas>
 
@@ -265,9 +383,29 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
       {/* Enhanced Controls Hint */}
       <div className="absolute bottom-4 left-4 text-detective-paper text-sm space-y-1">
-        <p>WASD - Move • Click Empty Area - Enable Mouse Look • {!isDetectiveMode && 'Space/Shift - Up/Down • '}Tab - Toggle Detective Mode</p>
+        <p>WASD - Move • Click Empty Area - Enable Mouse Look • {!isDetectiveMode && 'Space/Shift - Up/Down • '}Tab - Toggle Detective Mode (Default: ON)</p>
         <p>R - Resume Board • Click Board - Open Resume • ESC - Close Modal</p>
       </div>
+
+      {/* Intro fade overlay */}
+      {!introComplete && (
+        <>
+          <div
+            className={`absolute inset-0 bg-black transition-opacity duration-1000 pointer-events-none ${
+              fadeOut ? 'opacity-0' : 'opacity-100'
+            }`}
+            style={{ zIndex: 1000 }}
+          />
+          <div
+            className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 text-detective-paper text-sm transition-opacity duration-1000 ${
+              fadeOut ? 'opacity-0' : 'opacity-100'
+            }`}
+            style={{ zIndex: 1001 }}
+          >
+            Click or press any key to skip...
+          </div>
+        </>
+      )}
 
     </div>
   );

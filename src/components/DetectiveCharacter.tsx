@@ -79,27 +79,77 @@ export const DetectiveCharacter = forwardRef<THREE.Group, DetectiveCharacterProp
         <meshStandardMaterial color="#1a0f0a" roughness={0.9} />
       </mesh>
       
-      {/* Detective Head */}
-      <mesh position={[0, 1.9, 0]}>
-        <sphereGeometry args={[0.22]} />
-        <meshStandardMaterial color="#d4a574" roughness={0.7} />
+      {/* Detective Head - oval shaped */}
+      <mesh position={[0, 1.9, 0]} scale={[0.9, 1.1, 0.95]}>
+        <sphereGeometry args={[0.22, 32, 32]} />
+        <meshStandardMaterial color="#d4a574" roughness={0.6} />
       </mesh>
-      
-      {/* Detective Fedora Hat */}
-      <mesh position={[0, 2.25, 0]}>
-        <cylinderGeometry args={[0.28, 0.25, 0.2]} />
+
+      {/* Mean Detective Face - Prominent Features */}
+
+      {/* Eyes - larger, darker, more intense */}
+      <mesh position={[-0.07, 1.93, 0.21]}>
+        <sphereGeometry args={[0.017, 16, 16]} />
+        <meshStandardMaterial color="#0a0a0a" />
+      </mesh>
+      <mesh position={[0.07, 1.93, 0.21]}>
+        <sphereGeometry args={[0.017, 16, 16]} />
+        <meshStandardMaterial color="#0a0a0a" />
+      </mesh>
+
+      {/* Eyebrows - thick, heavily angled down for stern/mean look */}
+      <mesh position={[-0.07, 1.97, 0.21]} rotation={[0, 0, -0.3]}>
+        <boxGeometry args={[0.055, 0.014, 0.009]} />
+        <meshStandardMaterial color="#1a0f0a" />
+      </mesh>
+      <mesh position={[0.07, 1.97, 0.21]} rotation={[0, 0, 0.3]}>
+        <boxGeometry args={[0.055, 0.014, 0.009]} />
+        <meshStandardMaterial color="#1a0f0a" />
+      </mesh>
+
+      {/* Nose - smaller */}
+      <mesh position={[0, 1.88, 0.22]} scale={[0.8, 1, 1.2]}>
+        <sphereGeometry args={[0.018, 16, 16]} />
+        <meshStandardMaterial color="#b07550" />
+      </mesh>
+
+      {/* Mouth - stern, slightly downturned */}
+      <mesh position={[0, 1.81, 0.21]} rotation={[0, 0, 0]}>
+        <boxGeometry args={[0.05, 0.009, 0.007]} />
+        <meshStandardMaterial color="#6a3015" />
+      </mesh>
+
+      {/* Mustache - thick, bushy, prominent */}
+      <mesh position={[-0.032, 1.845, 0.215]} rotation={[0, 0, -0.1]}>
+        <boxGeometry args={[0.045, 0.016, 0.01]} />
+        <meshStandardMaterial color="#1a0f0a" />
+      </mesh>
+      <mesh position={[0.032, 1.845, 0.215]} rotation={[0, 0, 0.1]}>
+        <boxGeometry args={[0.045, 0.016, 0.01]} />
+        <meshStandardMaterial color="#1a0f0a" />
+      </mesh>
+
+      {/* Jawline - strong, defined */}
+      <mesh position={[0, 1.74, 0.20]}>
+        <boxGeometry args={[0.14, 0.035, 0.012]} />
+        <meshStandardMaterial color="#b88660" />
+      </mesh>
+
+      {/* Detective Fedora Hat - smaller and sitting on head */}
+      <mesh position={[0, 2.1, 0]}>
+        <cylinderGeometry args={[0.20, 0.18, 0.18]} />
         <meshStandardMaterial color="#1a1a1a" roughness={0.9} />
       </mesh>
-      
+
       {/* Hat Brim */}
-      <mesh position={[0, 2.15, 0]}>
-        <cylinderGeometry args={[0.4, 0.4, 0.03]} />
+      <mesh position={[0, 2.02, 0]}>
+        <cylinderGeometry args={[0.30, 0.30, 0.02]} />
         <meshStandardMaterial color="#1a1a1a" roughness={0.9} />
       </mesh>
-      
+
       {/* Hat Band */}
-      <mesh position={[0, 2.2, 0]}>
-        <cylinderGeometry args={[0.26, 0.26, 0.05]} />
+      <mesh position={[0, 2.06, 0]}>
+        <cylinderGeometry args={[0.19, 0.19, 0.04]} />
         <meshStandardMaterial color="#8B4513" roughness={0.7} />
       </mesh>
       
@@ -143,30 +193,6 @@ export const DetectiveCharacter = forwardRef<THREE.Group, DetectiveCharacterProp
         <meshStandardMaterial color="#0a0a0a" roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Detective Badge */}
-      <mesh position={[0, 1.4, 0.18]}>
-        <cylinderGeometry args={[0.06, 0.06, 0.01]} />
-        <meshStandardMaterial color="#ffd700" metalness={0.9} roughness={0.1} />
-      </mesh>
-      
-      {/* Magnifying Glass in Hand */}
-      <group position={[0.45, 0.8, 0.2]}>
-        <mesh>
-          <cylinderGeometry args={[0.1, 0.1, 0.02]} />
-          <meshStandardMaterial 
-            color="#ffffff" 
-            transparent 
-            opacity={0.3} 
-            metalness={0.1} 
-            roughness={0.1} 
-          />
-        </mesh>
-        <mesh position={[0, -0.12, 0]}>
-          <cylinderGeometry args={[0.008, 0.008, 0.18]} />
-          <meshStandardMaterial color="#654321" roughness={0.8} />
-        </mesh>
-      </group>
-      
       {/* Coat Buttons */}
       <mesh position={[0, 1.5, 0.18]}>
         <sphereGeometry args={[0.03]} />
@@ -192,13 +218,7 @@ export const DetectiveCharacter = forwardRef<THREE.Group, DetectiveCharacterProp
         <boxGeometry args={[0.08, 0.3, 0.02]} />
         <meshStandardMaterial color="#8B0000" roughness={0.7} />
       </mesh>
-      
-      {/* Mustache */}
-      <mesh position={[0, 1.85, 0.21]}>
-        <boxGeometry args={[0.12, 0.02, 0.02]} />
-        <meshStandardMaterial color="#654321" roughness={0.9} />
-      </mesh>
-      
+
       {/* Subtle lighting for the character */}
       <pointLight position={[0, 2.5, 1]} intensity={0.3} color="#ffd700" />
     </group>
