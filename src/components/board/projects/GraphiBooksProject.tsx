@@ -1,11 +1,13 @@
 import { Text, Line } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
 import { COLORS } from '../constants';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * GraphiBooks Project - Simple view with single paper
  */
 export const GraphiBooksProject = () => {
+  const textScale = getTextScale();
   return (
     <>
       {/* Single Paper */}
@@ -30,56 +32,56 @@ export const GraphiBooksProject = () => {
           <planeGeometry args={[7.2, 0.5]} />
           <meshStandardMaterial color={COLORS.primaryText} roughness={0.7} />
         </mesh>
-        <Text position={[0, 1.9, 0.002]} fontSize={0.22} color={COLORS.antiquePaper} anchorX="center" anchorY="middle">
+        <Text position={[0, 1.9, 0.002]} fontSize={0.22 * textScale} color={COLORS.antiquePaper} anchorX="center" anchorY="middle">
           Book Recommendation Platform
         </Text>
 
         <Line points={[[-2.5, 1.65, 0.002], [2.5, 1.65, 0.002]]} color={COLORS.brass} lineWidth={2} />
 
-        <Text position={[0, 1.35, 0.002]} fontSize={0.13} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+        <Text position={[0, 1.35, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
           GraphQL • React • Node.js • MongoDB • Apollo
         </Text>
 
-        <Text position={[0, 1.0, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 1.0, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Developed GraphQL API with Apollo Server for efficient
         </Text>
-        <Text position={[0, 0.85, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 0.85, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           data fetching and reduced network overhead
         </Text>
-        <Text position={[0, 0.65, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 0.65, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Built recommendation engine using collaborative
         </Text>
-        <Text position={[0, 0.5, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 0.5, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           filtering algorithms based on user reading history
         </Text>
-        <Text position={[0, 0.30, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 0.30, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Integrated Google Books API for comprehensive book
         </Text>
-        <Text position={[0, 0.15, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, 0.15, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           metadata and search functionality with real-time updates
         </Text>
-        <Text position={[0, -0.05, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.05, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Implemented Apollo Client for React with normalized
         </Text>
-        <Text position={[0, -0.20, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.20, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           caching and optimistic UI updates for smooth UX
         </Text>
-        <Text position={[0, -0.40, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.40, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Designed MongoDB collections for users, books, and
         </Text>
-        <Text position={[0, -0.55, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.55, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           reviews with indexed queries for fast search operations
         </Text>
-        <Text position={[0, -0.75, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.75, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           • Created responsive UI with advanced filtering, sorting,
         </Text>
-        <Text position={[0, -0.90, 0.002]} fontSize={0.10} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
+        <Text position={[0, -0.90, 0.002]} fontSize={0.10 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={6.5}>
           and pagination features for seamless book discovery
         </Text>
 
         <Line points={[[-3.3, -1.15, 0.002], [3.3, -1.15, 0.002]]} color={COLORS.tan} lineWidth={1} />
 
-        <Text position={[0, -1.40, 0.002]} fontSize={0.095} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[0, -1.40, 0.002]} fontSize={0.095 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           Personal Project • GraphQL Architecture
         </Text>
 
@@ -96,7 +98,7 @@ export const GraphiBooksProject = () => {
             <planeGeometry args={[3.5, 0.25]} />
             <meshStandardMaterial color={COLORS.brass} opacity={0.2} transparent />
           </mesh>
-          <Text fontSize={0.095} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+          <Text fontSize={0.095 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
             🔗 View on GitHub
           </Text>
         </group>

@@ -3,6 +3,7 @@ import { LinkWithProgress } from '../shared/LinkWithProgress';
 import { PaperCarousel } from './PaperCarousel';
 import { COLORS } from '../constants';
 import type { ZoomedPaper } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * ReFocused Project detail view - Header and paper carousel
@@ -13,6 +14,7 @@ interface ReFocusedProjectProps {
 }
 
 export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectProps) => {
+  const textScale = getTextScale();
   return (
     <>
       {/* Header Background Panel */}
@@ -48,7 +50,7 @@ export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectP
       {/* Project Title */}
       <Text
         position={[0, 2.3, 0.032]}
-        fontSize={0.32}
+        fontSize={0.32 * textScale}
         color={COLORS.primaryText}
         anchorX="center"
         anchorY="middle"
@@ -60,7 +62,7 @@ export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectP
       {/* Subtitle */}
       <Text
         position={[0, 2.08, 0.032]}
-        fontSize={0.13}
+        fontSize={0.13 * textScale}
         color={COLORS.secondaryText}
         anchorX="center"
         anchorY="middle"
@@ -75,7 +77,7 @@ export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectP
       {/* Professional Summary */}
       <Text
         position={[0, 1.72, 0.032]}
-        fontSize={0.092}
+        fontSize={0.092 * textScale}
         color={COLORS.secondaryText}
         anchorX="center"
         anchorY="middle"
@@ -85,7 +87,7 @@ export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectP
       </Text>
       <Text
         position={[0, 1.58, 0.032]}
-        fontSize={0.092}
+        fontSize={0.092 * textScale}
         color={COLORS.secondaryText}
         anchorX="center"
         anchorY="middle"

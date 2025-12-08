@@ -4,6 +4,7 @@ import { CaseFileCard } from './CaseFileCard';
 import { PushPin } from '../shared/PushPin';
 import { BOARD_CONFIG, COLORS, CASE_FILE_POSITIONS } from '../constants';
 import type { CaseFile, ProjectDetail } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Board Preview component - displays the initial board view with 4 case files
@@ -26,6 +27,8 @@ export const BoardPreview = ({
   onCaseFileClick,
   onBoardClick
 }: BoardPreviewProps) => {
+  const textScale = getTextScale(); // 1.5x on mobile, 1x on desktop
+
   const handleClick = (e: any) => {
     e.stopPropagation();
     onBoardClick?.();
@@ -120,7 +123,7 @@ export const BoardPreview = ({
           <planeGeometry args={[11, 0.7]} />
           <meshStandardMaterial color={COLORS.darkBrown} />
         </mesh>
-        <Text position={[0, 2.8, 0.04]} fontSize={0.32} color={COLORS.gold} anchorX="center" anchorY="middle">
+        <Text position={[0, 2.8, 0.04]} fontSize={0.32 * textScale} color={COLORS.gold} anchorX="center" anchorY="middle">
           CASE FILE: MAHDI GHALEB
         </Text>
 

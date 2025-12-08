@@ -2,6 +2,7 @@ import { Text } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
 import { COLORS } from '../constants';
 import type { CaseFileCardProps } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Reusable Case File Card component
@@ -17,6 +18,8 @@ export const CaseFileCard = ({
   onClick,
   labelColor = COLORS.darkRed
 }: CaseFileCardProps) => {
+  const textScale = getTextScale(); // 1.5x on mobile, 1x on desktop
+
   // Determine tab position based on card position
   const tabYOffset = position[1] > 0 ? 0.65 : 0.65;
   const labelXOffset = -1.05; // Position file number on left side of tab
@@ -53,7 +56,7 @@ export const CaseFileCard = ({
       </mesh>
       <Text
         position={[position[0] + labelXOffset - 0.2, position[1] + tabYOffset + 0.25, position[2] + 0.08]}
-        fontSize={0.17}
+        fontSize={0.17 * textScale}
         color="#FFFFFF"
         anchorX="center"
         anchorY="middle"
@@ -64,7 +67,7 @@ export const CaseFileCard = ({
       {/* Title */}
       <Text
         position={[position[0], position[1] + 0.35, position[2] + 0.06]}
-        fontSize={0.24}
+        fontSize={0.24 * textScale}
         color={COLORS.darkBrown}
         anchorX="center"
         anchorY="middle"
@@ -77,7 +80,7 @@ export const CaseFileCard = ({
         <Text
           key={index}
           position={[position[0], position[1] - 0.1 - index * 0.22, position[2] + 0.06]}
-          fontSize={0.12}
+          fontSize={0.12 * textScale}
           color={COLORS.tertiaryText}
           anchorX="center"
           anchorY="middle"

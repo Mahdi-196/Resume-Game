@@ -2,6 +2,7 @@ import { Text, Line } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
 import { COLORS } from '../constants';
 import type { ZoomedPaper } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Paper Carousel component - displays 3 papers (Frontend, Backend, AI) with navigation
@@ -13,6 +14,7 @@ interface PaperCarouselProps {
 }
 
 export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) => {
+  const textScale = getTextScale();
   return (
     <>
       {/* PAPER 1 - Frontend Repository (Left) */}
@@ -60,7 +62,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
           <planeGeometry args={[3.4, 0.4]} />
           <meshStandardMaterial color={COLORS.primaryText} roughness={0.7} />
         </mesh>
-        <Text position={[0, 1.35, 0.002]} fontSize={0.2} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
+        <Text position={[0, 1.35, 0.002]} fontSize={0.2 * textScale} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
           FRONTEND
         </Text>
 
@@ -68,39 +70,39 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         <Line points={[[-1.0, 1.17, 0.002], [1.0, 1.17, 0.002]]} color={COLORS.brass} lineWidth={2} />
 
         {/* Tech stack */}
-        <Text position={[0, 0.8, 0.002]} fontSize={0.13} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
+        <Text position={[0, 0.8, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
           Next.js 15 • React 19 • TypeScript
         </Text>
 
         {/* Content */}
-        <Text position={[0, 0.55, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.55, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Developed responsive web app using
         </Text>
-        <Text position={[0, 0.4, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.4, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           Next.js 15, React 19, strict TypeScript
         </Text>
-        <Text position={[0, 0.2, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.2, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Designed scalable state with TanStack
         </Text>
-        <Text position={[0, 0.05, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.05, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           Query + React Context, no prop-drilling
         </Text>
-        <Text position={[0, -0.15, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.15, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Engineered secure auth with silent token
         </Text>
-        <Text position={[0, -0.3, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.3, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           refresh, dual-strategy (Cookies/JWT)
         </Text>
-        <Text position={[0, -0.5, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.5, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Built 67+ reusable components: Quill.js
         </Text>
-        <Text position={[0, -0.65, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.65, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           editor w/ encryption, SVG meditation tool
         </Text>
-        <Text position={[0, -0.85, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.85, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Implemented multi-layer caching with
         </Text>
-        <Text position={[0, -1.0, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -1.0, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           React Query + localStorage for sub-second UI
         </Text>
 
@@ -118,7 +120,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
             <planeGeometry args={[2.8, 0.2]} />
             <meshStandardMaterial color={COLORS.brass} opacity={0.2} transparent />
           </mesh>
-          <Text fontSize={0.085} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+          <Text fontSize={0.085 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
             🔗 View on GitHub
           </Text>
         </group>
@@ -172,7 +174,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
           <planeGeometry args={[3.4, 0.4]} />
           <meshStandardMaterial color={COLORS.primaryText} roughness={0.7} />
         </mesh>
-        <Text position={[0, 1.35, 0.002]} fontSize={0.2} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
+        <Text position={[0, 1.35, 0.002]} fontSize={0.2 * textScale} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
           BACKEND API
         </Text>
 
@@ -180,39 +182,39 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         <Line points={[[-1.2, 1.17, 0.002], [1.2, 1.17, 0.002]]} color={COLORS.brass} lineWidth={2} />
 
         {/* Tech stack */}
-        <Text position={[0, 0.8, 0.002]} fontSize={0.13} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
+        <Text position={[0, 0.8, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
           FastAPI • Python • PostgreSQL • Redis
         </Text>
 
         {/* Content */}
-        <Text position={[0, 0.55, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.55, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Developed async-first API with FastAPI
         </Text>
-        <Text position={[0, 0.4, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.4, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           + asyncpg: 140+ endpoints, less than 50ms avg
         </Text>
-        <Text position={[0, 0.2, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.2, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Implemented multi-layer security: HTTP-Only
         </Text>
-        <Text position={[0, 0.05, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.05, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           Cookies, Google OAuth 2.0, CSRF protection
         </Text>
-        <Text position={[0, -0.15, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.15, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Designed observability stack: OpenTelemetry,
         </Text>
-        <Text position={[0, -0.3, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.3, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           Prometheus, Sentry to monitor app health
         </Text>
-        <Text position={[0, -0.5, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.5, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Deployed with multi-stage Docker build
         </Text>
-        <Text position={[0, -0.65, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.65, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           for secure, non-root production containers
         </Text>
-        <Text position={[0, -0.85, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.85, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Utilized async Redis cache to optimize
         </Text>
-        <Text position={[0, -1.0, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -1.0, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           PostgreSQL: queries, sessions, rate limits
         </Text>
 
@@ -230,7 +232,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
             <planeGeometry args={[2.8, 0.2]} />
             <meshStandardMaterial color={COLORS.brass} opacity={0.2} transparent />
           </mesh>
-          <Text fontSize={0.085} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+          <Text fontSize={0.085 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
             🔗 View on GitHub
           </Text>
         </group>
@@ -285,7 +287,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
           <planeGeometry args={[3.4, 0.4]} />
           <meshStandardMaterial color={COLORS.primaryText} roughness={0.7} />
         </mesh>
-        <Text position={[0, 1.35, 0.002]} fontSize={0.2} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
+        <Text position={[0, 1.35, 0.002]} fontSize={0.2 * textScale} color={COLORS.antiquePaper} anchorX="center" anchorY="middle" letterSpacing={0.04}>
           AI MODEL
         </Text>
 
@@ -293,39 +295,39 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         <Line points={[[-0.9, 1.17, 0.002], [0.9, 1.17, 0.002]]} color={COLORS.brass} lineWidth={2} />
 
         {/* Tech stack */}
-        <Text position={[0, 0.8, 0.002]} fontSize={0.13} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
+        <Text position={[0, 0.8, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
           1.2B Params • GPT-NeoX • PyTorch
         </Text>
 
         {/* Content */}
-        <Text position={[0, 0.55, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.55, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Built and trained a 1.2B param LLM
         </Text>
-        <Text position={[0, 0.4, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.4, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           from scratch to power AI-driven features
         </Text>
-        <Text position={[0, 0.2, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.2, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Built an end-to-end MLOps pipeline for
         </Text>
-        <Text position={[0, 0.05, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, 0.05, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           data collection, cleaning, and tokenization
         </Text>
-        <Text position={[0, -0.15, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.15, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Implemented fault-tolerant PyTorch training:
         </Text>
-        <Text position={[0, -0.3, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.3, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           mixed-precision, non-blocking GCS uploads
         </Text>
-        <Text position={[0, -0.5, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.5, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Designed LoRA fine-tuning workflows to
         </Text>
-        <Text position={[0, -0.65, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.65, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           specialize for chat and instruction-following
         </Text>
-        <Text position={[0, -0.85, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -0.85, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           • Engineered data pipeline in Python to parse,
         </Text>
-        <Text position={[0, -1.0, 0.002]} fontSize={0.095} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
+        <Text position={[0, -1.0, 0.002]} fontSize={0.095 * textScale} color={COLORS.secondaryText} anchorX="center" anchorY="middle" maxWidth={3.2}>
           clean, shard datasets into .npz for training
         </Text>
 
@@ -343,7 +345,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
             <planeGeometry args={[2.8, 0.2]} />
             <meshStandardMaterial color={COLORS.brass} opacity={0.2} transparent />
           </mesh>
-          <Text fontSize={0.085} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+          <Text fontSize={0.085 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
             🔗 View on GitHub
           </Text>
         </group>
@@ -371,7 +373,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
                 <planeGeometry args={[0.7, 0.7]} />
                 <meshStandardMaterial color={COLORS.brass} opacity={0.8} transparent />
               </mesh>
-              <Text position={[0, 0, 0.001]} fontSize={0.45} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+              <Text position={[0, 0, 0.001]} fontSize={0.45 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
                 ←
               </Text>
             </group>
@@ -392,7 +394,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
                 <planeGeometry args={[0.7, 0.7]} />
                 <meshStandardMaterial color={COLORS.brass} opacity={0.8} transparent />
               </mesh>
-              <Text position={[0, 0, 0.001]} fontSize={0.45} color={COLORS.primaryText} anchorX="center" anchorY="middle">
+              <Text position={[0, 0, 0.001]} fontSize={0.45 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle">
                 →
               </Text>
             </group>
@@ -412,7 +414,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
               <planeGeometry args={[1.5, 0.35]} />
               <meshStandardMaterial color={COLORS.darkRed} opacity={0.9} transparent />
             </mesh>
-            <Text position={[0, 0, 0.001]} fontSize={0.14} color={COLORS.antiquePaper} anchorX="center" anchorY="middle">
+            <Text position={[0, 0, 0.001]} fontSize={0.14 * textScale} color={COLORS.antiquePaper} anchorX="center" anchorY="middle">
               ✕ CLOSE
             </Text>
           </group>

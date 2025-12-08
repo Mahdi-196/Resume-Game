@@ -7,6 +7,7 @@ import { VibeLinkProject } from './VibeLinkProject';
 import { GraphiBooksProject } from './GraphiBooksProject';
 import { COLORS } from '../constants';
 import type { SideProject } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Side Projects Wrapper - Shows selection grid or individual project detail
@@ -22,6 +23,7 @@ export const SideProjectsWrapper = ({
   onSideProjectSelect,
   onBack
 }: SideProjectsWrapperProps) => {
+  const textScale = getTextScale();
   return (
     <>
       {/* Back Button - Always visible with smart behavior */}
@@ -55,7 +57,7 @@ export const SideProjectsWrapper = ({
 
       <Text
         position={[0, 2.7, 0.032]}
-        fontSize={0.22}
+        fontSize={0.22 * textScale}
         color={COLORS.primaryText}
         anchorX="center"
         anchorY="middle"

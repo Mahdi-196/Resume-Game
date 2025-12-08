@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Text } from '@react-three/drei';
 import { COLORS } from '../constants';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Interactive link component with hold-to-open progress indicator
@@ -17,6 +18,7 @@ export const LinkWithProgress = ({
   url = 'https://refocused.app',
   label = '🔗 Live Site'
 }: LinkWithProgressProps) => {
+  const textScale = getTextScale();
   const [holdProgress, setHoldProgress] = useState(0);
   const holdStartRef = useRef<number | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -69,7 +71,7 @@ export const LinkWithProgress = ({
         {/* Link text */}
         <Text
           position={[0.1, 0, 0.001]}
-          fontSize={0.11}
+          fontSize={0.11 * textScale}
           color={COLORS.primaryText}
           anchorX="center"
           anchorY="middle"

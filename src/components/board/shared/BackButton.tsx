@@ -1,5 +1,6 @@
 import { Text } from '@react-three/drei';
 import { COLORS } from '../constants';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Reusable Back Button component for detail views
@@ -11,6 +12,8 @@ interface BackButtonProps {
 }
 
 export const BackButton = ({ onClick, position = [-5.5, 2.8, 0.04] }: BackButtonProps) => {
+  const textScale = getTextScale(); // 1.5x on mobile, 1x on desktop
+
   return (
     <group
       position={position}
@@ -25,7 +28,7 @@ export const BackButton = ({ onClick, position = [-5.5, 2.8, 0.04] }: BackButton
         <planeGeometry args={[1.2, 0.4]} />
         <meshStandardMaterial color={COLORS.darkBrown} />
       </mesh>
-      <Text position={[0, 0, 0.01]} fontSize={0.15} color={COLORS.gold} anchorX="center" anchorY="middle">
+      <Text position={[0, 0, 0.01]} fontSize={0.15 * textScale} color={COLORS.gold} anchorX="center" anchorY="middle">
         ← BACK
       </Text>
     </group>

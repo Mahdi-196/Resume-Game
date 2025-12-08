@@ -7,6 +7,7 @@ import { RespawnRoomProject } from '../projects/RespawnRoomProject';
 import { SideProjectsWrapper } from '../projects/SideProjectsWrapper';
 import { COLORS } from '../constants';
 import type { ProjectsDetailProps } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Projects detail view wrapper
@@ -23,6 +24,8 @@ export const ProjectsDetail = ({
   selectedSideProject,
   onSideProjectSelect
 }: ProjectsDetailProps) => {
+  const textScale = getTextScale();
+
   // Reset zoomed papers when navigating away from projects
   useEffect(() => {
     if (selectedProject !== 'refocused') {
@@ -58,7 +61,7 @@ export const ProjectsDetail = ({
             <planeGeometry args={[10, 0.6]} />
             <meshStandardMaterial color={COLORS.darkRed} />
           </mesh>
-          <Text position={[0, 2.5, 0.04]} fontSize={0.28} color="#FFFFFF" anchorX="center" anchorY="middle">
+          <Text position={[0, 2.5, 0.04]} fontSize={0.28 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
             CASE FILE #002: PROJECTS
           </Text>
         </>

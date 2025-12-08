@@ -3,11 +3,13 @@ import { BackButton } from '../shared/BackButton';
 import { PushPin } from '../shared/PushPin';
 import { COLORS } from '../constants';
 import type { DetailViewProps } from '../types';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Education detail view - Formal education and self-taught learning
  */
 export const EducationDetail = ({ onBack }: DetailViewProps) => {
+  const textScale = getTextScale();
   return (
     <>
       {/* Back Button */}
@@ -18,7 +20,7 @@ export const EducationDetail = ({ onBack }: DetailViewProps) => {
         <planeGeometry args={[10, 0.6]} />
         <meshStandardMaterial color={COLORS.darkRed} />
       </mesh>
-      <Text position={[0, 2.5, 0.04]} fontSize={0.28} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text position={[0, 2.5, 0.04]} fontSize={0.28 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
         CASE FILE #002: EDUCATION
       </Text>
 
@@ -31,25 +33,25 @@ export const EducationDetail = ({ onBack }: DetailViewProps) => {
         <planeGeometry args={[4.4, 0.3]} />
         <meshStandardMaterial color={COLORS.darkRed} />
       </mesh>
-      <Text position={[-3.5, 2, 0.05]} fontSize={0.15} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text position={[-3.5, 2, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
         FORMAL EDUCATION
       </Text>
-      <Text position={[-3.5, 1.5, 0.05]} fontSize={0.13} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+      <Text position={[-3.5, 1.5, 0.05]} fontSize={0.13 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
         Computer Science
       </Text>
-      <Text position={[-3.5, 1.25, 0.05]} fontSize={0.1} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[-3.5, 1.25, 0.05]} fontSize={0.1 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         Bachelor's Degree
       </Text>
-      <Text position={[-3.5, 0.9, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[-3.5, 0.9, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         Focus: Software Engineering,
       </Text>
-      <Text position={[-3.5, 0.75, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[-3.5, 0.75, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         Web Development, Data
       </Text>
-      <Text position={[-3.5, 0.6, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[-3.5, 0.6, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         Structures & Algorithms
       </Text>
-      <Text position={[-3.5, 0.25, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[-3.5, 0.25, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         GPA: 3.8/4.0
       </Text>
 
@@ -62,28 +64,28 @@ export const EducationDetail = ({ onBack }: DetailViewProps) => {
         <planeGeometry args={[4.4, 0.3]} />
         <meshStandardMaterial color={COLORS.darkRed} />
       </mesh>
-      <Text position={[3.5, 2, 0.05]} fontSize={0.15} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text position={[3.5, 2, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
         SELF-TAUGHT LEARNING
       </Text>
-      <Text position={[3.5, 1.5, 0.05]} fontSize={0.13} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+      <Text position={[3.5, 1.5, 0.05]} fontSize={0.13 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
         Continuous Development
       </Text>
-      <Text position={[3.5, 1.15, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[3.5, 1.15, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         • Advanced React & TypeScript
       </Text>
-      <Text position={[3.5, 1.0, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[3.5, 1.0, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         • Three.js & WebGL Graphics
       </Text>
-      <Text position={[3.5, 0.85, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[3.5, 0.85, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         • Cloud Architecture (AWS)
       </Text>
-      <Text position={[3.5, 0.7, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[3.5, 0.7, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         • Microservices & DevOps
       </Text>
-      <Text position={[3.5, 0.55, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+      <Text position={[3.5, 0.55, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
         • UI/UX Design Principles
       </Text>
-      <Text position={[3.5, 0.2, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[3.5, 0.2, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         100+ Online Courses Completed
       </Text>
 
