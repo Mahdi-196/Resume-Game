@@ -83,3 +83,6 @@ export const MATERIALS = {
     metalness: 0,
   },
 };
+
+// Text size multiplier for mobile
+export const MOBILE_TEXT_SCALE = 1.5; // 50% larger text on mobile

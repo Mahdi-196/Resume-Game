@@ -101,8 +101,8 @@ export const RespawnRoomProject = ({ zoomedPaper, onPaperZoom }: RespawnRoomProj
       {/* Clickable link with hold animation */}
       <LinkWithProgress
         position={[0, 1.15, 0.033]}
-        url="https://github.com/Schanze117/RespawnRoom"
-        label="🔗 View on GitHub (Hold 2s)"
+        url="https://respawnroom.online"
+        label="🔗 Live Site"
       />
 
       {/* PAPER 1 - Frontend (Left) */}

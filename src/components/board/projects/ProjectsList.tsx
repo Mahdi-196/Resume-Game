@@ -1,6 +1,7 @@
 import { Text } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
 import { COLORS } from '../constants';
+import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Projects list view - displays 5 project cards in a grid layout
@@ -10,6 +11,8 @@ interface ProjectsListProps {
 }
 
 export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
+  const textScale = getTextScale(); // 1.5x on mobile, 1x on desktop
+
   return (
     <>
       {/* TOP ROW - ReFocused Center (Larger), RespawnRoom Left, 3D Resume Right */}
@@ -39,25 +42,25 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
           <planeGeometry args={[0.45, 0.25]} />
           <meshStandardMaterial color={COLORS.darkRed} />
         </mesh>
-        <Text position={[-1.675, 1.5, 0.07]} fontSize={0.13} color="#FFFFFF" anchorX="center" anchorY="middle">
+        <Text position={[-1.675, 1.5, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #001
         </Text>
-        <Text position={[0, 1.05, 0.05]} fontSize={0.22} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        <Text position={[0, 1.05, 0.05]} fontSize={0.22 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
           ReFocused
         </Text>
-        <Text position={[0, 0.65, 0.05]} fontSize={0.1} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
+        <Text position={[0, 0.65, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
           Advanced productivity platform
         </Text>
-        <Text position={[0, 0.48, 0.05]} fontSize={0.1} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
+        <Text position={[0, 0.48, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
           with AI-powered focus sessions
         </Text>
-        <Text position={[0, 0.31, 0.05]} fontSize={0.1} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
+        <Text position={[0, 0.31, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
           and intelligent task management
         </Text>
-        <Text position={[0, -0.05, 0.05]} fontSize={0.09} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[0, -0.05, 0.05]} fontSize={0.09 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           React • TypeScript • Node.js
         </Text>
-        <Text position={[0, -0.22, 0.05]} fontSize={0.09} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[0, -0.22, 0.05]} fontSize={0.09 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           PostgreSQL • Redis • OpenAI
         </Text>
         <PushPin position={[0, 1.5, 0.07]} radius={0.09} />
@@ -88,25 +91,25 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
           <planeGeometry args={[0.45, 0.25]} />
           <meshStandardMaterial color={COLORS.darkRed} />
         </mesh>
-        <Text position={[-5.775, 1.3, 0.07]} fontSize={0.13} color="#FFFFFF" anchorX="center" anchorY="middle">
+        <Text position={[-5.775, 1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #002
         </Text>
-        <Text position={[-4.5, 0.9, 0.05]} fontSize={0.18} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        <Text position={[-4.5, 0.9, 0.05]} fontSize={0.18 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
           RespawnRoom
         </Text>
-        <Text position={[-4.5, 0.55, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+        <Text position={[-4.5, 0.55, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
           Gaming community
         </Text>
-        <Text position={[-4.5, 0.4, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+        <Text position={[-4.5, 0.4, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
           platform for events
         </Text>
-        <Text position={[-4.5, 0.25, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+        <Text position={[-4.5, 0.25, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
           and tournaments
         </Text>
-        <Text position={[-4.5, -0.1, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[-4.5, -0.1, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           React • GraphQL • MongoDB
         </Text>
-        <Text position={[-4.5, -0.25, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[-4.5, -0.25, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           Node.js • PubNub • IGDB
         </Text>
         <PushPin position={[-4.5, 1.3, 0.07]} />
@@ -125,25 +128,25 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
         <planeGeometry args={[0.45, 0.25]} />
         <meshStandardMaterial color={COLORS.darkRed} />
       </mesh>
-      <Text position={[3.225, 1.3, 0.07]} fontSize={0.13} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text position={[3.225, 1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
         #003
       </Text>
-      <Text position={[4.5, 0.9, 0.05]} fontSize={0.18} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+      <Text position={[4.5, 0.9, 0.05]} fontSize={0.18 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
         3D Resume
       </Text>
-      <Text position={[4.5, 0.55, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+      <Text position={[4.5, 0.55, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
         Interactive detective
       </Text>
-      <Text position={[4.5, 0.4, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+      <Text position={[4.5, 0.4, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
         themed 3D portfolio
       </Text>
-      <Text position={[4.5, 0.25, 0.05]} fontSize={0.09} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
+      <Text position={[4.5, 0.25, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
         experience
       </Text>
-      <Text position={[4.5, -0.1, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[4.5, -0.1, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         React Three Fiber
       </Text>
-      <Text position={[4.5, -0.25, 0.05]} fontSize={0.08} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[4.5, -0.25, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         Three.js • TypeScript
       </Text>
       <PushPin position={[4.5, 1.3, 0.07]} />
@@ -175,25 +178,25 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
           <planeGeometry args={[0.45, 0.25]} />
           <meshStandardMaterial color={COLORS.darkRed} />
         </mesh>
-        <Text position={[-3.525, -1.3, 0.07]} fontSize={0.13} color="#FFFFFF" anchorX="center" anchorY="middle">
+        <Text position={[-3.525, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #004
         </Text>
-        <Text position={[-2.5, -1.65, 0.05]} fontSize={0.16} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        <Text position={[-2.5, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
           Side Projects
         </Text>
-        <Text position={[-2.5, -1.9, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2.5, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           Various experimental
         </Text>
-        <Text position={[-2.5, -2.03, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2.5, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           projects and open-
         </Text>
-        <Text position={[-2.5, -2.16, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2.5, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           source contributions
         </Text>
-        <Text position={[-2.5, -2.4, 0.05]} fontSize={0.075} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[-2.5, -2.4, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           Multiple Technologies
         </Text>
-        <Text position={[-2.5, -2.53, 0.05]} fontSize={0.075} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        <Text position={[-2.5, -2.53, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
           GitHub Repositories
         </Text>
         <PushPin position={[-2.5, -1.3, 0.07]} radius={0.07} />
@@ -212,25 +215,25 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
         <planeGeometry args={[0.45, 0.25]} />
         <meshStandardMaterial color={COLORS.darkRed} />
       </mesh>
-      <Text position={[1.475, -1.3, 0.07]} fontSize={0.13} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text position={[1.475, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
         #005
       </Text>
-      <Text position={[2.5, -1.65, 0.05]} fontSize={0.16} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+      <Text position={[2.5, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
         AWS Cloud
       </Text>
-      <Text position={[2.5, -1.9, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+      <Text position={[2.5, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
         Cloud infrastructure
       </Text>
-      <Text position={[2.5, -2.03, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+      <Text position={[2.5, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
         design and deployment
       </Text>
-      <Text position={[2.5, -2.16, 0.05]} fontSize={0.08} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+      <Text position={[2.5, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
         expertise
       </Text>
-      <Text position={[2.5, -2.4, 0.05]} fontSize={0.075} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[2.5, -2.4, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         EC2 • RDS • S3 • Lambda
       </Text>
-      <Text position={[2.5, -2.53, 0.05]} fontSize={0.075} color={COLORS.brownText} anchorX="center" anchorY="middle">
+      <Text position={[2.5, -2.53, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
         CloudFront • Auto Scaling
       </Text>
       <PushPin position={[2.5, -1.3, 0.07]} radius={0.07} />

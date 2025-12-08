@@ -59,7 +59,7 @@ export const ProjectsDetail = ({
             <meshStandardMaterial color={COLORS.darkRed} />
           </mesh>
           <Text position={[0, 2.5, 0.04]} fontSize={0.28} color="#FFFFFF" anchorX="center" anchorY="middle">
-            CASE FILE #004: PROJECTS
+            CASE FILE #002: PROJECTS
           </Text>
         </>
       )}

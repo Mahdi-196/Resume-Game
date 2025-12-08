@@ -2,6 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent mobile scrolling/bouncing and text selection */
+html, body {
+  overscroll-behavior: none;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height - accounts for mobile browser chrome */
+  height: calc(var(--vh, 1vh) * 100); /* Fallback for older browsers */
+  touch-action: none;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  /* Prevent text selection and highlighting */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; /* Prevent iOS callout menu */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+#root {
+  touch-action: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Prevent selection on canvas */
+canvas {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  outline: none;
+}
+
+/* Allow specific controls to have touch */
+.mobile-control {
+  touch-action: auto;
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */

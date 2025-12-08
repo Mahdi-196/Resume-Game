@@ -17,7 +17,8 @@ export const InteractiveDetectiveBoard = ({
   onCaseFileClick,
   showContent,
   selectedCaseFile,
-  overlayVisible
+  overlayVisible,
+  onContentClose
 }: InteractiveDetectiveBoardProps) => {
   // Track which project is selected (for nested navigation)
   const [selectedProject, setSelectedProject] = useState<ProjectDetail>(null);
@@ -48,7 +49,12 @@ export const InteractiveDetectiveBoard = ({
 
       {/* Detail Views - fade in when a case file is selected */}
       {selectedCaseFile && (
-        <group ref={detailGroupRef} position={BOARD_CONFIG.position} rotation={BOARD_CONFIG.rotation}>
+        <group
+          ref={detailGroupRef}
+          position={BOARD_CONFIG.position}
+          rotation={BOARD_CONFIG.rotation}
+          onClick={(e) => e.stopPropagation()} // Prevent clicks on board from closing it
+        >
           {/* About Me Detail */}
           {selectedCaseFile === 'about' && <AboutDetail onBack={() => onCaseFileClick?.(null)} />}
 

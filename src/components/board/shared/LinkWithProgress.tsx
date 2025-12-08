@@ -15,7 +15,7 @@ interface LinkWithProgressProps {
 export const LinkWithProgress = ({
   position,
   url = 'https://refocused.app',
-  label = '🔗 refocused.app (Hold 2s)'
+  label = '🔗 Live Site'
 }: LinkWithProgressProps) => {
   const [holdProgress, setHoldProgress] = useState(0);
   const holdStartRef = useRef<number | null>(null);
@@ -28,7 +28,7 @@ export const LinkWithProgress = ({
     intervalRef.current = setInterval(() => {
       if (holdStartRef.current) {
         const elapsed = Date.now() - holdStartRef.current;
-        const progress = Math.min(elapsed / 2000, 1);
+        const progress = Math.min(elapsed / 1000, 1);
         setHoldProgress(progress);
 
         if (progress >= 1) {

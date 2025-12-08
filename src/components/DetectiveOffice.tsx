@@ -4,6 +4,11 @@ import * as THREE from 'three';
 import { EnhancedCameraControls } from './EnhancedCameraControls';
 import { DetectiveOfficeScene } from './DetectiveOfficeScene';
 import { Lighting } from './Lighting';
+import { VirtualJoystick } from './mobile/VirtualJoystick';
+import { TouchLookControls } from './mobile/TouchLookControls';
+import { MobileControlButtons } from './mobile/MobileControlButtons';
+import { LandscapeLock } from './mobile/LandscapeLock';
+import { isMobileDevice } from '@/utils/detectMobile';
 
 interface CameraControlsRef {
   camera: THREE.Camera;
@@ -48,6 +53,12 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
   const cameraControlsRef = useRef<CameraControlsRef>(null);
   const detectivePosition = new THREE.Vector3(0, 2.3, 0); // Detective eye height position
 
+  // Mobile controls state
+  const [isMobile, setIsMobile] = useState(isMobileDevice());
+  const touchMovementRef = useRef({ x: 0, y: 0 });
+  const touchLookRef = useRef({ deltaX: 0, deltaY: 0 });
+  const keyPressTimesRef = useRef<number[]>([]);
+
   // Expose zoomOutFromBoard method to parent via ref
   useImperativeHandle(ref, () => ({
     zoomOutFromBoard: () => {
@@ -85,8 +96,8 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       });
       
       try {
-        // Smooth zoom to board - position to see full board
-        const boardPosition = new THREE.Vector3(0, 4.5, 4.5); // Further back to see board and wall
+        // Smooth zoom to board - balanced position
+        const boardPosition = new THREE.Vector3(0, 4.5, 5.5); // Balanced zoom (not too close, not too far)
         const boardTarget = new THREE.Vector3(0, 4.5, 9.9); // Board center
 
         await cameraControls.setLookAt(
@@ -297,6 +308,25 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     };
 
     const handleKeyPress = (event: KeyboardEvent) => {
+      // Check for '99999' sequence to toggle mobile mode
+      if (event.key === '9') {
+        const now = Date.now();
+        keyPressTimesRef.current.push(now);
+
+        // Keep only presses within the last 2 seconds
+        keyPressTimesRef.current = keyPressTimesRef.current.filter(
+          time => now - time < 2000
+        );
+
+        // Check if we have 5 presses within 2 seconds
+        if (keyPressTimesRef.current.length >= 5) {
+          setIsMobile(prev => !prev);
+          console.log('Mobile mode toggled:', !isMobile);
+          keyPressTimesRef.current = []; // Reset
+          return;
+        }
+      }
+
       // Skip intro on any key
       if (!introComplete && event.key !== 'F5') {
         event.preventDefault();
@@ -338,10 +368,16 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
   }, [showBoardContent, isTransitioning, originalCameraState, isDetectiveMode, introComplete]);
 
   return (
-    <div className="w-full h-screen bg-noir-shadow">
+    <div className="w-full h-full bg-noir-shadow" style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%'
+    }}>
       <Canvas
         shadows
-        camera={{ position: [-2.5, 2.5, 4], fov: 75 }}
+        camera={{ position: [-2.5, 2.5, 4], fov: isMobile ? 85 : 75 }}
         onCreated={({ gl }) => {
           gl.domElement.style.cursor = 'crosshair';
         }}
@@ -352,6 +388,8 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
           showBoardContent={showBoardContent}
           isDetectiveMode={isDetectiveMode}
           introComplete={introComplete}
+          touchMovementRef={isMobile ? touchMovementRef : undefined}
+          touchLookRef={isMobile ? touchLookRef : undefined}
         />
         <Lighting lampOn={lampOn} />
         <DetectiveOfficeScene
@@ -381,11 +419,42 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
         Banker's Lamp: {lampOn ? 'ON' : 'OFF'}
       </div>
 
-      {/* Enhanced Controls Hint */}
-      <div className="absolute bottom-4 left-4 text-detective-paper text-sm space-y-1">
-        <p>WASD - Move • Click Empty Area - Enable Mouse Look • {!isDetectiveMode && 'Space/Shift - Up/Down • '}Tab - Toggle Detective Mode (Default: ON)</p>
-        <p>R - Resume Board • Click Board - Open Resume • ESC - Close Modal</p>
-      </div>
+      {/* Enhanced Controls Hint - Hide on mobile */}
+      {!isMobile && (
+        <div className="absolute bottom-4 left-4 text-detective-paper text-sm space-y-1">
+          <p>WASD - Move • Click Empty Area - Enable Mouse Look • {!isDetectiveMode && 'Space/Shift - Up/Down • '}Tab - Toggle Detective Mode (Default: ON)</p>
+          <p>R - Resume Board • Click Board - Open Resume • ESC - Close Modal</p>
+        </div>
+      )}
+
+      {/* Mobile Controls - Hide when board is open */}
+      {isMobile && !showBoardContent && (
+        <>
+          <VirtualJoystick onMove={(x, y) => {
+            touchMovementRef.current = { x, y };
+          }} />
+          <TouchLookControls
+            sensitivity={1.5}
+            onLook={(deltaX, deltaY) => {
+              touchLookRef.current = { deltaX, deltaY };
+            }}
+          />
+          <MobileControlButtons
+            onToggleDetectiveMode={handleToggleDetectiveMode}
+            onOpenBoard={() => {
+              if (showBoardContent) {
+                handleBoardContentClose();
+              } else {
+                handleBoardClick();
+              }
+            }}
+            isDetectiveMode={isDetectiveMode}
+          />
+        </>
+      )}
+
+      {/* Landscape Lock - Always show */}
+      {isMobile && <LandscapeLock />}
 
       {/* Intro fade overlay */}
       {!introComplete && (

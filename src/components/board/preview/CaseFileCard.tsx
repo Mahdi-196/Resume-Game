@@ -19,7 +19,7 @@ export const CaseFileCard = ({
 }: CaseFileCardProps) => {
   // Determine tab position based on card position
   const tabYOffset = position[1] > 0 ? 0.65 : 0.65;
-  const labelXOffset = position[0] < 0 ? -0.95 : -0.95;
+  const labelXOffset = -1.05; // Position file number on left side of tab
 
   return (
     <group
@@ -52,7 +52,7 @@ export const CaseFileCard = ({
         <meshStandardMaterial color={labelColor} />
       </mesh>
       <Text
-        position={[position[0] + labelXOffset - 0.2, position[1] + tabYOffset + 0.25, position[2] + 0.05]}
+        position={[position[0] + labelXOffset - 0.2, position[1] + tabYOffset + 0.25, position[2] + 0.08]}
         fontSize={0.17}
         color="#FFFFFF"
         anchorX="center"
@@ -63,7 +63,7 @@ export const CaseFileCard = ({
 
       {/* Title */}
       <Text
-        position={[position[0], position[1] + 0.35, position[2] + 0.02]}
+        position={[position[0], position[1] + 0.35, position[2] + 0.06]}
         fontSize={0.24}
         color={COLORS.darkBrown}
         anchorX="center"
@@ -76,7 +76,7 @@ export const CaseFileCard = ({
       {items.map((item, index) => (
         <Text
           key={index}
-          position={[position[0], position[1] - 0.1 - index * 0.22, position[2] + 0.02]}
+          position={[position[0], position[1] - 0.1 - index * 0.22, position[2] + 0.06]}
           fontSize={0.12}
           color={COLORS.tertiaryText}
           anchorX="center"

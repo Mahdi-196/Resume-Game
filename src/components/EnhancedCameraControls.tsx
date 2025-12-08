@@ -7,6 +7,9 @@ interface EnhancedCameraControlsProps {
   showBoardContent?: boolean;
   isDetectiveMode?: boolean;
   introComplete?: boolean;
+  // Mobile touch controls
+  touchMovementRef?: React.MutableRefObject<{ x: number; y: number }>;
+  touchLookRef?: React.MutableRefObject<{ deltaX: number; deltaY: number }>;
 }
 
 interface CameraControlsRef {
@@ -21,7 +24,7 @@ interface CameraControlsRef {
 }
 
 export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCameraControlsProps>(
-  ({ isTransitioning, showBoardContent = false, isDetectiveMode = false, introComplete = false }, ref) => {
+  ({ isTransitioning, showBoardContent = false, isDetectiveMode = false, introComplete = false, touchMovementRef, touchLookRef }, ref) => {
     const { camera, gl } = useThree();
     const moveState = useRef({
       forward: false,
@@ -175,13 +178,13 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       const handleMouseMove = (event: MouseEvent) => {
         if (isMouseLocked.current && !isTransitioning) {
           const sensitivity = 0.002;
-          
+
           yaw.current -= event.movementX * sensitivity;
           pitch.current -= event.movementY * sensitivity;
-          
+
           // Clamp vertical rotation to prevent flipping
           pitch.current = Math.max(-Math.PI / 2 + 0.1, Math.min(Math.PI / 2 - 0.1, pitch.current));
-          
+
           // Calculate look direction and update target
           const direction = new THREE.Vector3(
             -Math.sin(yaw.current) * Math.cos(pitch.current),
@@ -266,27 +269,57 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
 
     useFrame(() => {
       if (isTransitioning || showBoardContent) return;
-      
-      const speed = 0.1;
+
+      // Apply touch look controls and consume deltas
+      if (touchLookRef && (touchLookRef.current.deltaX !== 0 || touchLookRef.current.deltaY !== 0)) {
+        const sensitivity = 0.006; // Increased for faster camera rotation
+
+        yaw.current -= touchLookRef.current.deltaX * sensitivity;
+        pitch.current -= touchLookRef.current.deltaY * sensitivity;
+
+        // Clamp vertical rotation to prevent flipping
+        pitch.current = Math.max(-Math.PI / 2 + 0.1, Math.min(Math.PI / 2 - 0.1, pitch.current));
+
+        // Reset deltas after consuming them (important!)
+        touchLookRef.current.deltaX = 0;
+        touchLookRef.current.deltaY = 0;
+      }
+
+      const keyboardSpeed = 0.1;
+      const touchSpeed = 0.1125; // 1.5x faster than 0.075
       const direction = new THREE.Vector3();
-      
+
+      // Keyboard movement
       if (moveState.current.forward) {
-        direction.z -= speed;
+        direction.z -= keyboardSpeed;
       }
       if (moveState.current.backward) {
-        direction.z += speed;
+        direction.z += keyboardSpeed;
       }
       if (moveState.current.left) {
-        direction.x -= speed;
+        direction.x -= keyboardSpeed;
       }
       if (moveState.current.right) {
-        direction.x += speed;
+        direction.x += keyboardSpeed;
       }
       if (moveState.current.up && !isDetectiveMode) {
-        direction.y += speed;
+        direction.y += keyboardSpeed;
       }
       if (moveState.current.down && !isDetectiveMode) {
-        direction.y -= speed;
+        direction.y -= keyboardSpeed;
+      }
+
+      // Touch movement (joystick) - only apply if not zero
+      if (touchMovementRef) {
+        const touchX = touchMovementRef.current.x;
+        const touchY = touchMovementRef.current.y;
+
+        // Only apply movement if values are non-zero (with tiny threshold to handle floating point)
+        if (Math.abs(touchX) > 0.0001 || Math.abs(touchY) > 0.0001) {
+          console.log('Camera receiving touch movement:', { touchX, touchY });
+          direction.x += touchX * touchSpeed;
+          direction.z += touchY * touchSpeed;
+        }
       }
 
       // Apply camera rotation to movement direction (only horizontal rotation for movement)
@@ -297,27 +330,34 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
 
       // Add bounds to keep camera within reasonable limits
       const newPosition = camera.position.clone().add(direction);
-      newPosition.x = Math.max(-50, Math.min(50, newPosition.x));
+
+      // Stricter bounds to prevent going out of scene
+      newPosition.x = Math.max(-20, Math.min(20, newPosition.x));
+      newPosition.z = Math.max(-10, Math.min(20, newPosition.z));
 
       // In detective mode, lock Y to eye level height
       if (isDetectiveMode) {
         newPosition.y = 2.3;
       } else {
-        newPosition.y = Math.max(0.5, Math.min(30, newPosition.y));
+        newPosition.y = Math.max(0.5, Math.min(10, newPosition.y));
       }
 
-      newPosition.z = Math.max(-50, Math.min(50, newPosition.z));
-      
-      camera.position.copy(newPosition);
-      
+      // Only update position if values are valid (prevent NaN issues)
+      if (!isNaN(newPosition.x) && !isNaN(newPosition.y) && !isNaN(newPosition.z)) {
+        camera.position.copy(newPosition);
+      }
+
       // Update look target to maintain current view direction
-      const viewDirection = new THREE.Vector3(
-        -Math.sin(yaw.current) * Math.cos(pitch.current),
-        Math.sin(pitch.current),
-        -Math.cos(yaw.current) * Math.cos(pitch.current)
-      );
-      lookTarget.current.copy(camera.position).add(viewDirection);
-      camera.lookAt(lookTarget.current);
+      // Only update if yaw and pitch are valid
+      if (!isNaN(yaw.current) && !isNaN(pitch.current)) {
+        const viewDirection = new THREE.Vector3(
+          -Math.sin(yaw.current) * Math.cos(pitch.current),
+          Math.sin(pitch.current),
+          -Math.cos(yaw.current) * Math.cos(pitch.current)
+        );
+        lookTarget.current.copy(camera.position).add(viewDirection);
+        camera.lookAt(lookTarget.current);
+      }
     });
 
     return null;
