@@ -50,24 +50,17 @@ export const DetectiveOfficeScene = ({
       {/* Desk Chair */}
       <VictorianChair position={[0, 0, -3]} rotation={[0, 0, 0]} />
       
-      {/* Click-off plane - positioned behind board to close it when clicking outside */}
+      {/* Click-off plane - positioned at walls to catch background clicks */}
       {showBoardContent && (
         <mesh
-          position={[0, 4.5, 5]} // Behind the camera when zoomed to board
+          position={[0, 4.5, 9.95]} // Just behind the board surface
+          rotation={[0, Math.PI, 0]} // Face the camera
           onClick={(e) => {
-            e.stopPropagation();
-            console.log('Click-off activated');
-            onCaseFileClick?.(null);
-            onBoardContentClose?.();
-          }}
-          onPointerDown={(e) => {
-            e.stopPropagation();
-            console.log('Click-off pointer down activated');
-            onCaseFileClick?.(null);
+            console.log('Click-off activated - closing board');
             onBoardContentClose?.();
           }}
         >
-          <planeGeometry args={[200, 200]} />
+          <planeGeometry args={[100, 100]} />
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
       )}

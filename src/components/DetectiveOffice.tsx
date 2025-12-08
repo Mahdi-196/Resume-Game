@@ -96,8 +96,8 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       });
       
       try {
-        // Smooth zoom to board - balanced position
-        const boardPosition = new THREE.Vector3(0, 4.5, 5.5); // Balanced zoom (not too close, not too far)
+        // Smooth zoom to board - less zoomed for better view
+        const boardPosition = new THREE.Vector3(0, 4.5, 4.5); // Further back for less zoom
         const boardTarget = new THREE.Vector3(0, 4.5, 9.9); // Board center
 
         await cameraControls.setLookAt(
@@ -118,41 +118,20 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
   };
 
   const handleBoardContentClose = async () => {
-    if (!originalCameraState || !cameraControlsRef.current) {
-      setShowBoardContent(false);
-      setIsTransitioning(false);
-      return;
-    }
-    
-    setIsTransitioning(true);
+    // Don't close case files or board content - just exit zoom mode
+    // This keeps the board state exactly as it is
+
+    // Simply exit the zoomed board view without resetting anything
     setShowBoardContent(false);
-    
-    try {
-      // Smooth transition back to original position
-      await cameraControlsRef.current.setLookAt(
-        originalCameraState.position.x, 
-        originalCameraState.position.y, 
-        originalCameraState.position.z,
-        originalCameraState.target.x, 
-        originalCameraState.target.y, 
-        originalCameraState.target.z,
-        true // enable smooth transition
-      );
-      
-      setIsTransitioning(false);
-      setOriginalCameraState(null);
-      
-      // Re-engage pointer lock after a short delay to ensure camera transition is complete
-      if (wasPointerLocked) {
-        setTimeout(() => {
-          cameraControlsRef.current?.lock();
-          setWasPointerLocked(false); // Reset the flag
-        }, 100); // Small delay to ensure smooth transition
-      }
-      
-    } catch (error) {
-      console.error('Camera return transition failed:', error);
-      setIsTransitioning(false);
+    setIsTransitioning(false);
+    setOriginalCameraState(null);
+
+    // Re-engage pointer lock after a short delay
+    if (wasPointerLocked) {
+      setTimeout(() => {
+        cameraControlsRef.current?.lock();
+        setWasPointerLocked(false); // Reset the flag
+      }, 100);
     }
   };
 
@@ -414,11 +393,6 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
         </div>
       )}
 
-      {/* Lamp Status Indicator */}
-      <div className="absolute top-4 right-4 text-detective-glow text-sm">
-        Banker's Lamp: {lampOn ? 'ON' : 'OFF'}
-      </div>
-
       {/* Enhanced Controls Hint - Hide on mobile */}
       {!isMobile && (
         <div className="absolute bottom-4 left-4 text-detective-paper text-sm space-y-1">
@@ -438,17 +412,6 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
             onLook={(deltaX, deltaY) => {
               touchLookRef.current = { deltaX, deltaY };
             }}
-          />
-          <MobileControlButtons
-            onToggleDetectiveMode={handleToggleDetectiveMode}
-            onOpenBoard={() => {
-              if (showBoardContent) {
-                handleBoardContentClose();
-              } else {
-                handleBoardClick();
-              }
-            }}
-            isDetectiveMode={isDetectiveMode}
           />
         </>
       )}

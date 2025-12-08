@@ -41,6 +41,15 @@ export const BoardPreview = ({
       position={BOARD_CONFIG.position}
       rotation={BOARD_CONFIG.rotation}
     >
+      {/* Invisible click blocker - prevents clicks on board area from closing board */}
+      <mesh
+        position={[0, 0, -0.5]}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <planeGeometry args={[BOARD_CONFIG.size.width + 1, BOARD_CONFIG.size.height + 1]} />
+        <meshBasicMaterial transparent opacity={0} />
+      </mesh>
+
       {/* Main Wooden Board Background */}
       <mesh
         onClick={selectedProject === 'refocused' ? undefined : handleClick}
