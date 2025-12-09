@@ -1,6 +1,7 @@
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { checkCollision } from '@/utils/collisionDetection';
 
 interface EnhancedCameraControlsProps {
   isTransitioning: boolean;
@@ -42,6 +43,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
     const pitch = useRef(0);
     const isMouseLocked = useRef(false);
     const lookTarget = useRef(new THREE.Vector3(0, 0, -1));
+    const hasInitialized = useRef(false);
 
     useImperativeHandle(ref, () => ({
       lock: () => {
@@ -107,9 +109,12 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
     useEffect(() => {
       if (isTransitioning || showBoardContent) return;
 
-      // Set initial camera position and rotation
-      camera.position.set(0, 2.3, 5);
-      camera.rotation.set(0, 0, 0);
+      // Set initial camera position and rotation only once on mount
+      if (!hasInitialized.current) {
+        camera.position.set(0, 2.3, 5);
+        camera.rotation.set(0, 0, 0);
+        hasInitialized.current = true;
+      }
       
       const handleKeyDown = (event: KeyboardEvent) => {
         if (isTransitioning) return;
@@ -253,6 +258,15 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
           gl.domElement.style.cursor = 'none';
         } else {
           gl.domElement.style.cursor = 'crosshair';
+          // Clear all movement state when pointer lock is lost to prevent stuck keys
+          moveState.current = {
+            forward: false,
+            backward: false,
+            left: false,
+            right: false,
+            up: false,
+            down: false
+          };
         }
       };
 
@@ -273,47 +287,26 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       };
     }, [camera, gl, isTransitioning, isDetectiveMode, introComplete, showBoardContent]);
 
+    // Clear movement state when board/map opens or transitions start
+    useEffect(() => {
+      if (showBoardContent || isTransitioning) {
+        moveState.current = {
+          forward: false,
+          backward: false,
+          left: false,
+          right: false,
+          up: false,
+          down: false
+        };
+      }
+    }, [showBoardContent, isTransitioning]);
+
     useFrame(() => {
       if (isTransitioning) return;
       if (showBoardContent) return; // Block all movement when viewing map or board
 
-      // Follow player character in first-person if ref exists
-      if (playerCharacterRef?.current) {
-        const character = playerCharacterRef.current;
-        const characterPos = character.position;
-
-        // Get yaw and pitch from character's userData
-        const yaw = (character as any).userData.yaw || 0;
-        const pitch = (character as any).userData.pitch || 0;
-
-        // Position camera at character's eye level (first-person view)
-        const eyeHeight = 2.3; // Eye height (2.0 * 1.15 = 2.3 for 15% taller)
-
-        const targetCameraPos = new THREE.Vector3(
-          characterPos.x,
-          characterPos.y + eyeHeight,
-          characterPos.z
-        );
-
-        // Set camera position to character's head
-        camera.position.copy(targetCameraPos);
-
-        // Calculate look direction based on yaw and pitch for 360-degree view
-        const lookDirection = new THREE.Vector3(
-          -Math.sin(yaw) * Math.cos(pitch),
-          Math.sin(pitch),
-          -Math.cos(yaw) * Math.cos(pitch)
-        );
-
-        const lookAtTarget = new THREE.Vector3().addVectors(
-          targetCameraPos,
-          lookDirection.multiplyScalar(10)
-        );
-
-        camera.lookAt(lookAtTarget);
-
-        return; // Skip normal movement when following character
-      }
+      // NOTE: Removed character following mode as it bypassed collision detection
+      // Camera now uses direct movement with collision detection
 
       // Apply touch look controls and consume deltas
       if (touchLookRef && (touchLookRef.current.deltaX !== 0 || touchLookRef.current.deltaY !== 0)) {
@@ -361,7 +354,6 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
 
         // Only apply movement if values are non-zero (with tiny threshold to handle floating point)
         if (Math.abs(touchX) > 0.0001 || Math.abs(touchY) > 0.0001) {
-          console.log('Camera receiving touch movement:', { touchX, touchY });
           direction.x += touchX * touchSpeed;
           direction.z += touchY * touchSpeed;
         }
@@ -373,18 +365,35 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
         direction.applyEuler(euler);
       }
 
-      // Add bounds to keep camera within reasonable limits
-      const newPosition = camera.position.clone().add(direction);
+      // Calculate intended position before collision detection
+      const intendedPosition = camera.position.clone().add(direction);
 
-      // Stricter bounds to prevent going out of scene
-      newPosition.x = Math.max(-20, Math.min(20, newPosition.x));
-      newPosition.z = Math.max(-10, Math.min(20, newPosition.z));
+      // Apply collision detection (only if actually moving)
+      let finalX = intendedPosition.x;
+      let finalZ = intendedPosition.z;
+
+      if (direction.length() > 0) {
+        const collisionResult = checkCollision(
+          camera.position.x,
+          camera.position.z,
+          intendedPosition.x,
+          intendedPosition.z,
+          0.4 // player collision radius
+        );
+
+        finalX = collisionResult.correctedX;
+        finalZ = collisionResult.correctedZ;
+      }
+
+      const newPosition = camera.position.clone();
+      newPosition.x = finalX;
+      newPosition.z = finalZ;
 
       // In detective mode, lock Y to eye level height
       if (isDetectiveMode) {
         newPosition.y = 2.645;
       } else {
-        newPosition.y = Math.max(0.5, Math.min(10, newPosition.y));
+        newPosition.y = Math.max(0.5, Math.min(10, intendedPosition.y));
       }
 
       // Only update position if values are valid (prevent NaN issues)
