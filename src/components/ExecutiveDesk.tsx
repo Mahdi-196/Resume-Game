@@ -1,34 +1,4 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-
-// Smoke Effect Component
-const SmokeEffect = ({ position }: { position: [number, number, number] }) => {
-  const smokeRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (smokeRef.current) {
-      smokeRef.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.1;
-    }
-  });
-
-  return (
-    <group ref={smokeRef} position={position}>
-      {[...Array(5)].map((_, i) => (
-        <mesh key={i} position={[0, i * 0.2, 0]}>
-          <sphereGeometry args={[0.05 + i * 0.02]} />
-          <meshStandardMaterial 
-            color="#666666" 
-            transparent 
-            opacity={0.3 - i * 0.05}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-};
-
-// Executive Desk Component
+// Executive Desk Component - Cleared
 export const ExecutiveDesk = ({ onInteraction }: { onInteraction: (type: string) => void }) => {
   return (
     <group position={[0, 0, -4.5]} rotation={[0, Math.PI, 0]}>
@@ -56,171 +26,202 @@ export const ExecutiveDesk = ({ onInteraction }: { onInteraction: (type: string)
         <meshStandardMaterial color="#2a1810" />
       </mesh>
 
-      {/* Typewriter */}
-      <group 
-        position={[1, 1.15, 0]}
-        onClick={() => onInteraction('typewriter')}
-        onPointerOver={() => { document.body.style.cursor = 'pointer'; }}
-        onPointerOut={() => { document.body.style.cursor = 'auto'; }}
-      >
-        <mesh>
-          <boxGeometry args={[0.8, 0.2, 0.6]} />
-          <meshStandardMaterial color="#1a1a1a" roughness={0.8} />
+      {/* Classic 1930s Pyramid Rotary Telephone */}
+      <group position={[-1.2, 1.06, 0.1]} rotation={[0, Math.PI/4, 0]} scale={2.5}>
+        {/* Main pyramid body - single smooth shape */}
+        <mesh position={[0, 0.06, 0]} castShadow receiveShadow>
+          <cylinderGeometry args={[0.11, 0.15, 0.12, 32]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.2}
+            metalness={0.6}
+            envMapIntensity={1}
+          />
         </mesh>
-      </group>
 
-      {/* Cigar in Ashtray with continuous smoke */}
-      <group position={[0.5, 1.1, 0.3]}>
-        {/* Ashtray */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.12, 0.1, 0.03]} />
-          <meshStandardMaterial color="#4a4a4a" metalness={0.6} roughness={0.4} />
+        {/* Base trim ring */}
+        <mesh position={[0, 0.005, 0]}>
+          <cylinderGeometry args={[0.155, 0.155, 0.01, 32]} />
+          <meshStandardMaterial
+            color="#0a0a0a"
+            roughness={0.3}
+            metalness={0.5}
+          />
         </mesh>
-        {/* Cigar */}
-        <mesh position={[0, 0.02, 0]} rotation={[0, 0, 0.3]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.15]} />
-          <meshStandardMaterial color="#8b4513" roughness={0.8} />
-        </mesh>
-        {/* Continuous Smoke Effect */}
-        <SmokeEffect position={[0, 0.05, 0]} />
-      </group>
 
-      {/* Loose Papers - Scattered across desk */}
-      <group position={[-0.5, 1.06, -0.2]}>
-        {[...Array(5)].map((_, i) => (
-          <mesh 
-            key={`paper-${i}`} 
-            position={[
-              (Math.random() - 0.5) * 0.6,
-              i * 0.001,
-              (Math.random() - 0.5) * 0.4
-            ]} 
-            rotation={[0, Math.random() * Math.PI, 0]}
-          >
-            <boxGeometry args={[0.12, 0.001, 0.16]} />
-            <meshStandardMaterial 
-              color={i % 2 === 0 ? "#f5f5dc" : "#fffff0"} 
-              roughness={0.9} 
+        {/* Top platform - flat surface */}
+        <mesh position={[0, 0.125, 0]}>
+          <cylinderGeometry args={[0.11, 0.11, 0.005, 32]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.2}
+            metalness={0.6}
+          />
+        </mesh>
+
+        {/* Rotary dial on front face - angled outward */}
+        <group position={[0, 0.07, 0.13]} rotation={[Math.PI/5, 0, 0]}>
+          {/* Dial outer rim - black */}
+          <mesh position={[0, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.05, 0.05, 0.008, 32]} />
+            <meshStandardMaterial
+              color="#0f0f0f"
+              roughness={0.2}
+              metalness={0.6}
             />
           </mesh>
-        ))}
-      </group>
 
-      {/* Stapler - Left side of desk */}
-      <group position={[-1.2, 1.06, 0.4]}>
-        {/* Stapler body */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[0.12, 0.08, 0.08]} />
-          <meshStandardMaterial color="#2d1810" roughness={0.7} />
-        </mesh>
-        {/* Stapler head */}
-        <mesh position={[0, 0.04, 0]}>
-          <boxGeometry args={[0.08, 0.04, 0.06]} />
-          <meshStandardMaterial color="#1a0f08" roughness={0.8} />
-        </mesh>
-        {/* Stapler arm */}
-        <mesh position={[0, 0.08, 0]}>
-          <boxGeometry args={[0.06, 0.02, 0.04]} />
-          <meshStandardMaterial color="#2d1810" roughness={0.7} />
-        </mesh>
-      </group>
-
-      {/* Telephone - Right side of desk */}
-      <group position={[-1.3, 1.06, -0.3]}>
-        {/* Telephone base */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[0.15, 0.06, 0.12]} />
-          <meshStandardMaterial color="#1a1a1a" roughness={0.8} />
-        </mesh>
-        {/* Telephone dial */}
-        <mesh position={[0, 0.03, 0]}>
-          <cylinderGeometry args={[0.04, 0.04, 0.02]} />
-          <meshStandardMaterial color="#4a4a4a" metalness={0.3} roughness={0.6} />
-        </mesh>
-        {/* Telephone handle */}
-        <mesh position={[0.08, 0.03, 0]}>
-          <boxGeometry args={[0.08, 0.04, 0.04]} />
-          <meshStandardMaterial color="#1a1a1a" roughness={0.8} />
-        </mesh>
-        {/* Phone cord */}
-        <mesh position={[0.12, 0.03, 0]} rotation={[0, 0, Math.PI/4]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.1]} />
-          <meshStandardMaterial color="#333333" roughness={0.9} />
-        </mesh>
-      </group>
-
-      {/* Quill Pen - Near papers */}
-      <group position={[-0.3, 1.06, -0.1]}>
-        {/* Pen body */}
-        <mesh position={[0, 0, 0]} rotation={[0, 0, 0.2]}>
-          <cylinderGeometry args={[0.008, 0.008, 0.12]} />
-          <meshStandardMaterial color="#8b4513" roughness={0.8} />
-        </mesh>
-        {/* Feather tip */}
-        <mesh position={[0, 0.06, 0]} rotation={[0, 0, 0.2]}>
-          <coneGeometry args={[0.02, 0.08]} />
-          <meshStandardMaterial color="#f0e68c" roughness={0.9} />
-        </mesh>
-        {/* Ink tip */}
-        <mesh position={[0, -0.06, 0]} rotation={[0, 0, 0.2]}>
-          <coneGeometry args={[0.003, 0.02]} />
-          <meshStandardMaterial color="#2f1b14" roughness={0.9} />
-        </mesh>
-      </group>
-
-      {/* Cigar Box - Front of desk */}
-      <group position={[0.8, 1.06, -0.6]}>
-        {/* Box base */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[0.2, 0.08, 0.15]} />
-          <meshStandardMaterial color="#8b4513" roughness={0.8} />
-        </mesh>
-        {/* Box lid (slightly open) */}
-        <mesh position={[0, 0.04, -0.02]} rotation={[-0.3, 0, 0]}>
-          <boxGeometry args={[0.19, 0.02, 0.14]} />
-          <meshStandardMaterial color="#654321" roughness={0.8} />
-        </mesh>
-        {/* Cigars inside */}
-        {[...Array(3)].map((_, i) => (
-          <mesh 
-            key={`cigar-${i}`} 
-            position={[
-              (i - 1) * 0.04,
-              0.02,
-              0
-            ]} 
-            rotation={[0, 0, 0.1]}
-          >
-            <cylinderGeometry args={[0.008, 0.008, 0.12]} />
-            <meshStandardMaterial color="#8b4513" roughness={0.8} />
-          </mesh>
-        ))}
-        {/* Gold trim */}
-        <mesh position={[0, 0.04, 0]}>
-          <boxGeometry args={[0.2, 0.001, 0.15]} />
-          <meshStandardMaterial color="#daa520" metalness={0.8} roughness={0.2} />
-        </mesh>
-      </group>
-
-      {/* Additional small papers near typewriter */}
-      <group position={[1.2, 1.06, 0.3]}>
-        {[...Array(3)].map((_, i) => (
-          <mesh 
-            key={`typewriter-paper-${i}`} 
-            position={[
-              (Math.random() - 0.5) * 0.2,
-              i * 0.001,
-              (Math.random() - 0.5) * 0.2
-            ]} 
-            rotation={[0, Math.random() * Math.PI * 0.5, 0]}
-          >
-            <boxGeometry args={[0.1, 0.001, 0.14]} />
-            <meshStandardMaterial 
-              color={i === 0 ? "#f0f0f0" : "#f5f5dc"} 
-              roughness={0.9} 
+          {/* White/silver dial plate */}
+          <mesh position={[0, 0.005, 0]}>
+            <cylinderGeometry args={[0.048, 0.048, 0.001, 32]} />
+            <meshStandardMaterial
+              color="#e8e8e8"
+              roughness={0.3}
+              metalness={0.4}
             />
           </mesh>
-        ))}
+
+          {/* Center label area with metallic finish */}
+          <mesh position={[0, 0.006, 0]}>
+            <cylinderGeometry args={[0.012, 0.012, 0.001, 24]} />
+            <meshStandardMaterial
+              color="#c0c0c0"
+              roughness={0.1}
+              metalness={0.9}
+            />
+          </mesh>
+
+          {/* Finger holes - cleaner and smaller */}
+          {[...Array(10)].map((_, i) => {
+            const angle = (i / 10) * Math.PI * 2 - Math.PI / 2;
+            const radius = 0.032;
+            return (
+              <mesh
+                key={`hole-${i}`}
+                position={[
+                  Math.sin(angle) * radius,
+                  0.005,
+                  Math.cos(angle) * radius
+                ]}
+              >
+                <cylinderGeometry args={[0.004, 0.004, 0.002, 12]} />
+                <meshStandardMaterial color="#1a1a1a" roughness={0.8} />
+              </mesh>
+            );
+          })}
+        </group>
+
+        {/* Bell housing domes - metal bells under the cradle */}
+        <mesh position={[-0.04, 0.128, 0]} castShadow>
+          <sphereGeometry args={[0.015, 20, 20, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.2}
+            metalness={0.6}
+          />
+        </mesh>
+
+        <mesh position={[0.04, 0.128, 0]} castShadow>
+          <sphereGeometry args={[0.015, 20, 20, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.2}
+            metalness={0.6}
+          />
+        </mesh>
+
+        {/* Handset cradle fork arms */}
+        <mesh position={[-0.04, 0.133, 0]}>
+          <cylinderGeometry args={[0.004, 0.004, 0.015, 12]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.3}
+            metalness={0.5}
+          />
+        </mesh>
+        <mesh position={[0.04, 0.133, 0]}>
+          <cylinderGeometry args={[0.004, 0.004, 0.015, 12]} />
+          <meshStandardMaterial
+            color="#0f0f0f"
+            roughness={0.3}
+            metalness={0.5}
+          />
+        </mesh>
+
+        {/* Handset sitting on cradle - clearly visible on top */}
+        <group position={[0, 0.155, 0]}>
+          {/* Main handset body - smooth curved handle */}
+          <mesh rotation={[0, Math.PI/2, 0]} castShadow>
+            <capsuleGeometry args={[0.014, 0.1, 10, 20]} />
+            <meshStandardMaterial
+              color="#0f0f0f"
+              roughness={0.2}
+              metalness={0.6}
+            />
+          </mesh>
+
+          {/* Left earpiece bell - FACING DOWN (wide end up, narrow down) */}
+          <mesh position={[-0.055, 0, 0]} rotation={[-Math.PI/2, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.012, 0.018, 0.022, 20]} />
+            <meshStandardMaterial
+              color="#0f0f0f"
+              roughness={0.2}
+              metalness={0.6}
+            />
+          </mesh>
+
+          {/* Left speaker grille at BOTTOM of bell (facing down) */}
+          <mesh position={[-0.055, -0.012, 0]} rotation={[Math.PI/2, 0, 0]}>
+            <cylinderGeometry args={[0.008, 0.008, 0.001, 16]} />
+            <meshStandardMaterial
+              color="#4a4a4a"
+              roughness={0.8}
+              metalness={0.2}
+            />
+          </mesh>
+
+          {/* Right mouthpiece bell - FACING DOWN (wide end up, narrow down) */}
+          <mesh position={[0.055, 0, 0]} rotation={[-Math.PI/2, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.012, 0.018, 0.022, 20]} />
+            <meshStandardMaterial
+              color="#0f0f0f"
+              roughness={0.2}
+              metalness={0.6}
+            />
+          </mesh>
+
+          {/* Right speaker grille at BOTTOM of bell (facing down) */}
+          <mesh position={[0.055, -0.012, 0]} rotation={[Math.PI/2, 0, 0]}>
+            <cylinderGeometry args={[0.008, 0.008, 0.001, 16]} />
+            <meshStandardMaterial
+              color="#4a4a4a"
+              roughness={0.8}
+              metalness={0.2}
+            />
+          </mesh>
+        </group>
+
+        {/* Coiled telephone cord - cleaner coils */}
+        <group position={[-0.07, 0.03, -0.09]}>
+          {[...Array(12)].map((_, i) => (
+            <mesh
+              key={`cord-${i}`}
+              position={[
+                -i * 0.008,
+                -i * 0.005,
+                -i * 0.007
+              ]}
+              rotation={[Math.PI/4, i * 0.35, 0]}
+            >
+              <torusGeometry args={[0.007, 0.002, 8, 12]} />
+              <meshStandardMaterial
+                color="#1a1a1a"
+                roughness={0.6}
+                metalness={0.1}
+              />
+            </mesh>
+          ))}
+        </group>
       </group>
     </group>
   );

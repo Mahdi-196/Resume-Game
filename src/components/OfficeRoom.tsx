@@ -105,6 +105,63 @@ export const OfficeRoom = ({ onMapClick }: OfficeRoomProps) => {
           <meshStandardMaterial color="#654321" roughness={0.7} />
         </mesh>
       ))}
+
+      {/* EXTERIOR ENVIRONMENT - Creates boundary around office */}
+
+      {/* Extended ground plane - larger than room */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]} receiveShadow>
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial
+          color="#1a1410"
+          roughness={0.9}
+          metalness={0}
+        />
+      </mesh>
+
+      {/* Exterior back wall - behind the office */}
+      <mesh position={[0, 4.5, -15]} receiveShadow>
+        <planeGeometry args={[60, 15]} />
+        <meshStandardMaterial
+          color="#0d0a08"
+          roughness={0.8}
+        />
+      </mesh>
+
+      {/* Exterior left wall */}
+      <mesh position={[-15, 4.5, 0]} rotation={[0, Math.PI / 2, 0]} receiveShadow>
+        <planeGeometry args={[60, 15]} />
+        <meshStandardMaterial
+          color="#0d0a08"
+          roughness={0.8}
+        />
+      </mesh>
+
+      {/* Exterior right wall */}
+      <mesh position={[15, 4.5, 0]} rotation={[0, -Math.PI / 2, 0]} receiveShadow>
+        <planeGeometry args={[60, 15]} />
+        <meshStandardMaterial
+          color="#0d0a08"
+          roughness={0.8}
+        />
+      </mesh>
+
+      {/* Exterior front wall - in front of the office */}
+      <mesh position={[0, 4.5, 15]} rotation={[0, Math.PI, 0]} receiveShadow>
+        <planeGeometry args={[60, 15]} />
+        <meshStandardMaterial
+          color="#0d0a08"
+          roughness={0.8}
+        />
+      </mesh>
+
+      {/* Exterior ceiling - top */}
+      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 15, 0]} receiveShadow>
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial
+          color="#0a0806"
+          roughness={0.9}
+        />
+      </mesh>
     </group>
   );
 };

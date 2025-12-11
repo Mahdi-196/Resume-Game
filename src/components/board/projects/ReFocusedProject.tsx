@@ -13,8 +13,61 @@ interface ReFocusedProjectProps {
   onPaperZoom: (paper: ZoomedPaper) => void;
 }
 
+// Cloud Icon Component constructed from primitives (2D style)
+const CloudIcon = () => (
+  <group>
+    {/* Main cloud body - made of flat circles with border effect */}
+    <group>
+      {/* White inner cloud */}
+      <mesh position={[0, 0, 0.002]}>
+        <circleGeometry args={[0.35, 32]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      <mesh position={[0.4, -0.1, 0.002]}>
+        <circleGeometry args={[0.25, 32]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      <mesh position={[-0.4, -0.1, 0.002]}>
+        <circleGeometry args={[0.25, 32]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      <mesh position={[0.2, 0.25, 0.002]}>
+        <circleGeometry args={[0.25, 32]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+      <mesh position={[-0.2, 0.2, 0.002]}>
+        <circleGeometry args={[0.22, 32]} />
+        <meshBasicMaterial color="#FFFFFF" />
+      </mesh>
+
+      {/* Dark outline/shadow for visibility */}
+      <mesh position={[0, 0, 0.001]}>
+        <circleGeometry args={[0.38, 32]} />
+        <meshBasicMaterial color={COLORS.primaryText} />
+      </mesh>
+      <mesh position={[0.4, -0.1, 0.001]}>
+        <circleGeometry args={[0.28, 32]} />
+        <meshBasicMaterial color={COLORS.primaryText} />
+      </mesh>
+      <mesh position={[-0.4, -0.1, 0.001]}>
+        <circleGeometry args={[0.28, 32]} />
+        <meshBasicMaterial color={COLORS.primaryText} />
+      </mesh>
+      <mesh position={[0.2, 0.25, 0.001]}>
+        <circleGeometry args={[0.28, 32]} />
+        <meshBasicMaterial color={COLORS.primaryText} />
+      </mesh>
+      <mesh position={[-0.2, 0.2, 0.001]}>
+        <circleGeometry args={[0.25, 32]} />
+        <meshBasicMaterial color={COLORS.primaryText} />
+      </mesh>
+    </group>
+  </group>
+);
+
 export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectProps) => {
   const textScale = getTextScale();
+
   return (
     <>
       {/* Header Background Panel */}
@@ -70,6 +123,11 @@ export const ReFocusedProject = ({ zoomedPaper, onPaperZoom }: ReFocusedProjectP
       >
         An End-to-End AI Productivity Platform
       </Text>
+
+      {/* Cloud Icon - Centered in remaining space on right */}
+      <group position={[3.5, 2.0, 0.033]} scale={1.2}>
+        <CloudIcon />
+      </group>
 
       {/* Decorative divider */}
       <Line points={[[-4.2, 1.92, 0.032], [4.2, 1.92, 0.032]]} color={COLORS.brass} lineWidth={1} />

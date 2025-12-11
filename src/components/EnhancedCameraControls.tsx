@@ -378,7 +378,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
           camera.position.z,
           intendedPosition.x,
           intendedPosition.z,
-          0.4 // player collision radius
+          0.75 // player collision radius - works with 10% bookshelf padding to prevent glitching and stuck issues
         );
 
         finalX = collisionResult.correctedX;

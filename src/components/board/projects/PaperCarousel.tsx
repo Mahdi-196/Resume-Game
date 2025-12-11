@@ -13,17 +13,20 @@ interface PaperCarouselProps {
   onPaperZoom: (paper: ZoomedPaper) => void;
 }
 
+
 export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) => {
   const textScale = getTextScale();
+
   return (
     <>
-      {/* PAPER 1 - Frontend Repository (Left) */}
+      {/* PAPER 1 - Frontend Repository (Center with Architecture Diagram) */}
+
       <group
         position={
-          !zoomedPaper ? [-4.2, -1.2, 0.03] :
+          !zoomedPaper ? [0, -1.2, 0.04] :
+          zoomedPaper === 'backend' ? [4.0, -0.3, 0.04] :
           zoomedPaper === 'frontend' ? [0, -0.3, 0.06] :
-          zoomedPaper === 'backend' ? [-4.0, -0.3, 0.04] :
-          [0, 0, 0]  // Hidden when AI is zoomed
+          [-4.0, -0.3, 0.04]
         }
         scale={
           !zoomedPaper ? 1 :
@@ -36,7 +39,6 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         }}
         onPointerEnter={() => (document.body.style.cursor = 'pointer')}
         onPointerLeave={() => (document.body.style.cursor = 'auto')}
-        visible={!zoomedPaper || zoomedPaper === 'frontend' || zoomedPaper === 'backend'}
       >
         {/* Paper shadow */}
         <mesh position={[0.05, -0.05, -0.001]}>
@@ -70,7 +72,8 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         <Line points={[[-1.0, 1.17, 0.002], [1.0, 1.17, 0.002]]} color={COLORS.brass} lineWidth={2} />
 
         {/* Tech stack */}
-        <Text position={[0, 0.8, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
+
+        <Text position={[0, 0.98, 0.002]} fontSize={0.11 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
           Next.js 15 • React 19 • TypeScript
         </Text>
 
@@ -130,13 +133,13 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         <PushPin position={[1.5, 1.5, 0.01]} color="#CD853F" radius={0.1} />
       </group>
 
-      {/* PAPER 2 - Backend Repository (Center) */}
+      {/* PAPER 2 - Backend Repository (Left) */}
       <group
         position={
-          !zoomedPaper ? [0, -1.2, 0.04] :
-          zoomedPaper === 'frontend' ? [4.0, -0.3, 0.04] :
+          !zoomedPaper ? [-4.2, -1.2, 0.03] :
           zoomedPaper === 'backend' ? [0, -0.3, 0.06] :
-          [-4.0, -0.3, 0.04]
+          zoomedPaper === 'frontend' ? [-4.0, -0.3, 0.04] :
+          [0, 0, 0]  // Hidden when AI is zoomed
         }
         scale={
           !zoomedPaper ? 1 :
@@ -149,6 +152,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         }}
         onPointerEnter={() => (document.body.style.cursor = 'pointer')}
         onPointerLeave={() => (document.body.style.cursor = 'auto')}
+        visible={!zoomedPaper || zoomedPaper === 'backend' || zoomedPaper === 'frontend'}
       >
         {/* Paper shadow */}
         <mesh position={[0.05, -0.05, -0.001]}>
@@ -247,7 +251,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         position={
           !zoomedPaper ? [4.2, -1.2, 0.03] :
           zoomedPaper === 'ai' ? [0, -0.3, 0.06] :
-          zoomedPaper === 'backend' ? [4.0, -0.3, 0.04] :
+          zoomedPaper === 'frontend' ? [4.0, -0.3, 0.04] :
           [0, 0, 0]
         }
         scale={
@@ -261,7 +265,7 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
         }}
         onPointerEnter={() => (document.body.style.cursor = 'pointer')}
         onPointerLeave={() => (document.body.style.cursor = 'auto')}
-        visible={!zoomedPaper || zoomedPaper === 'ai' || zoomedPaper === 'backend'}
+        visible={!zoomedPaper || zoomedPaper === 'ai' || zoomedPaper === 'frontend'}
       >
         {/* Paper shadow */}
         <mesh position={[0.05, -0.05, -0.001]}>
@@ -359,12 +363,12 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
       {zoomedPaper && (
         <>
           {/* Left Arrow */}
-          {(zoomedPaper === 'backend' || zoomedPaper === 'ai') && (
+          {(zoomedPaper === 'frontend' || zoomedPaper === 'ai') && (
             <group
               position={[-5.5, -0.3, 0.07]}
               onClick={(e) => {
                 e.stopPropagation();
-                onPaperZoom(zoomedPaper === 'backend' ? 'frontend' : 'backend');
+                onPaperZoom(zoomedPaper === 'frontend' ? 'backend' : 'frontend');
               }}
               onPointerEnter={() => (document.body.style.cursor = 'pointer')}
               onPointerLeave={() => (document.body.style.cursor = 'auto')}
@@ -380,12 +384,12 @@ export const PaperCarousel = ({ zoomedPaper, onPaperZoom }: PaperCarouselProps) 
           )}
 
           {/* Right Arrow */}
-          {(zoomedPaper === 'frontend' || zoomedPaper === 'backend') && (
+          {(zoomedPaper === 'backend' || zoomedPaper === 'frontend') && (
             <group
               position={[5.5, -0.3, 0.07]}
               onClick={(e) => {
                 e.stopPropagation();
-                onPaperZoom(zoomedPaper === 'frontend' ? 'backend' : 'ai');
+                onPaperZoom(zoomedPaper === 'backend' ? 'frontend' : 'ai');
               }}
               onPointerEnter={() => (document.body.style.cursor = 'pointer')}
               onPointerLeave={() => (document.body.style.cursor = 'auto')}

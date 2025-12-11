@@ -9,8 +9,8 @@ import { VictorianChandelier } from './VictorianChandelier';
 import { FirstPersonDetectiveBody } from './FirstPersonDetectiveBody';
 import { DetectiveCharacter } from './DetectiveCharacter';
 import { VictorianCouch } from './VictorianCouch';
-import { VictorianSideTable } from './VictorianSideTable';
 import { VictorianArmchair } from './VictorianArmchair';
+import { CoatRack } from './CoatRack';
 
 interface DetectiveOfficeSceneProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -104,12 +104,7 @@ export const DetectiveOfficeScene = ({
       </group>
       <VictorianArmchair position={[-3.5, 0, 3.5]} rotation={[0, Math.PI / 2, 0]} />
 
-      {/* Victorian Side Tables */}
-      <VictorianSideTable position={[-3, 0, 2]} rotation={[0, 0, 0]} />
-      <VictorianSideTable position={[-1, 0, 4]} rotation={[0, 0, 0]} />
-      <VictorianSideTable position={[-5.5, 0, 4]} rotation={[0, 0, 0]} />
-      
-      {/* Asymmetrical Bookshelves - Left wall (3 bookshelves with gaps) */}
+      {/* Asymmetrical Bookshelves - Left wall (3 bookshelves with gaps) */}}
       <Bookshelf position={[-9.0, 0, -6]} rotation={[0, Math.PI / 2, 0]} variant={1} />
       <Bookshelf position={[-9.0, 0, 6]} rotation={[0, Math.PI / 2, 0]} variant={3} />
       
@@ -122,7 +117,10 @@ export const DetectiveOfficeScene = ({
       <Bookshelf position={[-8, 0, -9]} rotation={[0, 0, 0]} variant={7} />
       
       {/* Victorian Door on right wall */}
-      <VictorianDoor position={[9.5, 0, 8]} rotation={[0, -Math.PI / 2, 0]} onInteraction={onInteraction} />
+      <VictorianDoor position={[9.95, 0, 7.5]} rotation={[0, -Math.PI / 2, 0]} onInteraction={onInteraction} />
+
+      {/* Coat Rack near entrance */}
+      <CoatRack position={[8, 0, 8.5]} rotation={[0, 0, 0]} />
 
       {/* Victorian Chandelier - lowered 10% for smaller room */}
       <VictorianChandelier position={[0, 8.1, 2]} isLit={lampOn} />

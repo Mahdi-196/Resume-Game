@@ -1,0 +1,124 @@
+================================================================================
+REFOCUSED PROJECT - ALL TEXT CONTENT
+================================================================================
+
+MAIN HEADER
+-----------
+Title: ReFocused
+Subtitle: An End-to-End AI Productivity Platform
+
+Summary:
+A full-stack application with a custom 1.2B parameter LLM, a high-performance
+FastAPI backend, and a modern Next.js frontend.
+
+================================================================================
+
+PAPER 1 - FRONTEND
+------------------
+Header: FRONTEND
+Tech Stack: Next.js 15 • React 19 • TypeScript
+
+Content:
+• Developed responsive web app using
+  Next.js 15, React 19, strict TypeScript
+
+• Designed scalable state with TanStack
+  Query + React Context, no prop-drilling
+
+• Engineered secure auth with silent token
+  refresh, dual-strategy (Cookies/JWT)
+
+• Built 67+ reusable components: Quill.js
+  editor w/ encryption, SVG meditation tool
+
+• Implemented multi-layer caching with
+  React Query + localStorage for sub-second UI
+
+GitHub Link: https://github.com/Mahdi-196/ReFocused-frontend
+
+================================================================================
+
+PAPER 2 - BACKEND API
+---------------------
+Header: BACKEND API
+Tech Stack: FastAPI • Python • PostgreSQL • Redis
+
+Content:
+• Developed async-first API with FastAPI
+  + asyncpg: 140+ endpoints, less than 50ms avg
+
+• Implemented multi-layer security: HTTP-Only
+  Cookies, Google OAuth 2.0, CSRF protection
+
+• Designed observability stack: OpenTelemetry,
+  Prometheus, Sentry to monitor app health
+
+• Deployed with multi-stage Docker build
+  for secure, non-root production containers
+
+• Utilized async Redis cache to optimize
+  PostgreSQL: queries, sessions, rate limits
+
+GitHub Link: https://github.com/Mahdi-196/ReFocused-backend
+
+================================================================================
+
+PAPER 3 - AI MODEL
+------------------
+Header: AI MODEL
+Tech Stack: 1.2B Params • GPT-NeoX • PyTorch
+
+Content:
+• Built and trained a 1.2B param LLM
+  from scratch to power AI-driven features
+
+• Built an end-to-end MLOps pipeline for
+  data collection, cleaning, and tokenization
+
+• Implemented fault-tolerant PyTorch training:
+  mixed-precision, non-blocking GCS uploads
+
+• Designed LoRA fine-tuning workflows to
+  specialize for chat and instruction-following
+
+• Engineered data pipeline in Python to parse,
+  clean, shard datasets into .npz for training
+
+GitHub Link: https://github.com/Mahdi-196/ReFocused-AI
+
+================================================================================
+================================================================================
+
+MEDESENSE PROJECT - ALL TEXT CONTENT
+================================================================================
+
+HEADER
+------
+Title: AI Healthcare Platform
+Tech Stack: FastAPI • React • AWS • OpenAI
+
+Content:
+• Built HIPAA-compliant healthcare chatbot with infinite
+  memory using Supermemory RAG API for context retention
+
+• Integrated AWS Textract for medical document OCR and
+  AWS Comprehend Medical for PHI detection and removal
+
+• Deployed serverless FastAPI backend on AWS Lambda
+  with API Gateway for auto-scaling and cost efficiency
+
+• Implemented per-user document isolation with tagged
+  storage in Supermemory for complete data separation
+
+• Architected React TypeScript frontend with Vite for
+  fast builds and deployed on CloudFront CDN
+
+• Secured with JWT authentication and PostgreSQL for
+  user management with bcrypt password hashing
+
+Footer:
+24-Hour Hackathon Project • VillageHacks 2025
+
+GitHub Link: https://github.com/Mahdi-196/VillageHacks
+
+================================================================================

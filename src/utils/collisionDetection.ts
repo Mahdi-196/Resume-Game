@@ -5,7 +5,7 @@ import { CollisionBox, CollisionResult } from '@/types/three';
  * All measurements are in Three.js units based on actual object positions and dimensions
  */
 export const DETECTIVE_OFFICE_COLLISIONS: CollisionBox[] = [
-  // Room walls (with slight buffer for collision detection)
+  // Room walls (with collision buffer)
   {
     id: 'wall_back',
     minX: -10, maxX: 10,
@@ -62,84 +62,61 @@ export const DETECTIVE_OFFICE_COLLISIONS: CollisionBox[] = [
     isStatic: true
   },
 
-  // Side table 1 at [-3, 0, 2] - cylindrical table approximated as box
-  {
-    id: 'side_table_1',
-    minX: -3.4, maxX: -2.6,
-    minY: 0, maxY: 0.7,
-    minZ: 1.6, maxZ: 2.4,
-    isStatic: true
-  },
-
-  // Side table 2 at [-1, 0, 4]
-  {
-    id: 'side_table_2',
-    minX: -1.4, maxX: -0.6,
-    minY: 0, maxY: 0.7,
-    minZ: 3.6, maxZ: 4.4,
-    isStatic: true
-  },
-
-  // Side table 3 at [-5.5, 0, 4]
-  {
-    id: 'side_table_3',
-    minX: -5.9, maxX: -5.1,
-    minY: 0, maxY: 0.7,
-    minZ: 3.6, maxZ: 4.4,
-    isStatic: true
-  },
-
-  // Bookshelf 1 - left wall at [-9.0, 0, -6] rotated 90° (1.8 depth in Z, 0.8 width in X)
+  // Bookshelf 1 - left wall at [-9.0, 0, -6] rotated 90° (with 10% padding)
+  // Original rotated: width 0.8 in X, depth 1.8 in Z
+  // 10% padding: 0.08 in X, 0.18 in Z on each side
   {
     id: 'bookshelf_1',
-    minX: -9.8, maxX: -8.6,
+    minX: -9.88, maxX: -8.12,
     minY: 0, maxY: 5,
-    minZ: -6.9, maxZ: -5.1,
+    minZ: -7.08, maxZ: -4.92,
     isStatic: true
   },
 
-  // Bookshelf 2 - left wall at [-9.0, 0, 6] rotated 90°
+  // Bookshelf 2 - left wall at [-9.0, 0, 6] rotated 90° (with 10% padding)
   {
     id: 'bookshelf_2',
-    minX: -9.8, maxX: -8.6,
+    minX: -9.88, maxX: -8.12,
     minY: 0, maxY: 5,
-    minZ: 5.1, maxZ: 6.9,
+    minZ: 4.92, maxZ: 7.08,
     isStatic: true
   },
 
-  // Bookshelf 3 - right wall at [9.0, 0, -3] rotated -90°
+  // Bookshelf 3 - right wall at [9.0, 0, -3] rotated -90° (with 10% padding)
   {
     id: 'bookshelf_3',
-    minX: 8.6, maxX: 9.8,
+    minX: 8.12, maxX: 9.88,
     minY: 0, maxY: 5,
-    minZ: -3.9, maxZ: -2.1,
+    minZ: -3.98, maxZ: -2.02,
     isStatic: true
   },
 
-  // Bookshelf 4 - right wall at [9.0, 0, 0] rotated -90°
+  // Bookshelf 4 - right wall at [9.0, 0, 0] rotated -90° (with 10% padding)
   {
     id: 'bookshelf_4',
-    minX: 8.6, maxX: 9.8,
+    minX: 8.12, maxX: 9.88,
     minY: 0, maxY: 5,
-    minZ: -0.9, maxZ: 0.9,
+    minZ: -0.98, maxZ: 0.98,
     isStatic: true
   },
 
-  // Bookshelf 5 - right wall at [9.0, 0, 3] rotated -90°
+  // Bookshelf 5 - right wall at [9.0, 0, 3] rotated -90° (with 10% padding)
   {
     id: 'bookshelf_5',
-    minX: 8.6, maxX: 9.8,
+    minX: 8.12, maxX: 9.88,
     minY: 0, maxY: 5,
-    minZ: 2.1, maxZ: 3.9,
+    minZ: 1.02, maxZ: 3.98,
     isStatic: true
   },
 
-  // Bookshelf 6 - corner at [-8, 0, -9] no rotation
+  // Bookshelf 6 - corner at [-8, 0, -9] no rotation (with 10% padding)
+  // Original: width 1.8 in X, depth 0.8 in Z
+  // 10% padding: 0.18 in X, 0.08 in Z on each side
   {
     id: 'bookshelf_6',
-    minX: -8.9, maxX: -7.1,
+    minX: -8.98, maxX: -7.02,
     minY: 0, maxY: 5,
-    minZ: -9.8, maxZ: -8.6,
+    minZ: -9.88, maxZ: -8.12,
     isStatic: true
   },
 
@@ -152,12 +129,21 @@ export const DETECTIVE_OFFICE_COLLISIONS: CollisionBox[] = [
     isStatic: true
   },
 
-  // Victorian door at [9.5, 0, 8] rotated -π/2
+  // Victorian door at [9.95, 0, 7.5] rotated -π/2
   {
     id: 'door',
-    minX: 9.3, maxX: 9.7,
+    minX: 9.75, maxX: 10.15,
     minY: 0, maxY: 3,
-    minZ: 7.5, maxZ: 8.5,
+    minZ: 7.0, maxZ: 8.0,
+    isStatic: true
+  },
+
+  // Coat rack near entrance at [8, 0, 8.5]
+  {
+    id: 'coat_rack',
+    minX: 7.7, maxX: 8.3,
+    minY: 0, maxY: 2,
+    minZ: 8.2, maxZ: 8.8,
     isStatic: true
   },
 ];
@@ -185,6 +171,8 @@ function aabbIntersects(
  * Resolves collision by implementing sliding behavior along obstacle surfaces
  * If diagonal movement hits an obstacle, tries moving along one axis at a time
  * This creates smooth "sliding along walls" movement
+ *
+ * IMPORTANT: Checks against ALL obstacles to prevent getting stuck in corners
  */
 function resolveCollisionWithSliding(
   currentX: number,
@@ -200,8 +188,17 @@ function resolveCollisionWithSliding(
   const xOnlyMinZ = currentZ - playerRadius;
   const xOnlyMaxZ = currentZ + playerRadius;
 
-  if (!aabbIntersects(xOnlyMinX, xOnlyMaxX, xOnlyMinZ, xOnlyMaxZ, obstacle)) {
-    // X movement is safe, cancel Z movement
+  // Check X-only movement against ALL obstacles, not just the current one
+  let xOnlySafe = true;
+  for (const box of DETECTIVE_OFFICE_COLLISIONS) {
+    if (aabbIntersects(xOnlyMinX, xOnlyMaxX, xOnlyMinZ, xOnlyMaxZ, box)) {
+      xOnlySafe = false;
+      break;
+    }
+  }
+
+  if (xOnlySafe) {
+    // X movement is safe against all obstacles, cancel Z movement
     return {
       collided: true,
       correctedX: newX,
@@ -216,8 +213,17 @@ function resolveCollisionWithSliding(
   const zOnlyMinZ = newZ - playerRadius;
   const zOnlyMaxZ = newZ + playerRadius;
 
-  if (!aabbIntersects(zOnlyMinX, zOnlyMaxX, zOnlyMinZ, zOnlyMaxZ, obstacle)) {
-    // Z movement is safe, cancel X movement
+  // Check Z-only movement against ALL obstacles
+  let zOnlySafe = true;
+  for (const box of DETECTIVE_OFFICE_COLLISIONS) {
+    if (aabbIntersects(zOnlyMinX, zOnlyMaxX, zOnlyMinZ, zOnlyMaxZ, box)) {
+      zOnlySafe = false;
+      break;
+    }
+  }
+
+  if (zOnlySafe) {
+    // Z movement is safe against all obstacles, cancel X movement
     return {
       collided: true,
       correctedX: currentX,
@@ -226,7 +232,7 @@ function resolveCollisionWithSliding(
     };
   }
 
-  // Both axes are blocked - prevent all movement
+  // Both axes are blocked by obstacles - prevent all movement
   return {
     collided: true,
     correctedX: currentX,
@@ -244,7 +250,7 @@ function resolveCollisionWithSliding(
  * @param currentZ - Current Z position
  * @param newX - Intended new X position
  * @param newZ - Intended new Z position
- * @param playerRadius - Collision radius around player (default: 0.4 units)
+ * @param playerRadius - Collision radius around player (default: 0.75 units)
  * @returns CollisionResult with corrected position and collision status
  */
 export function checkCollision(
@@ -252,7 +258,7 @@ export function checkCollision(
   currentZ: number,
   newX: number,
   newZ: number,
-  playerRadius: number = 0.4
+  playerRadius: number = 0.75
 ): CollisionResult {
   // Create player AABB from intended position and radius
   const playerMinX = newX - playerRadius;
