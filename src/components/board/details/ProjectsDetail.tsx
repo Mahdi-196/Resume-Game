@@ -3,6 +3,8 @@ import { Text } from '@react-three/drei';
 import { BackButton } from '../shared/BackButton';
 import { ProjectsList } from '../projects/ProjectsList';
 import { ReFocusedProject } from '../projects/ReFocusedProject';
+import { ResiliNetProject } from '../projects/ResiliNetProject';
+import { MedeSenseProject } from '../projects/MedeSenseProject';
 import { RespawnRoomProject } from '../projects/RespawnRoomProject';
 import { SideProjectsWrapper } from '../projects/SideProjectsWrapper';
 import { COLORS } from '../constants';
@@ -11,7 +13,8 @@ import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Projects detail view wrapper
- * Shows projects list, ReFocused detail, RespawnRoom detail, or Side Projects grid
+ * Shows projects list or individual project details:
+ * - ReFocused, ResiliNet, MedeSense, RespawnRoom, or Side Projects grid
  */
 export const ProjectsDetail = ({
   onBack,
@@ -34,6 +37,7 @@ export const ProjectsDetail = ({
     if (selectedProject !== 'respawnroom') {
       onRespawnPaperZoom(null);
     }
+    // ResiliNet and MedeSense don't have zoomed papers, so no need to reset
   }, [selectedProject, onPaperZoom, onRespawnPaperZoom]);
 
   return (
@@ -72,6 +76,10 @@ export const ProjectsDetail = ({
         <ProjectsList onProjectSelect={onProjectSelect} />
       ) : selectedProject === 'refocused' ? (
         <ReFocusedProject zoomedPaper={zoomedPaper} onPaperZoom={onPaperZoom} />
+      ) : selectedProject === 'resilinet' ? (
+        <ResiliNetProject />
+      ) : selectedProject === 'medesense' ? (
+        <MedeSenseProject />
       ) : selectedProject === 'respawnroom' ? (
         <RespawnRoomProject zoomedPaper={respawnPaper} onPaperZoom={onRespawnPaperZoom} />
       ) : selectedProject === 'sideprojects' ? (

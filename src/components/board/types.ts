@@ -3,8 +3,8 @@
  */
 
 export type CaseFile = 'about' | 'skillseducation' | 'projects' | null;
-export type ProjectDetail = 'refocused' | 'respawnroom' | 'sideprojects' | null;
-export type SideProject = 'medesense' | 'popuptrivia' | 'vibelink' | 'graphibooks' | null;
+export type ProjectDetail = 'refocused' | 'resilinet' | 'medesense' | 'respawnroom' | 'sideprojects' | null;
+export type SideProject = 'popuptrivia' | 'vibelink' | 'graphibooks' | null;
 export type ZoomedPaper = 'frontend' | 'backend' | 'ai' | null;
 export type RespawnPaper = 'frontend' | 'backend' | null;
 

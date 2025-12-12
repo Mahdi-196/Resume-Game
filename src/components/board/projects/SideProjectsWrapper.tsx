@@ -1,7 +1,6 @@
 import { Text, Line } from '@react-three/drei';
 import { BackButton } from '../shared/BackButton';
 import { SideProjectsSelection } from './SideProjectsSelection';
-import { MedeSenseProject } from './MedeSenseProject';
 import { PopUpTriviaProject } from './PopUpTriviaProject';
 import { VibeLinkProject } from './VibeLinkProject';
 import { GraphiBooksProject } from './GraphiBooksProject';
@@ -69,8 +68,6 @@ export const SideProjectsWrapper = ({
       {/* Show selection grid or individual project */}
       {!selectedSideProject ? (
         <SideProjectsSelection onProjectSelect={onSideProjectSelect} />
-      ) : selectedSideProject === 'medesense' ? (
-        <MedeSenseProject />
       ) : selectedSideProject === 'popuptrivia' ? (
         <PopUpTriviaProject />
       ) : selectedSideProject === 'vibelink' ? (
