@@ -17,6 +17,9 @@ import { VictorianCouch } from './VictorianCouch';
 import { VictorianArmchair } from './VictorianArmchair';
 import { CoatRack } from './CoatRack';
 import { FilingCabinet } from './FilingCabinet';
+import { WoodenCoffeeTable } from './WoodenCoffeeTable';
+import { WoodenEndTable } from './WoodenEndTable';
+import { SquareWoodenTable } from './SquareWoodenTable';
 
 interface DetectiveOfficeSceneProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -170,6 +173,20 @@ export const DetectiveOfficeScene = ({
 
       {/* Coat Rack near entrance */}
       <CoatRack position={[8, 0, 8.5]} rotation={[0, 0, 0]} />
+
+      {/* Wooden Tables - Practical furniture throughout the room */}
+
+      {/* Large wooden coffee table in front of couch */}
+      <WoodenCoffeeTable position={[0, 0, 3.8]} rotation={[0, 0, 0]} />
+
+      {/* Wooden end table near armchair */}
+      <WoodenEndTable position={[-5.5, 0, 4.5]} rotation={[0, 0, 0]} />
+
+      {/* Wooden end table on right side of couch */}
+      <WoodenEndTable position={[3, 0, 2.5]} rotation={[0, Math.PI / 4, 0]} />
+
+      {/* Square wooden table - center display piece */}
+      <SquareWoodenTable position={[4, 0, -3]} rotation={[0, 0, 0]} />
 
       {/* Victorian Chandelier - lowered 10% for smaller room */}
       <VictorianChandelier position={[0, 8.1, 2]} isLit={lampOn} />

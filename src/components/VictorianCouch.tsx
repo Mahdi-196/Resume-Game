@@ -44,36 +44,6 @@ export const VictorianCouch = ({
         />
       </mesh>
 
-      {/* Left edge circular cushion against backrest */}
-      <mesh position={[-0.9, 0.85, -0.15]} castShadow receiveShadow>
-        <sphereGeometry args={[0.35, 24, 24]} />
-        <meshStandardMaterial
-          color={cushionColor}
-          roughness={0.92}
-          metalness={0.0}
-        />
-      </mesh>
-
-      {/* Center circular cushion (smaller) against backrest */}
-      <mesh position={[0, 0.85, -0.15]} castShadow receiveShadow>
-        <sphereGeometry args={[0.28, 24, 24]} />
-        <meshStandardMaterial
-          color={cushionColor}
-          roughness={0.92}
-          metalness={0.0}
-        />
-      </mesh>
-
-      {/* Right edge circular cushion against backrest */}
-      <mesh position={[0.9, 0.85, -0.15]} castShadow receiveShadow>
-        <sphereGeometry args={[0.35, 24, 24]} />
-        <meshStandardMaterial
-          color={cushionColor}
-          roughness={0.92}
-          metalness={0.0}
-        />
-      </mesh>
-
       {/* Backrest main body - solid and substantial */}
       <mesh position={[0, 1.15, -0.4]} castShadow receiveShadow>
         <boxGeometry args={[2.9, 1.0, 0.25]} />

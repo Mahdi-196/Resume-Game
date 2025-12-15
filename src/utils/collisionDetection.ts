@@ -172,6 +172,46 @@ export const DETECTIVE_OFFICE_COLLISIONS: CollisionBox[] = [
     minZ: 8.65, maxZ: 9.75,
     isStatic: true
   },
+
+  // Wooden Coffee Table - in front of couch at [0, 0, 3.8]
+  // Large rectangular: 2.4 × 1.4 (with padding)
+  {
+    id: 'wooden_coffee_table',
+    minX: -1.3, maxX: 1.3,
+    minY: 0, maxY: 0.5,
+    minZ: 3.1, maxZ: 4.5,
+    isStatic: true
+  },
+
+  // Wooden End Table 1 - near armchair at [-5.5, 0, 4.5]
+  // Rectangular: 0.7 × 0.5
+  {
+    id: 'wooden_end_table_1',
+    minX: -5.9, maxX: -5.1,
+    minY: 0, maxY: 0.65,
+    minZ: 4.2, maxZ: 4.8,
+    isStatic: true
+  },
+
+  // Wooden End Table 2 - on right of couch at [3, 0, 2.5] rotated 45°
+  // Rectangular: 0.7 × 0.5 (diagonal orientation, use larger box)
+  {
+    id: 'wooden_end_table_2',
+    minX: 2.55, maxX: 3.45,
+    minY: 0, maxY: 0.65,
+    minZ: 2.05, maxZ: 2.95,
+    isStatic: true
+  },
+
+  // Square Wooden Table - center display at [4, 0, -3]
+  // Large square: 1.4 × 1.4
+  {
+    id: 'square_wooden_table',
+    minX: 3.2, maxX: 4.8,
+    minY: 0, maxY: 0.55,
+    minZ: -3.8, maxZ: -2.2,
+    isStatic: true
+  },
 ];
 
 /**
