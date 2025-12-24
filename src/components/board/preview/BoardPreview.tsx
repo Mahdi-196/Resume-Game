@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Text } from '@react-three/drei';
 import { CaseFileCard } from './CaseFileCard';
 import { PushPin } from '../shared/PushPin';
-import { BOARD_CONFIG, COLORS, CASE_FILE_POSITIONS } from '../constants';
+import { BOARD_CONFIG, COLORS, CASE_FILE_POSITIONS, SHARED_MATERIALS } from '../constants';
 import type { CaseFile, ProjectDetail } from '../types';
 import { getTextScale } from '@/utils/detectMobile';
 
@@ -74,12 +74,7 @@ export const BoardPreview = ({
         }}
       >
         <planeGeometry args={[BOARD_CONFIG.size.width, BOARD_CONFIG.size.height]} />
-        <meshStandardMaterial
-          color={COLORS.lightWood}
-          roughness={0.7}
-          metalness={0.1}
-          side={THREE.DoubleSide}
-        />
+        <primitive object={SHARED_MATERIALS.lightWood} attach="material" />
       </mesh>
 
       {/* Wooden Borders - Dark brown wood */}
@@ -90,7 +85,7 @@ export const BoardPreview = ({
         onPointerDown={handlePointerDown}
       >
         <boxGeometry args={[13, 0.25, 0.08]} />
-        <meshStandardMaterial color={COLORS.darkWood} roughness={0.8} metalness={0.1} side={THREE.DoubleSide} />
+        <primitive object={SHARED_MATERIALS.darkWood} attach="material" />
       </mesh>
 
       {/* Bottom border */}
@@ -100,7 +95,7 @@ export const BoardPreview = ({
         onPointerDown={handlePointerDown}
       >
         <boxGeometry args={[13, 0.25, 0.08]} />
-        <meshStandardMaterial color={COLORS.darkWood} roughness={0.8} metalness={0.1} side={THREE.DoubleSide} />
+        <primitive object={SHARED_MATERIALS.darkWood} attach="material" />
       </mesh>
 
       {/* Left border */}
@@ -110,7 +105,7 @@ export const BoardPreview = ({
         onPointerDown={handlePointerDown}
       >
         <boxGeometry args={[0.25, 6.5, 0.08]} />
-        <meshStandardMaterial color={COLORS.darkWood} roughness={0.8} metalness={0.1} side={THREE.DoubleSide} />
+        <primitive object={SHARED_MATERIALS.darkWood} attach="material" />
       </mesh>
 
       {/* Right border */}
@@ -120,7 +115,7 @@ export const BoardPreview = ({
         onPointerDown={handlePointerDown}
       >
         <boxGeometry args={[0.25, 6.5, 0.08]} />
-        <meshStandardMaterial color={COLORS.darkWood} roughness={0.8} metalness={0.1} side={THREE.DoubleSide} />
+        <primitive object={SHARED_MATERIALS.darkWood} attach="material" />
       </mesh>
 
       {/* Preview content group - fades out when detail shown */}
@@ -128,7 +123,7 @@ export const BoardPreview = ({
         {/* Header Bar */}
         <mesh position={[0, 2.8, 0.03]}>
           <planeGeometry args={[11, 0.7]} />
-          <meshStandardMaterial color={COLORS.darkBrown} />
+          <primitive object={SHARED_MATERIALS.darkBrown} attach="material" />
         </mesh>
         <Text position={[0, 2.8, 0.04]} fontSize={0.32 * textScale} color={COLORS.gold} anchorX="center" anchorY="middle">
           CASE FILE: MAHDI GHALEB

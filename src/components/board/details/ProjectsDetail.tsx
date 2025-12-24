@@ -7,7 +7,7 @@ import { ResiliNetProject } from '../projects/ResiliNetProject';
 import { MedeSenseProject } from '../projects/MedeSenseProject';
 import { RespawnRoomProject } from '../projects/RespawnRoomProject';
 import { SideProjectsWrapper } from '../projects/SideProjectsWrapper';
-import { COLORS } from '../constants';
+import { COLORS, SHARED_MATERIALS } from '../constants';
 import type { ProjectsDetailProps } from '../types';
 import { getTextScale } from '@/utils/detectMobile';
 
@@ -63,7 +63,7 @@ export const ProjectsDetail = ({
         <>
           <mesh position={[0, 2.5, 0.03]}>
             <planeGeometry args={[10, 0.6]} />
-            <meshStandardMaterial color={COLORS.darkRed} />
+            <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
           </mesh>
           <Text position={[0, 2.5, 0.04]} fontSize={0.28 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
             CASE FILE #002: PROJECTS

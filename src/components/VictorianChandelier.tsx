@@ -11,62 +11,62 @@ export const VictorianChandelier = ({
     <group position={position}>
       {/* Main chandelier body */}
       <group position={[0, -0.5, 0]}>
-        {/* Central brass column - 1.5x original size */}
+        {/* Central brass column - Optimized segments */}
         <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.225, 0.225, 1.8]} />
+          <cylinderGeometry args={[0.225, 0.225, 1.8, 12]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
 
-        {/* Ornate top cap - 1.5x original size */}
+        {/* Ornate top cap - Optimized segments */}
         <mesh position={[0, 1.05, 0]}>
-          <sphereGeometry args={[0.3]} />
+          <sphereGeometry args={[0.3, 16, 12]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
 
-        {/* Decorative ring - 1.5x original size */}
+        {/* Decorative ring - Optimized segments */}
         <mesh position={[0, 0.3, 0]}>
-          <torusGeometry args={[0.375, 0.06]} />
+          <torusGeometry args={[0.375, 0.06, 12, 16]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
 
-        {/* Bottom ornamental piece - 1.5x original size */}
+        {/* Bottom ornamental piece - Optimized segments */}
         <mesh position={[0, -1.2, 0]}>
-          <coneGeometry args={[0.18, 0.45]} />
+          <coneGeometry args={[0.18, 0.45, 12]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
 
-        {/* Arms extending outward for candles - 1.5x original size */}
+        {/* Arms extending outward for candles - Optimized segments */}
         {[0, Math.PI / 3, (2 * Math.PI) / 3, Math.PI, (4 * Math.PI) / 3, (5 * Math.PI) / 3].map((angle, i) => (
           <group key={i} rotation={[0, angle, 0]}>
-            {/* Curved arm - 1.5x original size */}
+            {/* Curved arm - Optimized segments */}
             <mesh position={[0.75, -0.3, 0]} rotation={[0, 0, Math.PI / 6]}>
-              <cylinderGeometry args={[0.045, 0.045, 0.9]} />
+              <cylinderGeometry args={[0.045, 0.045, 0.9, 8]} />
               <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
             </mesh>
 
-            {/* Candle holder - 1.5x original size */}
+            {/* Candle holder - Optimized segments */}
             <mesh position={[1.2, 0.15, 0]}>
-              <cylinderGeometry args={[0.075, 0.06, 0.24]} />
+              <cylinderGeometry args={[0.075, 0.06, 0.24, 8]} />
               <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
             </mesh>
 
-            {/* Candle - 1.5x original size */}
+            {/* Candle - Optimized segments */}
             <mesh position={[1.2, 0.45, 0]}>
-              <cylinderGeometry args={[0.045, 0.045, 0.36]} />
+              <cylinderGeometry args={[0.045, 0.045, 0.36, 8]} />
               <meshStandardMaterial color="#fffacd" roughness={0.6} />
             </mesh>
 
-            {/* Flame (when lit) - 1.5x original size */}
+            {/* Flame (when lit) - Optimized segments */}
             {isLit && (
               <mesh position={[1.2, 0.69, 0]}>
-                <coneGeometry args={[0.024, 0.12]} />
+                <coneGeometry args={[0.024, 0.12, 6]} />
                 <meshBasicMaterial color="#ff6b00" />
               </mesh>
             )}
 
-            {/* Wax drips - 1.5x original size */}
+            {/* Wax drips - Optimized segments */}
             <mesh position={[1.2, 0.27, 0]}>
-              <coneGeometry args={[0.015, 0.06]} />
+              <coneGeometry args={[0.015, 0.06, 6]} />
               <meshStandardMaterial color="#f5f5dc" roughness={0.8} />
             </mesh>
 
@@ -95,17 +95,17 @@ export const VictorianChandelier = ({
           </group>
         ))}
 
-        {/* Hanging crystal strands - 1.5x original size */}
-        {[0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4, Math.PI, (5 * Math.PI) / 4, (3 * Math.PI) / 2, (7 * Math.PI) / 4].map((angle, i) => (
+        {/* Optimized hanging crystal strands - Reduced from 8 to 4 strands, 2 crystals each */}
+        {[0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2].map((angle, i) => (
           <group key={`crystal-${i}`} rotation={[0, angle, 0]}>
-            {/* Crystal strand - 1.5x original size */}
-            {[0, -0.24, -0.48, -0.72].map((yOffset, j) => (
+            {/* Crystal strand - Reduced complexity */}
+            {[0, -0.36].map((yOffset, j) => (
               <mesh key={j} position={[0.36, yOffset - 0.6, 0]}>
-                <octahedronGeometry args={[0.024 + j * 0.006]} />
-                <meshStandardMaterial 
-                  color="#ffffff" 
-                  transparent 
-                  opacity={0.8} 
+                <octahedronGeometry args={[0.03 + j * 0.01]} />
+                <meshStandardMaterial
+                  color="#ffffff"
+                  transparent
+                  opacity={0.8}
                   roughness={0.1}
                   metalness={0.1}
                 />
@@ -127,55 +127,60 @@ export const VictorianChandelier = ({
         </mesh>
       </group>
 
-      {/* Ceiling chain/mounting - 1.5x original size */}
+      {/* Ceiling chain/mounting - Optimized from 16 to 8 links */}
       <group position={[0, 3.75, 0]}>
-        {/* Extended chain links - 1.5x original size */}
-        {[0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25].map((y, i) => (
+        {/* Optimized chain links - Reduced count for performance */}
+        {[0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1].map((y, i) => (
           <mesh key={i} position={[0, y, 0]} rotation={[Math.PI / 2, 0, i % 2 * Math.PI / 2]}>
             <torusGeometry args={[0.045, 0.012]} />
             <meshStandardMaterial color="#4a4a4a" metalness={0.7} roughness={0.3} />
           </mesh>
         ))}
 
-        {/* Ceiling mounting plate - 1.5x original size */}
+        {/* Ceiling mounting plate - Optimized segments */}
         <mesh position={[0, 2.4, 0]}>
-          <cylinderGeometry args={[0.12, 0.12, 0.06]} />
+          <cylinderGeometry args={[0.12, 0.12, 0.06, 12]} />
           <meshStandardMaterial color="#4a4a4a" metalness={0.7} roughness={0.3} />
         </mesh>
 
-        {/* Decorative ceiling medallion - 1.5x original size */}
+        {/* Decorative ceiling medallion - Optimized segments */}
         <mesh position={[0, 2.475, 0]}>
-          <cylinderGeometry args={[0.225, 0.225, 0.03]} />
+          <cylinderGeometry args={[0.225, 0.225, 0.03, 16]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
 
-        {/* Ornate ceiling details - 1.5x original size */}
+        {/* Ornate ceiling details - Optimized segments */}
         <mesh position={[0, 2.505, 0]}>
-          <torusGeometry args={[0.18, 0.0225]} />
+          <torusGeometry args={[0.18, 0.0225, 12, 16]} />
           <meshStandardMaterial color="#b8860b" metalness={0.8} roughness={0.2} />
         </mesh>
       </group>
 
-      {/* Point lights for illumination when lit - 1.5x original coverage */}
+      {/* Optimized lighting - Reduced from 7 to 3 lights for better performance */}
       {isLit && (
         <>
-          {[0, Math.PI / 3, (2 * Math.PI) / 3, Math.PI, (4 * Math.PI) / 3, (5 * Math.PI) / 3].map((angle, i) => (
-            <pointLight
-              key={`light-${i}`}
-              position={[Math.cos(angle) * 1.2, -1.35, Math.sin(angle) * 1.2]}
-              color="#ffcc77"
-              intensity={4.5}
-              distance={25}
-              decay={1.5}
-            />
-          ))}
+          {/* Two key candle lights for directional warmth */}
+          <pointLight
+            position={[1.2, -1.35, 0]}
+            color="#ffcc77"
+            intensity={5.5}
+            distance={28}
+            decay={1.5}
+          />
+          <pointLight
+            position={[-1.2, -1.35, 0]}
+            color="#ffcc77"
+            intensity={5.5}
+            distance={28}
+            decay={1.5}
+          />
 
-          {/* Central ambient light - Much stronger */}
+          {/* Central ambient light - Slightly stronger to compensate */}
           <pointLight
             position={[0, -2.4, 0]}
             color="#ffcc77"
-            intensity={8.0}
-            distance={30}
+            intensity={10.0}
+            distance={32}
             decay={1.5}
           />
         </>

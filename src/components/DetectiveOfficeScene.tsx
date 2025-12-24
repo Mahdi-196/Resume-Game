@@ -5,10 +5,10 @@ import { DetectiveOfficeChair } from './DetectiveOfficeChair';
 import { OfficeWindow } from './OfficeWindow';
 import { VictorianChair } from './VictorianChair';
 import { InteractiveDetectiveBoard } from './board';
-import { Bookshelf } from './Bookshelf';
-import { VictorianBookshelf } from './VictorianBookshelf';
-import { ArtDecoBookshelf } from './ArtDecoBookshelf';
-import { LibraryLadderBookshelf } from './LibraryLadderBookshelf';
+// import { Bookshelf } from './Bookshelf'; // Temporarily disabled for lag testing
+// import { VictorianBookshelf } from './VictorianBookshelf'; // Temporarily disabled for lag testing
+// import { ArtDecoBookshelf } from './ArtDecoBookshelf'; // Temporarily disabled for lag testing
+// import { LibraryLadderBookshelf } from './LibraryLadderBookshelf'; // Temporarily disabled for lag testing
 import { VictorianDoor } from './VictorianDoor';
 import { VictorianChandelier } from './VictorianChandelier';
 import { FirstPersonDetectiveBody } from './FirstPersonDetectiveBody';
@@ -191,12 +191,12 @@ export const DetectiveOfficeScene = ({
       {/* Persian Rug - Vintage oriental rug anchoring the seating area */}
       <PersianRug position={[0, 0.01, 0.5]} rotation={[0, Math.PI / 2, 0]} />
 
-      {/* Right wall (2 original bookshelves with gap) */}
-      <Bookshelf position={[9.0, 0, -3]} rotation={[0, -Math.PI / 2, 0]} variant={5} />
-      <Bookshelf position={[9.0, 0, 3]} rotation={[0, -Math.PI / 2, 0]} variant={6} />
+      {/* Right wall (2 original bookshelves with gap) - Temporarily disabled for lag testing */}
+      {/* <Bookshelf position={[9.0, 0, -3]} rotation={[0, -Math.PI / 2, 0]} variant={5} />
+      <Bookshelf position={[9.0, 0, 3]} rotation={[0, -Math.PI / 2, 0]} variant={6} /> */}
 
-      {/* Left wall - Art Deco Bookshelf (1930s geometric with chrome and black frame) - Further along wall */}
-      <ArtDecoBookshelf position={[-9.0, 0, 2]} rotation={[0, Math.PI / 2, 0]} variant={2} />
+      {/* Left wall - Art Deco Bookshelf (1930s geometric with chrome and black frame) - Temporarily disabled for lag testing */}
+      {/* <ArtDecoBookshelf position={[-9.0, 0, 2]} rotation={[0, Math.PI / 2, 0]} variant={2} /> */}
 
       {/* Victorian Door on right wall */}
       <VictorianDoor position={[9.95, 0, 7.5]} rotation={[0, -Math.PI / 2, 0]} onInteraction={onInteraction} />

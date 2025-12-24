@@ -1,6 +1,6 @@
 import { Text } from '@react-three/drei';
 import { BackButton } from '../shared/BackButton';
-import { COLORS } from '../constants';
+import { COLORS, SHARED_MATERIALS } from '../constants';
 import type { DetailViewProps } from '../types';
 import { getTextScale } from '@/utils/detectMobile';
 
@@ -17,7 +17,7 @@ export const SkillsEducationDetail = ({ onBack }: DetailViewProps) => {
       {/* Header */}
       <mesh position={[0, 2.5, 0.03]}>
         <planeGeometry args={[11, 0.7]} />
-        <meshStandardMaterial color={COLORS.darkRed} />
+        <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
       </mesh>
       <Text
         position={[0, 2.5, 0.04]}

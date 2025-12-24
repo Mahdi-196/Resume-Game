@@ -3,6 +3,8 @@
  * Centralized colors, positions, and configuration values
  */
 
+import * as THREE from 'three';
+
 // Board configuration
 export const BOARD_CONFIG = {
   position: [0, 4.5, 9.9] as [number, number, number],
@@ -82,6 +84,39 @@ export const MATERIALS = {
     roughness: 0.9,
     metalness: 0,
   },
+};
+
+// Shared material instances to prevent recreation on every render
+// Reusing materials significantly reduces GPU overhead
+export const SHARED_MATERIALS = {
+  darkWood: new THREE.MeshStandardMaterial({
+    color: COLORS.darkWood,
+    roughness: MATERIALS.wood.roughness,
+    metalness: MATERIALS.wood.metalness,
+    side: THREE.DoubleSide,
+  }),
+  lightWood: new THREE.MeshStandardMaterial({
+    color: COLORS.lightWood,
+    roughness: MATERIALS.wood.roughness,
+    metalness: MATERIALS.wood.metalness,
+    side: THREE.DoubleSide,
+  }),
+  manila: new THREE.MeshStandardMaterial({
+    color: COLORS.manila,
+    roughness: MATERIALS.manila.roughness,
+    metalness: MATERIALS.manila.metalness,
+  }),
+  manilaTab: new THREE.MeshStandardMaterial({
+    color: COLORS.manilaTab,
+    roughness: MATERIALS.manila.roughness,
+    metalness: MATERIALS.manila.metalness,
+  }),
+  darkRed: new THREE.MeshStandardMaterial({
+    color: COLORS.darkRed,
+  }),
+  darkBrown: new THREE.MeshStandardMaterial({
+    color: COLORS.darkBrown,
+  }),
 };
 
 // Text size multiplier for mobile

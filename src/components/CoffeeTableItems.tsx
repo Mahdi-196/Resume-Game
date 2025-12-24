@@ -20,29 +20,27 @@ export const CoffeeTableItems = ({
     <group position={position} rotation={rotation}>
       {/* Crystal Whiskey Decanter - Center */}
       <group position={[0, 0.49, 0]}>
-        {/* Decanter base */}
+        {/* Decanter base - Optimized material */}
         <mesh position={[0, 0.05, 0]} castShadow>
           <cylinderGeometry args={[0.08, 0.12, 0.1, 8]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color="#d4e8f0"
             transparent
-            opacity={0.65}
+            opacity={0.6}
             roughness={0.1}
-            metalness={0.15}
-            transmission={0.5}
+            metalness={0.2}
           />
         </mesh>
 
-        {/* Decanter body */}
+        {/* Decanter body - Optimized material */}
         <mesh position={[0, 0.15, 0]} castShadow>
           <cylinderGeometry args={[0.12, 0.12, 0.12, 8]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color="#d4e8f0"
             transparent
-            opacity={0.65}
+            opacity={0.6}
             roughness={0.1}
-            metalness={0.15}
-            transmission={0.5}
+            metalness={0.2}
           />
         </mesh>
 
@@ -59,27 +57,27 @@ export const CoffeeTableItems = ({
           />
         </mesh>
 
-        {/* Decanter neck */}
+        {/* Decanter neck - Optimized material */}
         <mesh position={[0, 0.25, 0]}>
           <cylinderGeometry args={[0.03, 0.05, 0.08, 8]} />
-          <meshPhysicalMaterial
+          <meshStandardMaterial
+            color="#d4e8f0"
+            transparent
+            opacity={0.6}
+            roughness={0.1}
+            metalness={0.2}
+          />
+        </mesh>
+
+        {/* Crystal stopper - Optimized material */}
+        <mesh position={[0, 0.32, 0]}>
+          <cylinderGeometry args={[0.04, 0.025, 0.06, 8]} />
+          <meshStandardMaterial
             color="#d4e8f0"
             transparent
             opacity={0.65}
             roughness={0.1}
-            transmission={0.5}
-          />
-        </mesh>
-
-        {/* Crystal stopper */}
-        <mesh position={[0, 0.32, 0]}>
-          <cylinderGeometry args={[0.04, 0.025, 0.06, 8]} />
-          <meshPhysicalMaterial
-            color="#d4e8f0"
-            transparent
-            opacity={0.7}
-            roughness={0.1}
-            transmission={0.4}
+            metalness={0.2}
           />
         </mesh>
       </group>

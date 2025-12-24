@@ -1,14 +1,16 @@
+import { memo } from 'react';
 import { Text } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
-import { COLORS } from '../constants';
+import { COLORS, SHARED_MATERIALS } from '../constants';
 import type { CaseFileCardProps } from '../types';
 import { getTextScale } from '@/utils/detectMobile';
 
 /**
  * Reusable Case File Card component
  * Displays a manila folder with title and items
+ * Memoized to prevent unnecessary re-renders
  */
-export const CaseFileCard = ({
+export const CaseFileCard = memo(({
   position,
   title,
   fileNumber,
@@ -40,13 +42,13 @@ export const CaseFileCard = ({
       {/* Folder body - manila envelope (40% bigger) */}
       <mesh position={position}>
         <boxGeometry args={[3.1, 1.8, 0.04]} />
-        <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+        <primitive object={SHARED_MATERIALS.manila} attach="material" />
       </mesh>
 
       {/* Folder tab at top */}
       <mesh position={[position[0], position[1] + tabYOffset + 0.25, position[2] + 0.015]}>
         <boxGeometry args={[3.1, 0.28, 0.03]} />
-        <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+        <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
       </mesh>
 
       {/* File identifier label */}
@@ -94,4 +96,6 @@ export const CaseFileCard = ({
       <PushPin position={[position[0], position[1] + tabYOffset + 0.25, position[2] + 0.06]} radius={0.12} />
     </group>
   );
-};
+});
+
+CaseFileCard.displayName = 'CaseFileCard';

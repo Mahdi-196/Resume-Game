@@ -1,6 +1,6 @@
 import { Text } from '@react-three/drei';
 import { PushPin } from '../shared/PushPin';
-import { COLORS } from '../constants';
+import { COLORS, SHARED_MATERIALS } from '../constants';
 import { getTextScale } from '@/utils/detectMobile';
 
 /**
@@ -32,15 +32,15 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
       >
         <mesh position={[0, 0.3, 0.03]}>
           <boxGeometry args={[3.8, 2.4, 0.03]} />
-          <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
         <mesh position={[0, 1.5, 0.045]}>
           <boxGeometry args={[3.8, 0.22, 0.025]} />
-          <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
         <mesh position={[-1.675, 1.5, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
-          <meshStandardMaterial color={COLORS.darkRed} />
+          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
         <Text position={[-1.675, 1.5, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #001
@@ -81,15 +81,15 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
       >
         <mesh position={[-4.5, 0.3, 0.03]}>
           <boxGeometry args={[3.0, 2.0, 0.03]} />
-          <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
         <mesh position={[-4.5, 1.3, 0.045]}>
           <boxGeometry args={[3.0, 0.2, 0.025]} />
-          <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
         <mesh position={[-5.775, 1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
-          <meshStandardMaterial color={COLORS.darkRed} />
+          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
         <Text position={[-5.775, 1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #002
@@ -130,15 +130,15 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
       >
         <mesh position={[4.5, 0.3, 0.03]}>
           <boxGeometry args={[3.0, 2.0, 0.03]} />
-          <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
         <mesh position={[4.5, 1.3, 0.045]}>
           <boxGeometry args={[3.0, 0.2, 0.025]} />
-          <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
         <mesh position={[3.225, 1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
-          <meshStandardMaterial color={COLORS.darkRed} />
+          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
         <Text position={[3.225, 1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #003
@@ -181,15 +181,15 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
       >
         <mesh position={[-4, -2.1, 0.03]}>
           <boxGeometry args={[2.5, 1.6, 0.03]} />
-          <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
         <mesh position={[-4, -1.3, 0.045]}>
           <boxGeometry args={[2.5, 0.18, 0.025]} />
-          <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
         <mesh position={[-5.025, -1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
-          <meshStandardMaterial color={COLORS.darkRed} />
+          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
         <Text position={[-5.025, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #004
@@ -266,15 +266,15 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
       >
         <mesh position={[4, -2.1, 0.03]}>
           <boxGeometry args={[2.5, 1.6, 0.03]} />
-          <meshStandardMaterial color={COLORS.manila} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
         <mesh position={[4, -1.3, 0.045]}>
           <boxGeometry args={[2.5, 0.18, 0.025]} />
-          <meshStandardMaterial color={COLORS.manilaTab} roughness={0.9} />
+          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
         <mesh position={[2.975, -1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
-          <meshStandardMaterial color={COLORS.darkRed} />
+          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
         <Text position={[2.975, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #006
