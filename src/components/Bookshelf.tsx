@@ -20,9 +20,10 @@ export const Bookshelf = ({ position, rotation = [0, 0, 0], variant = 0 }: {
   ];
 
   // Generate consistent book layout for each shelf based on variant
+  // 80% full: 18-26 books per shelf for realistic fullness
   const generateShelfBooks = (shelfIndex: number) => {
     const books = [];
-    const bookCount = 25 + Math.floor(seededRandom(variant * 100 + shelfIndex * 10) * 15); // 25-40 books per shelf
+    const bookCount = 18 + Math.floor(seededRandom(variant * 100 + shelfIndex * 10) * 8); // 18-26 books per shelf
 
     for (let i = 0; i < bookCount; i++) {
       const seed = variant * 1000 + shelfIndex * 100 + i;

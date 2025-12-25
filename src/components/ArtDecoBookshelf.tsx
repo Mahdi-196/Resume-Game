@@ -32,7 +32,8 @@ export const ArtDecoBookshelf = ({
 
   const generateShelfBooks = (shelfIndex: number) => {
     const books = [];
-    const bookCount = 20 + Math.floor(seededRandom(variant * 100 + shelfIndex * 10) * 10);
+    // 80% full: 18-26 books per shelf for realistic fullness
+    const bookCount = 18 + Math.floor(seededRandom(variant * 100 + shelfIndex * 10) * 8);
 
     for (let i = 0; i < bookCount; i++) {
       const seed = variant * 1000 + shelfIndex * 100 + i;
