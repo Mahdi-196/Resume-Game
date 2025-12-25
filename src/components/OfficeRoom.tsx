@@ -7,8 +7,9 @@ interface OfficeRoomProps {
 
 // Complete Detective Office Room with wood paneling and bookshelves
 export const OfficeRoom = ({ onMapClick }: OfficeRoomProps) => {
-  // Load Sherlock Holmes map texture
+  // Load Sherlock Holmes map texture with anisotropic filtering
   const mapTexture = useLoader(THREE.TextureLoader, '/map.png');
+  mapTexture.anisotropy = 16;
 
   return (
     <group>

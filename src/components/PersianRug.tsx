@@ -23,6 +23,7 @@ export const PersianRug = ({
         // Crop 5% from top and bottom edges
         loadedTexture.repeat.y = 0.9; // Use 90% of texture (crop 5% top + 5% bottom)
         loadedTexture.offset.y = 0.05; // Start 5% from bottom
+        loadedTexture.anisotropy = 16; // Anisotropic filtering for better quality at angles
         setTexture(loadedTexture);
       },
       undefined,

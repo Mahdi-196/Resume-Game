@@ -437,8 +437,16 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       <Canvas
         shadows
         camera={{ position: [-2.5, 2.5, 4], fov: isMobile ? 85 : 75 }}
+        gl={{
+          antialias: true,
+          alpha: false,
+          powerPreference: 'high-performance'
+        }}
+        dpr={[1, 2]}
         onCreated={({ gl }) => {
           gl.domElement.style.cursor = 'crosshair';
+          gl.toneMapping = THREE.ACESFilmicToneMapping;
+          gl.toneMappingExposure = 1.0;
         }}
       >
         <EnhancedCameraControls

@@ -34,9 +34,6 @@ export const MergedBookshelf = ({
 
     return shelfHeights.map((shelfY, shelfIndex) => {
       const bookGeometries: THREE.BufferGeometry[] = [];
-      const pageGeometries: THREE.BufferGeometry[] = [];
-      const goldLeafGeometries: THREE.BufferGeometry[] = [];
-      const ribbingGeometries: THREE.BufferGeometry[] = [];
 
       let currentX = -0.75;
       // More varied book count per shelf: 14-30 books (averages to ~22 books = 80% full)
@@ -85,138 +82,17 @@ export const MergedBookshelf = ({
         coverGeo.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
         bookGeometries.push(coverGeo);
 
-        // Page edges (front, top, bottom)
-        const pageColor = new THREE.Color('#f4ede1');
-
-        // Front page edge (positioned at the page side after 180° rotation)
-        const frontPageGeo = new THREE.BoxGeometry(
-          thickness * 0.92,
-          clampedHeight * 0.96,
-          0.005  // Slightly thicker to reduce aliasing
-        );
-        const frontPageMatrix = new THREE.Matrix4();
-        const pageRotationMatrix = new THREE.Matrix4().makeRotationY(Math.PI);
-        const pageLeanMatrix = new THREE.Matrix4().makeRotationZ(lean);
-        frontPageMatrix.multiplyMatrices(pageLeanMatrix, pageRotationMatrix);
-        // After 180° Y rotation, pages should be on the opposite side
-        const frontOffset = new THREE.Vector3(
-          thickness * 0.48 * Math.cos(lean),
-          thickness * 0.48 * Math.sin(lean),
-          -depth / 2 - 0.003  // Increased offset to prevent z-fighting
-        );
-        frontPageMatrix.setPosition(
-          xPos + frontOffset.x,
-          bookCenterY + frontOffset.y,
-          -0.2 + frontOffset.z
-        );
-        frontPageGeo.applyMatrix4(frontPageMatrix);
-
-        const frontColorArray = new Float32Array(frontPageGeo.attributes.position.count * 3);
-        for (let j = 0; j < frontPageGeo.attributes.position.count; j++) {
-          frontColorArray[j * 3] = pageColor.r;
-          frontColorArray[j * 3 + 1] = pageColor.g;
-          frontColorArray[j * 3 + 2] = pageColor.b;
-        }
-        frontPageGeo.setAttribute('color', new THREE.BufferAttribute(frontColorArray, 3));
-        pageGeometries.push(frontPageGeo);
-
-        // Gold leaf (15% chance)
-        if (rand(6) > 0.85) {
-          const goldGeo = new THREE.BoxGeometry(
-            0.006,  // Thicker to reduce aliasing
-            clampedHeight * 0.15,
-            depth * 0.85
-          );
-          const goldMatrix = new THREE.Matrix4();
-          const goldRotationMatrix = new THREE.Matrix4().makeRotationY(Math.PI);
-          const goldLeanMatrix = new THREE.Matrix4().makeRotationZ(lean);
-          goldMatrix.multiplyMatrices(goldLeanMatrix, goldRotationMatrix);
-          const goldOffset = new THREE.Vector3(
-            -thickness / 2 * Math.cos(lean) - 0.003 * Math.cos(lean),  // Increased offset
-            -thickness / 2 * Math.sin(lean) - 0.003 * Math.sin(lean) + clampedHeight * 0.25,
-            0
-          );
-          goldMatrix.setPosition(
-            xPos + goldOffset.x,
-            bookCenterY + goldOffset.y,
-            -0.2 + goldOffset.z
-          );
-          goldGeo.applyMatrix4(goldMatrix);
-
-          const goldColor = new THREE.Color('#d4af37');
-          const goldColorArray = new Float32Array(goldGeo.attributes.position.count * 3);
-          for (let j = 0; j < goldGeo.attributes.position.count; j++) {
-            goldColorArray[j * 3] = goldColor.r;
-            goldColorArray[j * 3 + 1] = goldColor.g;
-            goldColorArray[j * 3 + 2] = goldColor.b;
-          }
-          goldGeo.setAttribute('color', new THREE.BufferAttribute(goldColorArray, 3));
-          goldLeafGeometries.push(goldGeo);
-        }
-
-        // Ribbing (15% chance)
-        if (rand(11) > 0.85) {
-          [0.25, -0.15].forEach((yOffset) => {
-            const ribGeo = new THREE.BoxGeometry(
-              0.006,  // Slightly thicker to reduce aliasing
-              0.012,
-              depth * 0.92
-            );
-            const ribMatrix = new THREE.Matrix4();
-            const ribRotationMatrix = new THREE.Matrix4().makeRotationY(Math.PI);
-            const ribLeanMatrix = new THREE.Matrix4().makeRotationZ(lean);
-            ribMatrix.multiplyMatrices(ribLeanMatrix, ribRotationMatrix);
-            const ribOffset = new THREE.Vector3(
-              -thickness / 2 * Math.cos(lean) - 0.003 * Math.cos(lean),  // Increased offset
-              -thickness / 2 * Math.sin(lean) - 0.003 * Math.sin(lean) + clampedHeight * yOffset,
-              0
-            );
-            ribMatrix.setPosition(
-              xPos + ribOffset.x,
-              bookCenterY + ribOffset.y,
-              -0.2 + ribOffset.z
-            );
-            ribGeo.applyMatrix4(ribMatrix);
-
-            const ribColor = new THREE.Color(bookColors[colorIndex]).multiplyScalar(0.85);
-            const ribColorArray = new Float32Array(ribGeo.attributes.position.count * 3);
-            for (let j = 0; j < ribGeo.attributes.position.count; j++) {
-              ribColorArray[j * 3] = ribColor.r;
-              ribColorArray[j * 3 + 1] = ribColor.g;
-              ribColorArray[j * 3 + 2] = ribColor.b;
-            }
-            ribGeo.setAttribute('color', new THREE.BufferAttribute(ribColorArray, 3));
-            ribbingGeometries.push(ribGeo);
-          });
-        }
+        // Removed page edges, gold leaf, and ribbing to eliminate temporal aliasing during camera motion
       }
 
-      // Merge all geometries for this shelf and recompute normals
+      // Merge only book covers - simplified for clean motion rendering
       const mergedBooks = bookGeometries.length > 0 ? mergeGeometries(bookGeometries) : null;
-      if (mergedBooks) {
-        mergedBooks.computeVertexNormals();
-      }
-
-      const mergedPages = pageGeometries.length > 0 ? mergeGeometries(pageGeometries) : null;
-      if (mergedPages) {
-        mergedPages.computeVertexNormals();
-      }
-
-      const mergedGold = goldLeafGeometries.length > 0 ? mergeGeometries(goldLeafGeometries) : null;
-      if (mergedGold) {
-        mergedGold.computeVertexNormals();
-      }
-
-      const mergedRibbing = ribbingGeometries.length > 0 ? mergeGeometries(ribbingGeometries) : null;
-      if (mergedRibbing) {
-        mergedRibbing.computeVertexNormals();
-      }
 
       return {
         books: mergedBooks,
-        pages: mergedPages,
-        gold: mergedGold,
-        ribbing: mergedRibbing
+        pages: null,
+        gold: null,
+        ribbing: null
       };
     });
   }, [variant]);
@@ -257,58 +133,16 @@ export const MergedBookshelf = ({
         </mesh>
       ))}
 
-      {/* Merged book geometries - One mesh per shelf! */}
+      {/* Merged book geometries - One mesh per shelf! Simplified to solid colors for clean motion */}
       {shelfGeometries.map((shelf, i) => (
         <group key={`shelf-books-${i}`}>
-          {/* Book covers */}
+          {/* Book covers - solid colors only */}
           {shelf.books && (
             <mesh geometry={shelf.books}>
               <meshStandardMaterial
                 vertexColors
                 roughness={0.9}
                 metalness={0.05}
-              />
-            </mesh>
-          )}
-
-          {/* Page edges */}
-          {shelf.pages && (
-            <mesh geometry={shelf.pages}>
-              <meshStandardMaterial
-                vertexColors
-                roughness={0.95}
-                polygonOffset
-                polygonOffsetFactor={1}
-                polygonOffsetUnits={1}
-              />
-            </mesh>
-          )}
-
-          {/* Gold leaf */}
-          {shelf.gold && (
-            <mesh geometry={shelf.gold}>
-              <meshStandardMaterial
-                vertexColors
-                metalness={0.85}
-                roughness={0.25}
-                emissive="#8b6914"
-                emissiveIntensity={0.2}
-                polygonOffset
-                polygonOffsetFactor={2}
-                polygonOffsetUnits={1}
-              />
-            </mesh>
-          )}
-
-          {/* Ribbing */}
-          {shelf.ribbing && (
-            <mesh geometry={shelf.ribbing}>
-              <meshStandardMaterial
-                vertexColors
-                roughness={0.9}
-                polygonOffset
-                polygonOffsetFactor={2}
-                polygonOffsetUnits={1}
               />
             </mesh>
           )}
