@@ -2,276 +2,214 @@ import { Text } from '@react-three/drei';
 import { BackButton } from '../shared/BackButton';
 import { PushPin } from '../shared/PushPin';
 import { COLORS, SHARED_MATERIALS } from '../constants';
-import { SubjectProfileDetailProps, ProfileSection } from '../types';
+import { DetailViewProps } from '../types';
 import { getTextScale } from '@/utils/detectMobile';
 
 /**
- * Subject Profile Detail - displays 3 sub-cards for About, Skills, Education
- * Similar to ProjectsList but for personal/background information
+ * Subject Profile Detail - displays About, Skills, and Education all in one view
+ * No sub-card navigation - shows everything directly
  */
-export const SubjectProfileDetail = ({
-  opacity,
-  onBack,
-  selectedSection,
-  onSectionClick
-}: SubjectProfileDetailProps) => {
-  const textScale = getTextScale(); // 1.5x on mobile, 1x on desktop
+export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
+  const textScale = getTextScale();
 
   return (
     <group>
-      {/* Title Header */}
+      {/* Back button at the top */}
+      <BackButton onClick={onBack} position={[-5.5, 2.8, 0.04]} />
+
+      {/* Header Banner */}
+      <mesh position={[0, 2.5, 0.03]}>
+        <planeGeometry args={[11, 0.7]} />
+        <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
+      </mesh>
       <Text
-        position={[0, 2.7, 0.05]}
-        fontSize={0.35 * textScale}
-        color={COLORS.darkBrown}
+        position={[0, 2.5, 0.04]}
+        fontSize={0.32 * textScale}
+        color={COLORS.gold}
         anchorX="center"
         anchorY="middle"
+        letterSpacing={0.03}
       >
         SUBJECT PROFILE
       </Text>
 
-      <Text
-        position={[0, 2.3, 0.05]}
-        fontSize={0.12 * textScale}
-        color={COLORS.secondaryText}
-        anchorX="center"
-        anchorY="middle"
-      >
-        Personal Background & Credentials
+      {/* Skills Section - Top Row (3 cards: Frontend, Backend, DevOps) */}
+      {/* Frontend Skills Card */}
+      <mesh position={[-3.5, 0.4, 0.03]}>
+        <planeGeometry args={[4.2, 2.8]} />
+        <meshStandardMaterial color={COLORS.yellow} />
+      </mesh>
+      <mesh position={[-3.5, 1.6, 0.04]}>
+        <planeGeometry args={[4.1, 0.3]} />
+        <meshStandardMaterial color={COLORS.darkBrown} />
+      </mesh>
+      <Text position={[-3.5, 1.6, 0.05]} fontSize={0.15 * textScale} color={COLORS.gold} anchorX="center" anchorY="middle">
+        FRONTEND
+      </Text>
+      <Text position={[-3.5, 1.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ React & Next.js
+      </Text>
+      <Text position={[-3.5, 0.95, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ TypeScript
+      </Text>
+      <Text position={[-3.5, 0.75, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ Three.js & R3F
+      </Text>
+      <Text position={[-3.5, 0.55, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ Tailwind CSS
+      </Text>
+      <Text position={[-3.5, 0.35, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ Redux & Zustand
+      </Text>
+      <Text position={[-3.5, 0.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ Responsive Design
+      </Text>
+      <Text position={[-3.5, -0.05, 0.05]} fontSize={0.1 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        ⭐ Accessibility
       </Text>
 
-      {/* Section Cards Grid - Top Row: About Me, Skills | Bottom: Education */}
+      {/* Backend Skills Card */}
+      <mesh position={[0, 0.4, 0.03]}>
+        <planeGeometry args={[4.2, 2.8]} />
+        <meshStandardMaterial color={COLORS.creamPaper} />
+      </mesh>
+      <mesh position={[0, 1.6, 0.04]}>
+        <planeGeometry args={[4.1, 0.3]} />
+        <meshStandardMaterial color={COLORS.darkRed} />
+      </mesh>
+      <Text position={[0, 1.6, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        BACKEND
+      </Text>
+      <Text position={[0, 1.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Node.js & Express
+      </Text>
+      <Text position={[0, 0.95, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Python & FastAPI
+      </Text>
+      <Text position={[0, 0.75, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ PostgreSQL & MongoDB
+      </Text>
+      <Text position={[0, 0.55, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ GraphQL & REST APIs
+      </Text>
+      <Text position={[0, 0.35, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Redis & Caching
+      </Text>
+      <Text position={[0, 0.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ WebSockets
+      </Text>
+      <Text position={[0, -0.05, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Microservices
+      </Text>
 
-      {/* Card 1 - About Me (Top Left) */}
-      <group
-        onClick={(e) => {
-          e.stopPropagation();
-          onSectionClick('about');
-        }}
-        onPointerEnter={() => {
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerLeave={() => {
-          document.body.style.cursor = 'auto';
-        }}
-      >
-        <mesh position={[-3, 0.3, 0.03]}>
-          <boxGeometry args={[4.0, 2.2, 0.03]} />
-          <primitive object={SHARED_MATERIALS.manila} attach="material" />
-        </mesh>
-        <mesh position={[-3, 1.4, 0.045]}>
-          <boxGeometry args={[4.0, 0.2, 0.025]} />
-          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
-        </mesh>
-        <mesh position={[-4.775, 1.4, 0.06]}>
-          <planeGeometry args={[0.45, 0.25]} />
-          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
-        </mesh>
-        <Text
-          position={[-4.775, 1.4, 0.07]}
-          fontSize={0.12 * textScale}
-          color="#FFFFFF"
-          anchorX="center"
-          anchorY="middle"
-        >
-          001
-        </Text>
-        <Text
-          position={[-3, 1.0, 0.05]}
-          fontSize={0.22 * textScale}
-          color={COLORS.darkBrown}
-          anchorX="center"
-          anchorY="middle"
-        >
-          About Me
-        </Text>
-        <Text
-          position={[-3, 0.65, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Personal introduction
-        </Text>
-        <Text
-          position={[-3, 0.48, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Professional background
-        </Text>
-        <Text
-          position={[-3, 0.31, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Career objectives
-        </Text>
-        <PushPin position={[-3, 1.4, 0.07]} radius={0.09} />
-      </group>
+      {/* DevOps & Tools Card */}
+      <mesh position={[3.5, 0.4, 0.03]}>
+        <planeGeometry args={[4.2, 2.8]} />
+        <meshStandardMaterial color={COLORS.creamPaper} />
+      </mesh>
+      <mesh position={[3.5, 1.6, 0.04]}>
+        <planeGeometry args={[4.1, 0.3]} />
+        <meshStandardMaterial color={COLORS.darkRed} />
+      </mesh>
+      <Text position={[3.5, 1.6, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        DEVOPS & TOOLS
+      </Text>
+      <Text position={[3.5, 1.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ AWS & Cloud
+      </Text>
+      <Text position={[3.5, 0.95, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Docker & K8s
+      </Text>
+      <Text position={[3.5, 0.75, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ CI/CD Pipelines
+      </Text>
+      <Text position={[3.5, 0.55, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Git & GitHub
+      </Text>
+      <Text position={[3.5, 0.35, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Linux & Bash
+      </Text>
+      <Text position={[3.5, 0.15, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Nginx & Load Bal.
+      </Text>
+      <Text position={[3.5, -0.05, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle">
+        ⭐ Monitoring Tools
+      </Text>
 
-      {/* Card 2 - Skills (Top Right) */}
-      <group
-        onClick={(e) => {
-          e.stopPropagation();
-          onSectionClick('skills');
-        }}
-        onPointerEnter={() => {
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerLeave={() => {
-          document.body.style.cursor = 'auto';
-        }}
-      >
-        <mesh position={[3, 0.3, 0.03]}>
-          <boxGeometry args={[4.0, 2.2, 0.03]} />
-          <primitive object={SHARED_MATERIALS.manila} attach="material" />
-        </mesh>
-        <mesh position={[3, 1.4, 0.045]}>
-          <boxGeometry args={[4.0, 0.2, 0.025]} />
-          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
-        </mesh>
-        <mesh position={[1.225, 1.4, 0.06]}>
-          <planeGeometry args={[0.45, 0.25]} />
-          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
-        </mesh>
-        <Text
-          position={[1.225, 1.4, 0.07]}
-          fontSize={0.12 * textScale}
-          color="#FFFFFF"
-          anchorX="center"
-          anchorY="middle"
-        >
-          002
-        </Text>
-        <Text
-          position={[3, 1.0, 0.05]}
-          fontSize={0.22 * textScale}
-          color={COLORS.darkBrown}
-          anchorX="center"
-          anchorY="middle"
-        >
-          Skills
-        </Text>
-        <Text
-          position={[3, 0.65, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Technical proficiencies
-        </Text>
-        <Text
-          position={[3, 0.48, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Development expertise
-        </Text>
-        <Text
-          position={[3, 0.31, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Tools & technologies
-        </Text>
-        <PushPin position={[3, 1.4, 0.07]} radius={0.09} />
-      </group>
+      {/* Push pins for skills cards */}
+      <PushPin position={[-3.5, 1.9, 0.05]} />
+      <PushPin position={[0, 1.9, 0.05]} />
+      <PushPin position={[3.5, 1.9, 0.05]} />
 
-      {/* Card 3 - Education (Bottom Center) */}
-      <group
-        onClick={(e) => {
-          e.stopPropagation();
-          onSectionClick('education');
-        }}
-        onPointerEnter={() => {
-          document.body.style.cursor = 'pointer';
-        }}
-        onPointerLeave={() => {
-          document.body.style.cursor = 'auto';
-        }}
-      >
-        <mesh position={[0, -2.0, 0.03]}>
-          <boxGeometry args={[4.0, 2.2, 0.03]} />
-          <primitive object={SHARED_MATERIALS.manila} attach="material" />
-        </mesh>
-        <mesh position={[0, -1.1, 0.045]}>
-          <boxGeometry args={[4.0, 0.2, 0.025]} />
-          <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
-        </mesh>
-        <mesh position={[-1.775, -1.1, 0.06]}>
-          <planeGeometry args={[0.45, 0.25]} />
-          <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
-        </mesh>
-        <Text
-          position={[-1.775, -1.1, 0.07]}
-          fontSize={0.12 * textScale}
-          color="#FFFFFF"
-          anchorX="center"
-          anchorY="middle"
-        >
-          003
-        </Text>
-        <Text
-          position={[0, -1.5, 0.05]}
-          fontSize={0.22 * textScale}
-          color={COLORS.darkBrown}
-          anchorX="center"
-          anchorY="middle"
-        >
-          Education
-        </Text>
-        <Text
-          position={[0, -1.85, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Academic background
-        </Text>
-        <Text
-          position={[0, -2.02, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Certifications & training
-        </Text>
-        <Text
-          position={[0, -2.19, 0.05]}
-          fontSize={0.1 * textScale}
-          color={COLORS.tertiaryText}
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={3.7}
-        >
-          Degrees & qualifications
-        </Text>
-        <PushPin position={[0, -1.1, 0.07]} radius={0.09} />
-      </group>
+      {/* Education Section - Bottom Row (2 cards: Formal Education, Self-Taught) */}
+      {/* Education Card 1 - Formal Education */}
+      <mesh position={[-3.5, -2.0, 0.03]}>
+        <planeGeometry args={[4.5, 2.8]} />
+        <meshStandardMaterial color={COLORS.creamPaper} />
+      </mesh>
+      <mesh position={[-3.5, -1.2, 0.04]}>
+        <planeGeometry args={[4.4, 0.3]} />
+        <meshStandardMaterial color={COLORS.darkRed} />
+      </mesh>
+      <Text position={[-3.5, -1.2, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        FORMAL EDUCATION
+      </Text>
+      <Text position={[-3.5, -1.7, 0.05]} fontSize={0.13 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        Computer Science
+      </Text>
+      <Text position={[-3.5, -1.95, 0.05]} fontSize={0.1 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        Bachelor's Degree
+      </Text>
+      <Text position={[-3.5, -2.3, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        Focus: Software Engineering,
+      </Text>
+      <Text position={[-3.5, -2.45, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        Web Development, Data
+      </Text>
+      <Text position={[-3.5, -2.6, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        Structures & Algorithms
+      </Text>
+      <Text position={[-3.5, -2.95, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        GPA: 3.8/4.0
+      </Text>
 
-      {/* Back button */}
-      <BackButton onClick={onBack} position={[-5.5, -2.8, 0.04]} />
+      {/* Education Card 2 - Self-Taught Learning */}
+      <mesh position={[3.5, -2.0, 0.03]}>
+        <planeGeometry args={[4.5, 2.8]} />
+        <meshStandardMaterial color={COLORS.creamPaper} />
+      </mesh>
+      <mesh position={[3.5, -1.2, 0.04]}>
+        <planeGeometry args={[4.4, 0.3]} />
+        <meshStandardMaterial color={COLORS.darkRed} />
+      </mesh>
+      <Text position={[3.5, -1.2, 0.05]} fontSize={0.15 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        SELF-TAUGHT LEARNING
+      </Text>
+      <Text position={[3.5, -1.7, 0.05]} fontSize={0.13 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        Continuous Development
+      </Text>
+      <Text position={[3.5, -2.05, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        • Advanced React & TypeScript
+      </Text>
+      <Text position={[3.5, -2.2, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        • Three.js & WebGL Graphics
+      </Text>
+      <Text position={[3.5, -2.35, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        • Cloud Architecture (AWS)
+      </Text>
+      <Text position={[3.5, -2.5, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        • Microservices & DevOps
+      </Text>
+      <Text position={[3.5, -2.65, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={4}>
+        • UI/UX Design Principles
+      </Text>
+      <Text position={[3.5, -3.0, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
+        100+ Online Courses Completed
+      </Text>
+
+      {/* Push pins for education cards */}
+      <PushPin position={[-3.5, -0.9, 0.05]} />
+      <PushPin position={[3.5, -0.9, 0.05]} />
     </group>
   );
 };

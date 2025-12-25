@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { BoardPreview } from './preview/BoardPreview';
 import { SubjectProfileDetail } from './details/SubjectProfileDetail';
-import { ProfileSectionWrapper } from './details/ProfileSectionWrapper';
 import { ProjectsDetail } from './details/ProjectsDetail';
 import { useFadeAnimation } from './hooks/useFadeAnimation';
 import { BOARD_CONFIG } from './constants';
-import type { InteractiveDetectiveBoardProps, ProfileSection, ProjectDetail, ZoomedPaper, RespawnPaper, SideProject } from './types';
+import type { InteractiveDetectiveBoardProps, ProjectDetail, ZoomedPaper, RespawnPaper, SideProject } from './types';
 
 /**
  * Main Interactive Detective Board component
@@ -20,9 +19,6 @@ export const InteractiveDetectiveBoard = ({
   overlayVisible,
   onContentClose
 }: InteractiveDetectiveBoardProps) => {
-  // Track which profile section is selected (about, skills, education)
-  const [selectedProfileSection, setSelectedProfileSection] = useState<ProfileSection>(null);
-
   // Track which project is selected (for nested navigation)
   const [selectedProject, setSelectedProject] = useState<ProjectDetail>(null);
 
@@ -68,22 +64,10 @@ export const InteractiveDetectiveBoard = ({
             </mesh>
           )}
 
-          {/* Subject Profile - Sub-card selection view */}
-          {selectedCaseFile === 'profile' && selectedProfileSection === null && (
+          {/* Subject Profile - Shows all content directly */}
+          {selectedCaseFile === 'profile' && (
             <SubjectProfileDetail
-              opacity={1}
               onBack={() => showContent && onCaseFileClick?.(null)}
-              selectedSection={selectedProfileSection}
-              onSectionClick={(section) => showContent && setSelectedProfileSection(section)}
-            />
-          )}
-
-          {/* Subject Profile - Individual section view (About/Skills/Education) */}
-          {selectedCaseFile === 'profile' && selectedProfileSection !== null && (
-            <ProfileSectionWrapper
-              opacity={1}
-              section={selectedProfileSection}
-              onBack={() => showContent && setSelectedProfileSection(null)}
             />
           )}
 
