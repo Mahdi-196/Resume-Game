@@ -104,20 +104,20 @@ export const DetectiveOfficeScene = ({
 
       {/* Desk Lamp - positioned on desk surface, clickable to turn on/off */}
       <ModelLoader
-        modelPath="/models/desk_lamp/scene.gltf"
-        position={[-8.5, 1.65, -3.5]}
-        scale={0.25}
-        rotation={[0, -Math.PI / 2, 0]}
+        modelPath="/models/bankers_lamp/scene.gltf"
+        position={[-9.5, 1.5, -2.5]}
+        scale={2.0}
+        rotation={[0, Math.PI / 2 + Math.PI / 6 + Math.PI / 9, 0]}
         onClick={() => setDeskLampOn(!deskLampOn)}
       />
 
       {/* Desk lamp light - only visible when lamp is on */}
       {deskLampOn && (
         <>
-          <pointLight position={[-8.5, 1.95, -3.3]} intensity={1.5} color="#ffdb8c" distance={3} />
+          <pointLight position={[-9.5, 1.95, -2.3]} intensity={1.5} color="#ffdb8c" distance={3} />
           <spotLight
-            position={[-8.5, 1.95, -3.3]}
-            target-position={[-8.5, 1.3, -3.5]}
+            position={[-9.5, 1.95, -2.3]}
+            target-position={[-9.5, 1.3, -2.5]}
             intensity={2}
             angle={0.6}
             penumbra={0.5}
@@ -129,8 +129,8 @@ export const DetectiveOfficeScene = ({
       {/* Magnifying Glass - detective tool on desk */}
       <ModelLoader
         modelPath="/models/magnifying_glass/scene.gltf"
-        position={[-7.5, 1.65, -2.5]}
-        scale={1.5}
+        position={[-8.0, 1.5, -5.0]}
+        scale={4.5}
         rotation={[0, Math.PI / 4, 0]}
       />
 
@@ -256,6 +256,25 @@ export const DetectiveOfficeScene = ({
 
       {/* Coffee table decorative items - whiskey set, ashtray, case files, etc. */}
       <CoffeeTableItems position={[0, 0, 3.8]} rotation={[0, 0, 0]} />
+
+      {/* Vintage Seating - Small and large vintage couches */}
+
+      {/* Small vintage couch */}
+      <ModelLoader
+        modelPath="/models/vintage_couch_small/scene.gltf"
+        position={[-2.0, 0.7, 3.5]}
+        scale={0.8}
+        rotation={[0, Math.PI / 2 - Math.PI * 0.30, 0]}
+      />
+
+      {/* Larger vintage couch */}
+      <ModelLoader
+        modelPath="/models/vintage_couch_large/scene.gltf"
+        position={[0, 0.5, 3.5]}
+        scale={[1.5, 2.5, 2.5]}
+        rotation={[0, 0, 0]}
+        hideMeshes={['P-2']}
+      />
 
       {/* Wooden end table near armchair */}
       <WoodenEndTable position={[-5.5, 0, 4.5]} rotation={[0, 0, 0]} />
