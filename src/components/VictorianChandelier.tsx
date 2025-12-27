@@ -156,31 +156,15 @@ export const VictorianChandelier = ({
         </mesh>
       </group>
 
-      {/* Optimized lighting - Reduced from 7 to 3 lights for better performance */}
+      {/* Single center light for chandelier */}
       {isLit && (
         <>
-          {/* Two key candle lights for directional warmth */}
-          <pointLight
-            position={[1.2, -1.35, 0]}
-            color="#ffcc77"
-            intensity={5.5}
-            distance={28}
-            decay={1.5}
-          />
-          <pointLight
-            position={[-1.2, -1.35, 0]}
-            color="#ffcc77"
-            intensity={5.5}
-            distance={28}
-            decay={1.5}
-          />
-
-          {/* Central ambient light - Slightly stronger to compensate */}
+          {/* Single central light */}
           <pointLight
             position={[0, -2.4, 0]}
             color="#ffcc77"
-            intensity={10.0}
-            distance={32}
+            intensity={18.0}
+            distance={35}
             decay={1.5}
           />
         </>
