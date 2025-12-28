@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Text } from '@react-three/drei';
 import { OfficeRoom } from './OfficeRoom';
 import { ExecutiveDesk } from './ExecutiveDesk';
 import { DetectiveDesk } from './DetectiveDesk';
@@ -20,6 +21,8 @@ import { SquareWoodenTable } from './SquareWoodenTable';
 import { CoffeeTableItems } from './CoffeeTableItems';
 import { PersianRug } from './PersianRug';
 import { ModelLoader } from './ModelLoader';
+import { OfficePapers } from './OfficePapers';
+import { DetectiveFiles } from './DetectiveFiles';
 
 interface DetectiveOfficeSceneProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -118,14 +121,15 @@ export const DetectiveOfficeScene = ({
       {/* Desk lamp light - only visible when lamp is on */}
       {deskLampOn && (
         <>
-          <pointLight position={[-9.5, 2.3, -2.5]} intensity={1.5} color="#ffdb8c" distance={3} />
+          <pointLight position={[-9.5, 2.3, -2.5]} intensity={6} color="#ffdb8c" distance={8} decay={2.5} />
           <spotLight
             position={[-9.5, 2.3, -2.5]}
-            target-position={[-9.5, 1.3, -2.5]}
-            intensity={2}
-            angle={0.6}
-            penumbra={0.5}
+            target-position={[-9.5, 1.5, -2.5]}
+            intensity={5}
+            angle={1.4}
+            penumbra={1.0}
             color="#ffdb8c"
+            distance={8}
           />
         </>
       )}
@@ -150,10 +154,63 @@ export const DetectiveOfficeScene = ({
       {/* Smoking Pipe - classic detective accessory on desk */}
       <ModelLoader
         modelPath="/models/smoking_pipe/scene.gltf"
-        position={[-7.9, 1.60, -6.0]}
+        position={[-7.9, 1.60, -2.8]}
         scale={0.0035}
         rotation={[0, Math.PI / 3, 0]}
       />
+
+      {/* Book stack on desk */}
+      <ModelLoader
+        modelPath="/models/book_stack/scene.gltf"
+        position={[-9.5, 1.68, -4.5]}
+        scale={0.5}
+        rotation={[0, 0, 0]}
+      />
+
+      {/* Case file on desk - manila folder with realistic details */}
+      <group position={[-8.3, 1.55, -4.3]} rotation={[-Math.PI / 2, 0, 1.524]} scale={0.9}>
+        {/* Bottom folder layer */}
+        <mesh position={[0, 0, 0]} castShadow receiveShadow>
+          <boxGeometry args={[0.7, 0.9, 0.015]} />
+          <meshStandardMaterial color="#d4a574" roughness={0.9} />
+        </mesh>
+
+        {/* Folder thickness - papers inside */}
+        <mesh position={[0, 0, 0.025]} castShadow receiveShadow>
+          <boxGeometry args={[0.68, 0.88, 0.04]} />
+          <meshStandardMaterial color="#f5f5dc" roughness={0.85} />
+        </mesh>
+
+        {/* Top folder layer - slightly smaller */}
+        <mesh position={[0.02, 0.05, 0.048]} castShadow receiveShadow>
+          <boxGeometry args={[0.68, 0.85, 0.012]} />
+          <meshStandardMaterial color="#d4a574" roughness={0.9} />
+        </mesh>
+
+        {/* TOP SECRET stamp - red box outline */}
+        <group position={[0.02, 0.05, 0.062]}>
+          {/* Stamp background */}
+          <mesh position={[0, 0, 0]}>
+            <boxGeometry args={[0.45, 0.15, 0.002]} />
+            <meshStandardMaterial color="#cc3333" roughness={0.7} />
+          </mesh>
+          {/* Inner rectangle detail */}
+          <mesh position={[0, 0, 0.002]}>
+            <boxGeometry args={[0.42, 0.12, 0.001]} />
+            <meshStandardMaterial color="#d4a574" roughness={0.9} />
+          </mesh>
+          {/* TOP SECRET text */}
+          <Text
+            position={[0, 0, 0.004]}
+            fontSize={0.06}
+            color="#cc3333"
+            anchorX="center"
+            anchorY="middle"
+          >
+            TOP SECRET
+          </Text>
+        </group>
+      </group>
 
       {/* Detective Office Chair - Moved east and rotated more north (1.7x scale) */}
       <group scale={1.7}>
@@ -286,14 +343,8 @@ export const DetectiveOfficeScene = ({
           {/* Additional hemisphere light for overall brightness */}
           <hemisphereLight intensity={1.2} color="#ffffff" groundColor="#8b7355" />
 
-          {/* Corner fill lights */}
-          <pointLight position={[-8, 6, -8]} intensity={1.5} color="#fffaf0" distance={15} />
-          <pointLight position={[8, 6, -8]} intensity={1.5} color="#fffaf0" distance={15} />
-          <pointLight position={[-8, 6, 8]} intensity={1.5} color="#fffaf0" distance={15} />
-          <pointLight position={[8, 6, 8]} intensity={1.5} color="#fffaf0" distance={15} />
-
-          {/* Center ceiling light */}
-          <pointLight position={[0, 8, 0]} intensity={2} color="#ffffff" distance={20} />
+          {/* Single center ceiling light */}
+          <pointLight position={[0, 8, 2]} intensity={4} color="#ffffff" distance={25} />
         </>
       )}
 
