@@ -19,6 +19,7 @@ import { CoffeeTableItems } from './CoffeeTableItems';
 import { PersianRug } from './PersianRug';
 import { ModelLoader } from './ModelLoader';
 import { DetectiveFiles } from './DetectiveFiles';
+import { ProceduralGlobe } from './ProceduralGlobe';
 
 interface DetectiveOfficeSceneProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -130,8 +131,12 @@ export const DetectiveOfficeScene = ({
         </>
       )}
 
-      {/* Decorative desk items removed for performance (Book Stack: 10 meshes, Globe: 447KB, etc.) */}
-      {/* Keep only interactive Banker's Lamp - can add procedural replacements later if needed */}
+      {/* Lightweight procedural globe - replaces heavy 447KB GLTF model */}
+      <ProceduralGlobe
+        position={[-11.0, 1.5, -5.1]}
+        rotation={[0, Math.PI / 6, 0]}
+        scale={2.08}
+      />
 
       {/* Case file on desk - manila folder with realistic details */}
       <group position={[-8.3, 1.55, -4.3]} rotation={[-Math.PI / 2, 0, 1.524]} scale={0.9}>
