@@ -136,6 +136,7 @@ export const DetectiveOfficeScene = ({
         position={[-8.0, 1.5, -5.0]}
         scale={4.5}
         rotation={[0, Math.PI / 4, 0]}
+        simplify={true}
       />
 
       {/* Antique Globe - decorative piece on desk */}
@@ -153,6 +154,7 @@ export const DetectiveOfficeScene = ({
         position={[-7.9, 1.60, -2.8]}
         scale={0.0035}
         rotation={[0, Math.PI / 3, 0]}
+        simplify={true}
       />
 
       {/* Book stack on desk */}
@@ -161,6 +163,7 @@ export const DetectiveOfficeScene = ({
         position={[-9.5, 1.68, -4.5]}
         scale={0.5}
         rotation={[0, 0, 0]}
+        simplify={true}
       />
 
       {/* Case file on desk - manila folder with realistic details */}
