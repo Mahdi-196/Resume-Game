@@ -33,7 +33,7 @@ export const DetectiveDesk = ({
   return (
     <group position={position} rotation={rotation}>
       {/* Main desktop surface */}
-      <mesh position={[0, 0.85, 0]} castShadow receiveShadow material={materials.deskWood}>
+      <mesh position={[0, 0.85, 0]} castShadow receiveShadow material={materials.deskWood} frustumCulled={true}>
         <boxGeometry args={[2.4, 0.08, 1.3]} />
       </mesh>
 

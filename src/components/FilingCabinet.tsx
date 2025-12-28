@@ -1,4 +1,5 @@
 // Filing Cabinet Component - Three 1930s vintage styles
+import React from 'react';
 
 interface FilingCabinetProps {
   position: [number, number, number];
@@ -151,8 +152,9 @@ export const FilingCabinet = ({
         </mesh>
 
         {/* Grid of small drawers - 3 columns × 8 rows = 24 small drawers */}
-        {Array.from({ length: 8 }).map((_, row) =>
-          Array.from({ length: 3 }).map((_, col) => {
+        {Array.from({ length: 8 }).map((_, row) => (
+          <React.Fragment key={`row-${row}`}>
+            {Array.from({ length: 3 }).map((_, col) => {
             const xPos = -0.28 + col * 0.28;
             const yPos = 0.3 + row * 0.28;
 
@@ -183,8 +185,9 @@ export const FilingCabinet = ({
                 </mesh>
               </group>
             );
-          })
-        )}
+          })}
+          </React.Fragment>
+        ))}
 
         {/* Decorative vertical dividers between columns */}
         {[-0.14, 0.14].map((x) => (

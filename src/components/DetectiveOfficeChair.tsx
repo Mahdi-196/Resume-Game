@@ -148,7 +148,7 @@ export const DetectiveOfficeChair = ({
   return (
     <group position={position} rotation={rotation}>
       {/* Seat cushion - slightly curved for comfort */}
-      <mesh position={[0, 0.55, 0]} castShadow receiveShadow material={materials.leather}>
+      <mesh position={[0, 0.55, 0]} castShadow receiveShadow material={materials.leather} frustumCulled={true}>
         <boxGeometry args={[0.65, 0.12, 0.65]} />
       </mesh>
 

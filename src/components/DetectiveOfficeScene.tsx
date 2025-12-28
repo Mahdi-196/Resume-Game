@@ -130,41 +130,8 @@ export const DetectiveOfficeScene = ({
         </>
       )}
 
-      {/* Magnifying Glass - detective tool on desk */}
-      <ModelLoader
-        modelPath="/models/magnifying_glass/scene.gltf"
-        position={[-8.0, 1.5, -5.0]}
-        scale={4.5}
-        rotation={[0, Math.PI / 4, 0]}
-        simplify={true}
-      />
-
-      {/* Antique Globe - decorative piece on desk */}
-      <ModelLoader
-        modelPath="/models/antique_globe/scene.gltf"
-        position={[-11.0, 2.12, -5.1]}
-        scale={2.08}
-        rotation={[0, Math.PI / 6, 0]}
-        simplify={true}
-      />
-
-      {/* Smoking Pipe - classic detective accessory on desk */}
-      <ModelLoader
-        modelPath="/models/smoking_pipe/scene.gltf"
-        position={[-7.9, 1.60, -2.8]}
-        scale={0.0035}
-        rotation={[0, Math.PI / 3, 0]}
-        simplify={true}
-      />
-
-      {/* Book stack on desk */}
-      <ModelLoader
-        modelPath="/models/book_stack/scene.gltf"
-        position={[-9.5, 1.68, -4.5]}
-        scale={0.5}
-        rotation={[0, 0, 0]}
-        simplify={true}
-      />
+      {/* Decorative desk items removed for performance (Book Stack: 10 meshes, Globe: 447KB, etc.) */}
+      {/* Keep only interactive Banker's Lamp - can add procedural replacements later if needed */}
 
       {/* Case file on desk - manila folder with realistic details */}
       <group position={[-8.3, 1.55, -4.3]} rotation={[-Math.PI / 2, 0, 1.524]} scale={0.9}>
