@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Text } from '@react-three/drei';
 import { OfficeRoom } from './OfficeRoom';
-import { ExecutiveDesk } from './ExecutiveDesk';
 import { DetectiveDesk } from './DetectiveDesk';
 import { DetectiveOfficeChair } from './DetectiveOfficeChair';
 import { OfficeWindow } from './OfficeWindow';
-import { VictorianChair } from './VictorianChair';
 import { InteractiveDetectiveBoard } from './board';
 import { VictorianDoor } from './VictorianDoor';
 import { VictorianChandelier } from './VictorianChandelier';
@@ -17,11 +15,9 @@ import { DetectiveCharacter } from './DetectiveCharacter';
 import { FilingCabinet } from './FilingCabinet';
 import { WoodenCoffeeTable } from './WoodenCoffeeTable';
 import { WoodenEndTable } from './WoodenEndTable';
-import { SquareWoodenTable } from './SquareWoodenTable';
 import { CoffeeTableItems } from './CoffeeTableItems';
 import { PersianRug } from './PersianRug';
 import { ModelLoader } from './ModelLoader';
-import { OfficePapers } from './OfficePapers';
 import { DetectiveFiles } from './DetectiveFiles';
 
 interface DetectiveOfficeSceneProps {
