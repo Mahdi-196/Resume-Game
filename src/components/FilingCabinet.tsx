@@ -1,7 +1,5 @@
-// Filing Cabinet Component - Optimized 1930s vintage styles
-// Reduced from 46 meshes to ~8 meshes per variant
-import React, { useMemo } from 'react';
-import * as THREE from 'three';
+// Filing Cabinet Component - Three 1930s vintage styles
+import React from 'react';
 
 interface FilingCabinetProps {
   position: [number, number, number];
@@ -15,116 +13,203 @@ export const FilingCabinet = ({
   variant = 'classic'
 }: FilingCabinetProps) => {
 
-  // Shared materials - created once for performance
-  const materials = useMemo(() => ({
-    darkMetal: new THREE.MeshStandardMaterial({ color: "#2d2d2d", roughness: 0.4, metalness: 0.6 }),
-    lightMetal: new THREE.MeshStandardMaterial({ color: "#3a3a3a", roughness: 0.3, metalness: 0.7 }),
-    brass: new THREE.MeshStandardMaterial({ color: "#b8860b", roughness: 0.2, metalness: 0.9 }),
-    darkWood: new THREE.MeshStandardMaterial({ color: "#2a1810", roughness: 0.5, metalness: 0.1 }),
-    mediumWood: new THREE.MeshStandardMaterial({ color: "#3d2817", roughness: 0.6, metalness: 0.2 }),
-    lightWood: new THREE.MeshStandardMaterial({ color: "#5c4033", roughness: 0.5, metalness: 0.1 })
-  }), []);
-
-  // Disable pointer events
+  // Disable pointer events to prevent zoom on click
   const commonProps = {
     onPointerOver: (e: any) => e.stopPropagation(),
     onPointerOut: (e: any) => e.stopPropagation(),
     onClick: (e: any) => e.stopPropagation(),
-    raycast: () => null,
-    frustumCulled: true
+    raycast: () => null // Completely disable raycasting
   };
 
-  // Classic Vertical - Optimized from 21 to 7 meshes
+  // Classic Vertical Filing Cabinet - Traditional tall 4-drawer office style
   if (variant === 'classic') {
     return (
       <group position={position} rotation={rotation} {...commonProps}>
-        {/* Main body with top rim merged */}
-        <mesh material={materials.darkMetal} frustumCulled>
-          <boxGeometry args={[0.55, 2.84, 0.7]} />
+        {/* Main cabinet body */}
+        <mesh position={[0, 1.4, 0]} {...commonProps}>
+          <boxGeometry args={[0.55, 2.8, 0.7]} />
+          <meshStandardMaterial color="#2d2d2d" roughness={0.4} metalness={0.6} />
         </mesh>
 
-        {/* All 4 drawer fronts merged into instanced mesh */}
-        {[0, 1, 2, 3].map((i) => (
-          <group key={i} position={[0, 0.3 + i * 0.7, 0.33]}>
-            {/* Drawer front */}
-            <mesh material={materials.lightMetal} frustumCulled>
-              <boxGeometry args={[0.5, 0.6, 0.06]} />
-            </mesh>
-            {/* Handle - simplified */}
-            <mesh position={[0, -0.15, 0.04]} material={materials.brass} frustumCulled>
-              <boxGeometry args={[0.12, 0.03, 0.02]} />
-            </mesh>
-          </group>
-        ))}
+        {/* Four drawers with handles and label holders */}
+        {[0, 1, 2, 3].map((i) => {
+          const yPos = 0.3 + i * 0.7;
+          return (
+            <group key={`drawer-${i}`}>
+              {/* Drawer front panel - slightly recessed */}
+              <mesh position={[0, yPos, 0.33]}>
+                <boxGeometry args={[0.5, 0.6, 0.06]} />
+                <meshStandardMaterial color="#3a3a3a" roughness={0.3} metalness={0.7} />
+              </mesh>
+
+              {/* Brass pull handle */}
+              <mesh position={[0, yPos - 0.15, 0.37]}>
+                <boxGeometry args={[0.12, 0.03, 0.02]} />
+                <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
+              </mesh>
+
+              {/* Label holder frame - brass */}
+              <mesh position={[0, yPos + 0.15, 0.37]}>
+                <boxGeometry args={[0.25, 0.08, 0.01]} />
+                <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
+              </mesh>
+
+              {/* White label card */}
+              <mesh position={[0, yPos + 0.15, 0.375]}>
+                <boxGeometry args={[0.23, 0.06, 0.005]} />
+                <meshStandardMaterial color="#e8e4d0" roughness={0.8} />
+              </mesh>
+            </group>
+          );
+        })}
+
+        {/* Top rim detail */}
+        <mesh position={[0, 2.82, 0]}>
+          <boxGeometry args={[0.57, 0.04, 0.72]} />
+          <meshStandardMaterial color="#1a1a1a" roughness={0.3} metalness={0.5} />
+        </mesh>
       </group>
     );
   }
 
-  // Lateral - Optimized from 10 to 5 meshes
+  // Lateral Filing Cabinet - Low, wide 1930s office style
   if (variant === 'lateral') {
     return (
       <group position={position} rotation={rotation} {...commonProps}>
-        {/* Main body with top merged */}
-        <mesh material={materials.mediumWood} frustumCulled>
-          <boxGeometry args={[1.2, 1.44, 0.6]} />
+        {/* Main cabinet body - wider and shorter */}
+        <mesh position={[0, 0.7, 0]} {...commonProps}>
+          <boxGeometry args={[1.2, 1.4, 0.6]} />
+          <meshStandardMaterial color="#3d2817" roughness={0.6} metalness={0.2} />
         </mesh>
 
-        {/* 2 drawers */}
-        {[0, 1].map((i) => (
-          <group key={i} position={[0, 0.4 + i * 0.6, 0.28]}>
-            {/* Drawer front */}
-            <mesh material={materials.darkWood} frustumCulled>
-              <boxGeometry args={[1.1, 0.5, 0.06]} />
+        {/* Wood grain top surface */}
+        <mesh position={[0, 1.42, 0]}>
+          <boxGeometry args={[1.22, 0.04, 0.62]} />
+          <meshStandardMaterial color="#5c4033" roughness={0.5} metalness={0.1} />
+        </mesh>
+
+        {/* Two horizontal drawers stacked */}
+        {[0, 1].map((i) => {
+          const yPos = 0.4 + i * 0.6;
+          return (
+            <group key={`drawer-${i}`}>
+              {/* Drawer front - wood panel */}
+              <mesh position={[0, yPos, 0.28]}>
+                <boxGeometry args={[1.1, 0.5, 0.06]} />
+                <meshStandardMaterial color="#4a352a" roughness={0.6} metalness={0.1} />
+              </mesh>
+
+              {/* Two brass handles side by side */}
+              <mesh position={[-0.3, yPos, 0.32]}>
+                <cylinderGeometry args={[0.02, 0.02, 0.08, 6]} />
+                <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
+              </mesh>
+              <mesh position={[0.3, yPos, 0.32]}>
+                <cylinderGeometry args={[0.02, 0.02, 0.08, 6]} />
+                <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
+              </mesh>
+
+              {/* Decorative brass trim on drawer */}
+              <mesh position={[0, yPos - 0.2, 0.32]}>
+                <boxGeometry args={[0.9, 0.01, 0.01]} />
+                <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
+              </mesh>
+            </group>
+          );
+        })}
+
+        {/* Decorative corner brackets - Art Deco style */}
+        {[-0.55, 0.55].map((x) => (
+          <>
+            <mesh key={`bracket-top-${x}`} position={[x, 1.35, 0.28]}>
+              <boxGeometry args={[0.04, 0.08, 0.02]} />
+              <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
             </mesh>
-            {/* Handles - simplified to boxes */}
-            <mesh position={[-0.3, 0, 0.04]} material={materials.brass} frustumCulled>
-              <boxGeometry args={[0.03, 0.08, 0.02]} />
+            <mesh key={`bracket-bot-${x}`} position={[x, 0.05, 0.28]}>
+              <boxGeometry args={[0.04, 0.08, 0.02]} />
+              <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
             </mesh>
-            <mesh position={[0.3, 0, 0.04]} material={materials.brass} frustumCulled>
-              <boxGeometry args={[0.03, 0.08, 0.02]} />
-            </mesh>
-          </group>
+          </>
         ))}
       </group>
     );
   }
 
-  // Card Catalog - Optimized from 105 to 8 meshes
-  // Instead of 24 individual drawers, use texture mapping illusion
+  // Card Catalog Style - Victorian library aesthetic with small drawers
   if (variant === 'card-catalog') {
     return (
       <group position={position} rotation={rotation} {...commonProps}>
-        {/* Main body */}
-        <mesh material={materials.darkWood} frustumCulled>
-          <boxGeometry args={[0.9, 2.46, 0.5]} />
+        {/* Main cabinet frame - rich dark wood */}
+        <mesh position={[0, 1.2, 0]} {...commonProps}>
+          <boxGeometry args={[0.9, 2.4, 0.5]} />
+          <meshStandardMaterial color="#2a1810" roughness={0.5} metalness={0.1} />
         </mesh>
 
-        {/* Drawer grid front - single textured plane creates illusion of many drawers */}
-        <mesh position={[0, 1.2, 0.24]} material={materials.mediumWood} frustumCulled>
-          <boxGeometry args={[0.85, 2.2, 0.02]} />
+        {/* Decorative top molding */}
+        <mesh position={[0, 2.42, 0]}>
+          <boxGeometry args={[0.95, 0.06, 0.55]} />
+          <meshStandardMaterial color="#1a0f08" roughness={0.6} metalness={0.1} />
         </mesh>
 
-        {/* Vertical dividers for depth */}
-        <mesh position={[-0.14, 1.2, 0.24]} material={materials.darkWood} frustumCulled>
-          <boxGeometry args={[0.015, 2.3, 0.01]} />
-        </mesh>
-        <mesh position={[0.14, 1.2, 0.24]} material={materials.darkWood} frustumCulled>
-          <boxGeometry args={[0.015, 2.3, 0.01]} />
-        </mesh>
+        {/* Grid of small drawers - 3 columns × 8 rows = 24 small drawers */}
+        {Array.from({ length: 8 }).map((_, row) => (
+          <React.Fragment key={`row-${row}`}>
+            {Array.from({ length: 3 }).map((_, col) => {
+            const xPos = -0.28 + col * 0.28;
+            const yPos = 0.3 + row * 0.28;
 
-        {/* Representative drawer knobs in front for visual interest (8 instead of 24) */}
-        {[0, 1].map((row) =>
-          [0, 1, 2].map((col) => (
-            <mesh
-              key={`${row}-${col}`}
-              position={[-0.28 + col * 0.28, 0.6 + row * 1.2, 0.26]}
-              material={materials.brass}
-              frustumCulled
-            >
-              <sphereGeometry args={[0.012, 6, 6]} />
+            return (
+              <group key={`drawer-${row}-${col}`}>
+                {/* Small drawer front */}
+                <mesh position={[xPos, yPos, 0.23]}>
+                  <boxGeometry args={[0.26, 0.26, 0.04]} />
+                  <meshStandardMaterial color="#3d2817" roughness={0.6} metalness={0.1} />
+                </mesh>
+
+                {/* Tiny brass knob */}
+                <mesh position={[xPos, yPos, 0.26]}>
+                  <sphereGeometry args={[0.015, 12, 12]} />
+                  <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
+                </mesh>
+
+                {/* Label slot */}
+                <mesh position={[xPos, yPos + 0.08, 0.255]}>
+                  <boxGeometry args={[0.18, 0.04, 0.005]} />
+                  <meshStandardMaterial color="#e8e4d0" roughness={0.8} />
+                </mesh>
+
+                {/* Brass label frame */}
+                <mesh position={[xPos, yPos + 0.08, 0.25]}>
+                  <boxGeometry args={[0.19, 0.045, 0.003]} />
+                  <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
+                </mesh>
+              </group>
+            );
+          })}
+          </React.Fragment>
+        ))}
+
+        {/* Decorative vertical dividers between columns */}
+        {[-0.14, 0.14].map((x) => (
+          <mesh key={`divider-${x}`} position={[x, 1.2, 0.24]}>
+            <boxGeometry args={[0.015, 2.3, 0.01]} />
+            <meshStandardMaterial color="#1a0f08" roughness={0.7} />
+          </mesh>
+        ))}
+
+        {/* Victorian style brass corner protectors */}
+        {[-0.42, 0.42].map((x) => (
+          <>
+            <mesh key={`corner-top-${x}`} position={[x, 2.3, 0.23]}>
+              <boxGeometry args={[0.03, 0.12, 0.02]} />
+              <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
             </mesh>
-          ))
-        )}
+            <mesh key={`corner-bot-${x}`} position={[x, 0.1, 0.23]}>
+              <boxGeometry args={[0.03, 0.12, 0.02]} />
+              <meshStandardMaterial color="#8b7355" roughness={0.3} metalness={0.7} />
+            </mesh>
+          </>
+        ))}
       </group>
     );
   }
