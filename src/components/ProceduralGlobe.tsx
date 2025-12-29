@@ -17,23 +17,26 @@ const GlobeWithTexture = ({
   const texture = useTexture(textureUrl);
 
   const material = useMemo(() => {
-    // Enhanced contrast and vibrancy
+    // Enhanced contrast and vibrancy with optimized texture settings
     texture.colorSpace = THREE.SRGBColorSpace;
+    texture.minFilter = THREE.LinearFilter; // Faster filtering
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false; // Disable mipmaps for performance
 
     return new THREE.MeshStandardMaterial({
       map: texture,
       color: "#ffffff", // No color tint - show true map colors
-      roughness: 0.3,    // Smoother surface for better light reflection
+      roughness: 0.4,    // Slightly rougher for better performance
       metalness: 0.0,    // Non-metallic for paper-like appearance
       emissive: "#1a1510", // Subtle warm glow for depth
-      emissiveIntensity: 0.15,
-      envMapIntensity: 1.2 // Enhanced environment reflections
+      emissiveIntensity: 0.1, // Reduced for performance
+      envMapIntensity: 1.0 // Reduced for performance
     });
   }, [texture]);
 
   return (
-    <mesh position={position} material={material} castShadow receiveShadow>
-      <sphereGeometry args={[0.25 * scale, 32, 32]} />
+    <mesh position={position} material={material}>
+      <sphereGeometry args={[0.25 * scale, 16, 16]} />
     </mesh>
   );
 };

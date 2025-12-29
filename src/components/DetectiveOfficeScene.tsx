@@ -111,21 +111,13 @@ export const DetectiveOfficeScene = ({
       {/* Desk lamp light - only visible when lamp is on */}
       {deskLampOn && (
         <>
-          {/* Main desk spotlight */}
+          {/* Single optimized desk spotlight */}
           <spotLight
             position={[-9.62, 2.31, -2.17]}
             target-position={[-8.5, 1.55, -4.0]}
-            intensity={35}
-            angle={1.8}
-            penumbra={0.5}
-            color="#ffdb8c"
-            distance={3.5}
-            decay={1.5}
-          />
-          {/* Ambient point light for desk glow */}
-          <pointLight
-            position={[-9.62, 2.31, -2.17]}
-            intensity={12}
+            intensity={18}
+            angle={1.6}
+            penumbra={0.6}
             color="#ffdb8c"
             distance={3}
             decay={1.8}

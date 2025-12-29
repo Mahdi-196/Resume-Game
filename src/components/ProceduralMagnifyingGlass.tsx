@@ -53,8 +53,8 @@ export const ProceduralMagnifyingGlass = ({
   return (
     <group position={position} rotation={rotation}>
       {/* Glass lens - thin disc rotated to sit flat in the frame */}
-      <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[lensRadius, lensRadius, lensThickness, 32]} />
+      <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[lensRadius, lensRadius, lensThickness, 16]} />
         <meshStandardMaterial
           color="#ffffff"
           transparent={true}
@@ -67,23 +67,21 @@ export const ProceduralMagnifyingGlass = ({
       </mesh>
 
       {/* Inner brass rim around lens edge */}
-      <mesh position={[0, 0, 0]} material={materials.brass} castShadow>
-        <torusGeometry args={[lensRadius, rimThickness, 8, 32]} />
+      <mesh position={[0, 0, 0]} material={materials.brass}>
+        <torusGeometry args={[lensRadius, rimThickness, 6, 16]} />
       </mesh>
 
       {/* Outer brass rim/frame - decorative border */}
-      <mesh position={[0, 0, 0]} material={materials.brass} castShadow>
-        <torusGeometry args={[lensRadius + rimThickness * 2, rimThickness * 1.5, 8, 32]} />
+      <mesh position={[0, 0, 0]} material={materials.brass}>
+        <torusGeometry args={[lensRadius + rimThickness * 2, rimThickness * 1.5, 6, 16]} />
       </mesh>
 
       {/* Wooden handle - cylindrical rod */}
       <mesh
         position={[0, -handleLength / 2 - lensRadius * 1.2, 0]}
         material={materials.wood}
-        castShadow
-        receiveShadow
       >
-        <cylinderGeometry args={[handleRadius, handleRadius * 1.3, handleLength, 12]} />
+        <cylinderGeometry args={[handleRadius, handleRadius * 1.3, handleLength, 8]} />
       </mesh>
 
       {/* Handle grip detail - decorative rings */}

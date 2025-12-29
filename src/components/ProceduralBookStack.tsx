@@ -57,7 +57,7 @@ export const ProceduralBookStack = ({
       {/* Book 1 - Bottom, largest book lying flat */}
       <group position={[0, bookHeight / 2, 0]}>
         {/* Cover */}
-        <mesh material={materials.book1} castShadow receiveShadow>
+        <mesh material={materials.book1}>
           <boxGeometry args={[bookWidth, bookHeight, bookDepth]} />
         </mesh>
         {/* Page edges - right side */}
@@ -77,7 +77,7 @@ export const ProceduralBookStack = ({
       {/* Book 2 - Second layer, medium size, slightly rotated */}
       <group position={[0.015, bookHeight * 1.5, 0.01]} rotation={[0, Math.PI / 10, 0]}>
         {/* Cover */}
-        <mesh material={materials.book2} castShadow receiveShadow>
+        <mesh material={materials.book2}>
           <boxGeometry args={[bookWidth * 0.88, bookHeight * 1.1, bookDepth * 0.92]} />
         </mesh>
         {/* Page edges - right */}
@@ -97,7 +97,7 @@ export const ProceduralBookStack = ({
       {/* Book 3 - Third layer, rotated opposite direction */}
       <group position={[-0.018, bookHeight * 2.65, -0.015]} rotation={[0, -Math.PI / 7, 0]}>
         {/* Cover */}
-        <mesh material={materials.book3} castShadow receiveShadow>
+        <mesh material={materials.book3}>
           <boxGeometry args={[bookWidth * 0.82, bookHeight * 0.95, bookDepth * 0.85]} />
         </mesh>
         {/* Page edges - right */}
@@ -117,7 +117,7 @@ export const ProceduralBookStack = ({
       {/* Book 4 - Top book, smallest, different angle */}
       <group position={[0.008, bookHeight * 3.6, 0.012]} rotation={[0, Math.PI / 5, 0]}>
         {/* Cover */}
-        <mesh material={materials.book4} castShadow receiveShadow>
+        <mesh material={materials.book4}>
           <boxGeometry args={[bookWidth * 0.75, bookHeight * 0.9, bookDepth * 0.78]} />
         </mesh>
         {/* Page edges - right */}
