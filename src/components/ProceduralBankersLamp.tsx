@@ -76,47 +76,49 @@ export const ProceduralBankersLamp = ({
     <group position={position} rotation={rotation} onClick={onClick}>
       {/* Weighted base - stepped brass base */}
       {/* Bottom tier */}
-      <mesh position={[0, baseHeight * 0.15, 0]} material={materials.brass}>
-        <cylinderGeometry args={[baseRadius * 1.2, baseRadius * 1.25, baseHeight * 0.3, 24]} />
+      <mesh position={[0, baseHeight * 0.15, 0]} material={materials.brass} frustumCulled>
+        <cylinderGeometry args={[baseRadius * 1.2, baseRadius * 1.25, baseHeight * 0.3, 8]} />
       </mesh>
 
       {/* Middle tier */}
-      <mesh position={[0, baseHeight * 0.45, 0]} material={materials.brass}>
-        <cylinderGeometry args={[baseRadius * 0.9, baseRadius * 1.0, baseHeight * 0.4, 24]} />
+      <mesh position={[0, baseHeight * 0.45, 0]} material={materials.brass} frustumCulled>
+        <cylinderGeometry args={[baseRadius * 0.9, baseRadius * 1.0, baseHeight * 0.4, 8]} />
       </mesh>
 
       {/* Top tier */}
-      <mesh position={[0, baseHeight * 0.8, 0]} material={materials.brass}>
-        <cylinderGeometry args={[baseRadius * 0.7, baseRadius * 0.8, baseHeight * 0.3, 24]} />
+      <mesh position={[0, baseHeight * 0.8, 0]} material={materials.brass} frustumCulled>
+        <cylinderGeometry args={[baseRadius * 0.7, baseRadius * 0.8, baseHeight * 0.3, 8]} />
       </mesh>
 
       {/* Felt bottom pad */}
-      <mesh position={[0, 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]} material={materials.felt}>
-        <circleGeometry args={[baseRadius * 1.22, 24]} />
+      <mesh position={[0, 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]} material={materials.felt} frustumCulled>
+        <circleGeometry args={[baseRadius * 1.22, 8]} />
       </mesh>
 
       {/* Decorative brass rings on base */}
-      <mesh position={[0, baseHeight * 0.3, 0]} material={materials.darkBrass}>
-        <torusGeometry args={[baseRadius * 0.95, 0.006 * scale, 8, 24]} />
+      <mesh position={[0, baseHeight * 0.3, 0]} material={materials.darkBrass} frustumCulled>
+        <torusGeometry args={[baseRadius * 0.95, 0.006 * scale, 6, 8]} />
       </mesh>
-      <mesh position={[0, baseHeight * 0.65, 0]} material={materials.darkBrass}>
-        <torusGeometry args={[baseRadius * 0.75, 0.005 * scale, 8, 24]} />
+      <mesh position={[0, baseHeight * 0.65, 0]} material={materials.darkBrass} frustumCulled>
+        <torusGeometry args={[baseRadius * 0.75, 0.005 * scale, 6, 8]} />
       </mesh>
 
       {/* Vertical pole/stem from base */}
       <mesh
         position={[0, baseHeight + poleHeight / 2, 0]}
         material={materials.brass}
+        frustumCulled
       >
-        <cylinderGeometry args={[poleRadius, poleRadius * 1.2, poleHeight, 12]} />
+        <cylinderGeometry args={[poleRadius, poleRadius * 1.2, poleHeight, 6]} />
       </mesh>
 
       {/* Pole top knob */}
       <mesh
         position={[0, baseHeight + poleHeight, 0]}
         material={materials.brass}
+        frustumCulled
       >
-        <sphereGeometry args={[poleRadius * 2.2, 12, 12]} />
+        <sphereGeometry args={[poleRadius * 2.2, 8, 8]} />
       </mesh>
 
       {/* Horizontal arm extending from pole */}
@@ -124,16 +126,18 @@ export const ProceduralBankersLamp = ({
         position={[armLength / 2, baseHeight + poleHeight - 0.02 * scale, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.brass}
+        frustumCulled
       >
-        <cylinderGeometry args={[armRadius, armRadius, armLength, 12]} />
+        <cylinderGeometry args={[armRadius, armRadius, armLength, 6]} />
       </mesh>
 
       {/* Arm-to-shade joint (decorative ball joint) */}
       <mesh
         position={[armLength, baseHeight + poleHeight - 0.02 * scale, 0]}
         material={materials.darkBrass}
+        frustumCulled
       >
-        <sphereGeometry args={[armRadius * 2, 12, 12]} />
+        <sphereGeometry args={[armRadius * 2, 8, 8]} />
       </mesh>
 
       {/* Green glass shade - elongated dome shape */}
@@ -142,8 +146,9 @@ export const ProceduralBankersLamp = ({
         <mesh
           rotation={[0, 0, Math.PI / 2]}
           material={materials.greenGlass}
+          frustumCulled
         >
-          <capsuleGeometry args={[shadeRadius, shadeLength, 16, 24]} />
+          <capsuleGeometry args={[shadeRadius, shadeLength, 8, 12]} />
         </mesh>
 
         {/* Brass shade rim - front opening */}
@@ -151,8 +156,9 @@ export const ProceduralBankersLamp = ({
           position={[shadeLength / 2 + shadeRadius, 0, 0]}
           rotation={[0, Math.PI / 2, 0]}
           material={materials.brass}
+          frustumCulled
         >
-          <torusGeometry args={[shadeRadius * 0.95, 0.01 * scale, 8, 24]} />
+          <torusGeometry args={[shadeRadius * 0.95, 0.01 * scale, 6, 8]} />
         </mesh>
 
         {/* Brass shade rim - back */}
@@ -160,40 +166,45 @@ export const ProceduralBankersLamp = ({
           position={[-shadeLength / 2 - shadeRadius, 0, 0]}
           rotation={[0, Math.PI / 2, 0]}
           material={materials.brass}
+          frustumCulled
         >
-          <torusGeometry args={[shadeRadius * 0.95, 0.01 * scale, 8, 24]} />
+          <torusGeometry args={[shadeRadius * 0.95, 0.01 * scale, 6, 8]} />
         </mesh>
 
         {/* Brass top cap/mount */}
         <mesh
           position={[0, shadeRadius, 0]}
           material={materials.brass}
+          frustumCulled
         >
-          <cylinderGeometry args={[0.025 * scale, 0.035 * scale, 0.04 * scale, 16]} />
+          <cylinderGeometry args={[0.025 * scale, 0.035 * scale, 0.04 * scale, 8]} />
         </mesh>
 
         {/* Light bulb socket */}
         <mesh
           position={[0, shadeRadius * 0.4, 0]}
           material={materials.socket}
+          frustumCulled
         >
-          <cylinderGeometry args={[bulbRadius * 0.6, bulbRadius * 0.7, bulbRadius * 0.8, 16]} />
+          <cylinderGeometry args={[bulbRadius * 0.6, bulbRadius * 0.7, bulbRadius * 0.8, 6]} />
         </mesh>
 
         {/* Light bulb - classic incandescent shape */}
         <mesh
           position={[0, 0, 0]}
           material={materials.bulb}
+          frustumCulled
         >
-          <sphereGeometry args={[bulbRadius, 16, 16]} />
+          <sphereGeometry args={[bulbRadius, 8, 8]} />
         </mesh>
 
         {/* Bulb base/threads */}
         <mesh
           position={[0, bulbRadius * 0.85, 0]}
           material={materials.socket}
+          frustumCulled
         >
-          <cylinderGeometry args={[bulbRadius * 0.5, bulbRadius * 0.55, bulbRadius * 0.4, 12]} />
+          <cylinderGeometry args={[bulbRadius * 0.5, bulbRadius * 0.55, bulbRadius * 0.4, 6]} />
         </mesh>
       </group>
 
@@ -201,14 +212,16 @@ export const ProceduralBankersLamp = ({
       <mesh
         position={[armLength + shadeLength / 2 + shadeRadius * 0.5, baseHeight + poleHeight - 0.02 * scale - shadeRadius * 1.5, 0]}
         material={materials.darkBrass}
+        frustumCulled
       >
-        <cylinderGeometry args={[0.003 * scale, 0.003 * scale, shadeRadius * 1.2, 8]} />
+        <cylinderGeometry args={[0.003 * scale, 0.003 * scale, shadeRadius * 1.2, 6]} />
       </mesh>
 
       {/* Chain bead/pull */}
       <mesh
         position={[armLength + shadeLength / 2 + shadeRadius * 0.5, baseHeight + poleHeight - 0.02 * scale - shadeRadius * 2.1, 0]}
         material={materials.darkBrass}
+        frustumCulled
       >
         <sphereGeometry args={[0.015 * scale, 8, 8]} />
       </mesh>

@@ -57,19 +57,19 @@ export const ProceduralBookStack = ({
       {/* Book 1 - Bottom, largest book lying flat */}
       <group position={[0, bookHeight / 2, 0]}>
         {/* Cover */}
-        <mesh material={materials.book1}>
+        <mesh material={materials.book1} frustumCulled>
           <boxGeometry args={[bookWidth, bookHeight, bookDepth]} />
         </mesh>
         {/* Page edges - right side */}
-        <mesh position={[bookWidth / 2 - 0.002, 0, 0]} material={materials.pages}>
+        <mesh position={[bookWidth / 2 - 0.002, 0, 0]} material={materials.pages} frustumCulled>
           <boxGeometry args={[0.005, bookHeight * 0.85, bookDepth]} />
         </mesh>
         {/* Page edges - front */}
-        <mesh position={[0, 0, bookDepth / 2 - 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, bookDepth / 2 - 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth, bookHeight * 0.85, 0.005]} />
         </mesh>
         {/* Page edges - back */}
-        <mesh position={[0, 0, -bookDepth / 2 + 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, -bookDepth / 2 + 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth, bookHeight * 0.85, 0.005]} />
         </mesh>
       </group>
@@ -77,19 +77,19 @@ export const ProceduralBookStack = ({
       {/* Book 2 - Second layer, medium size, slightly rotated */}
       <group position={[0.015, bookHeight * 1.5, 0.01]} rotation={[0, Math.PI / 10, 0]}>
         {/* Cover */}
-        <mesh material={materials.book2}>
+        <mesh material={materials.book2} frustumCulled>
           <boxGeometry args={[bookWidth * 0.88, bookHeight * 1.1, bookDepth * 0.92]} />
         </mesh>
         {/* Page edges - right */}
-        <mesh position={[bookWidth * 0.44 - 0.002, 0, 0]} material={materials.pages}>
+        <mesh position={[bookWidth * 0.44 - 0.002, 0, 0]} material={materials.pages} frustumCulled>
           <boxGeometry args={[0.005, bookHeight * 0.95, bookDepth * 0.92]} />
         </mesh>
         {/* Page edges - front */}
-        <mesh position={[0, 0, bookDepth * 0.46 - 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, bookDepth * 0.46 - 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.88, bookHeight * 0.95, 0.005]} />
         </mesh>
         {/* Page edges - back */}
-        <mesh position={[0, 0, -bookDepth * 0.46 + 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, -bookDepth * 0.46 + 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.88, bookHeight * 0.95, 0.005]} />
         </mesh>
       </group>
@@ -97,19 +97,19 @@ export const ProceduralBookStack = ({
       {/* Book 3 - Third layer, rotated opposite direction */}
       <group position={[-0.018, bookHeight * 2.65, -0.015]} rotation={[0, -Math.PI / 7, 0]}>
         {/* Cover */}
-        <mesh material={materials.book3}>
+        <mesh material={materials.book3} frustumCulled>
           <boxGeometry args={[bookWidth * 0.82, bookHeight * 0.95, bookDepth * 0.85]} />
         </mesh>
         {/* Page edges - right */}
-        <mesh position={[bookWidth * 0.41 - 0.002, 0, 0]} material={materials.pages}>
+        <mesh position={[bookWidth * 0.41 - 0.002, 0, 0]} material={materials.pages} frustumCulled>
           <boxGeometry args={[0.005, bookHeight * 0.82, bookDepth * 0.85]} />
         </mesh>
         {/* Page edges - front */}
-        <mesh position={[0, 0, bookDepth * 0.425 - 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, bookDepth * 0.425 - 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.82, bookHeight * 0.82, 0.005]} />
         </mesh>
         {/* Page edges - back */}
-        <mesh position={[0, 0, -bookDepth * 0.425 + 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, -bookDepth * 0.425 + 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.82, bookHeight * 0.82, 0.005]} />
         </mesh>
       </group>
@@ -117,19 +117,19 @@ export const ProceduralBookStack = ({
       {/* Book 4 - Top book, smallest, different angle */}
       <group position={[0.008, bookHeight * 3.6, 0.012]} rotation={[0, Math.PI / 5, 0]}>
         {/* Cover */}
-        <mesh material={materials.book4}>
+        <mesh material={materials.book4} frustumCulled>
           <boxGeometry args={[bookWidth * 0.75, bookHeight * 0.9, bookDepth * 0.78]} />
         </mesh>
         {/* Page edges - right */}
-        <mesh position={[bookWidth * 0.375 - 0.002, 0, 0]} material={materials.pages}>
+        <mesh position={[bookWidth * 0.375 - 0.002, 0, 0]} material={materials.pages} frustumCulled>
           <boxGeometry args={[0.005, bookHeight * 0.78, bookDepth * 0.78]} />
         </mesh>
         {/* Page edges - front */}
-        <mesh position={[0, 0, bookDepth * 0.39 - 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, bookDepth * 0.39 - 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.75, bookHeight * 0.78, 0.005]} />
         </mesh>
         {/* Page edges - back */}
-        <mesh position={[0, 0, -bookDepth * 0.39 + 0.002]} material={materials.pages}>
+        <mesh position={[0, 0, -bookDepth * 0.39 + 0.002]} material={materials.pages} frustumCulled>
           <boxGeometry args={[bookWidth * 0.75, bookHeight * 0.78, 0.005]} />
         </mesh>
       </group>

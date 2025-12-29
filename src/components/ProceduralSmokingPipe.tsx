@@ -49,19 +49,19 @@ export const ProceduralSmokingPipe = ({
   return (
     <group position={position} rotation={rotation}>
       {/* Bowl exterior - brown wood, tapered cylinder */}
-      <mesh position={[0, bowlHeight / 2, 0]} material={materials.brownWood} castShadow receiveShadow>
-        <cylinderGeometry args={[bowlRadius * 0.75, bowlRadius, bowlHeight, 20]} />
+      <mesh position={[0, bowlHeight / 2, 0]} material={materials.brownWood} frustumCulled>
+        <cylinderGeometry args={[bowlRadius * 0.75, bowlRadius, bowlHeight, 8]} />
       </mesh>
 
       {/* Bowl interior - black, visible from top (open pipe) */}
-      <mesh position={[0, bowlHeight - 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[bowlRadius * 0.68, 20]} />
+      <mesh position={[0, bowlHeight - 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]} frustumCulled>
+        <circleGeometry args={[bowlRadius * 0.68, 8]} />
         <meshStandardMaterial color="#0a0a0a" roughness={0.9} side={2} />
       </mesh>
 
       {/* Interior walls - black inside visible when looking down */}
-      <mesh position={[0, bowlHeight / 2, 0]}>
-        <cylinderGeometry args={[bowlRadius * 0.68, bowlRadius * 0.68, bowlHeight * 0.95, 20, 1, true]} />
+      <mesh position={[0, bowlHeight / 2, 0]} frustumCulled>
+        <cylinderGeometry args={[bowlRadius * 0.68, bowlRadius * 0.68, bowlHeight * 0.95, 8, 1, true]} />
         <meshStandardMaterial color="#0a0a0a" roughness={0.9} side={1} />
       </mesh>
 
@@ -70,9 +70,9 @@ export const ProceduralSmokingPipe = ({
         position={[stemLength * 0.18, bowlHeight * 0.15, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.blackHandle}
-        castShadow
+        frustumCulled
       >
-        <cylinderGeometry args={[stemRadius * 2.2, stemRadius * 1.8, stemLength * 0.25, 12]} />
+        <cylinderGeometry args={[stemRadius * 2.2, stemRadius * 1.8, stemLength * 0.25, 6]} />
       </mesh>
 
       {/* Stem segment 1 - starts horizontal, slight upward curve */}
@@ -80,10 +80,9 @@ export const ProceduralSmokingPipe = ({
         position={[stemLength * 0.4, bowlHeight * 0.16, 0]}
         rotation={[0, 0, Math.PI / 2 - Math.PI / 24]}
         material={materials.blackHandle}
-        castShadow
-        receiveShadow
+        frustumCulled
       >
-        <cylinderGeometry args={[stemRadius, stemRadius, stemLength * 0.35, 12]} />
+        <cylinderGeometry args={[stemRadius, stemRadius, stemLength * 0.35, 6]} />
       </mesh>
 
       {/* Stem segment 2 - continues curve upward */}
@@ -91,10 +90,9 @@ export const ProceduralSmokingPipe = ({
         position={[stemLength * 0.68, bowlHeight * 0.22, 0]}
         rotation={[0, 0, Math.PI / 2 - Math.PI / 12]}
         material={materials.blackHandle}
-        castShadow
-        receiveShadow
+        frustumCulled
       >
-        <cylinderGeometry args={[stemRadius, stemRadius, stemLength * 0.35, 12]} />
+        <cylinderGeometry args={[stemRadius, stemRadius, stemLength * 0.35, 6]} />
       </mesh>
 
       {/* Mouthpiece - bit end (black), angled upward */}
@@ -102,9 +100,9 @@ export const ProceduralSmokingPipe = ({
         position={[stemLength * 0.92, bowlHeight * 0.32, 0]}
         rotation={[0, 0, Math.PI / 2 - Math.PI / 10]}
         material={materials.blackHandle}
-        castShadow
+        frustumCulled
       >
-        <cylinderGeometry args={[stemRadius * 1.2, stemRadius, stemLength * 0.08, 10]} />
+        <cylinderGeometry args={[stemRadius * 1.2, stemRadius, stemLength * 0.08, 6]} />
       </mesh>
 
       {/* Brass band - decorative ring on shank */}
@@ -112,8 +110,9 @@ export const ProceduralSmokingPipe = ({
         position={[stemLength * 0.12, bowlHeight * 0.15, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.brass}
+        frustumCulled
       >
-        <cylinderGeometry args={[stemRadius * 2.0, stemRadius * 2.0, 0.012 * scale, 12]} />
+        <cylinderGeometry args={[stemRadius * 2.0, stemRadius * 2.0, 0.012 * scale, 6]} />
       </mesh>
     </group>
   );
