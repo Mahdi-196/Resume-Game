@@ -171,25 +171,24 @@ export const DetectiveOfficeScene = ({
         angle={0.6}
         penumbra={0.4}
         color="#fff5e6"
-        castShadow
       />
 
       {/* Case file on desk - manila folder with realistic details */}
       <group position={[-8.3, 1.55, -4.3]} rotation={[-Math.PI / 2, 0, 1.524]} scale={0.9}>
         {/* Bottom folder layer */}
-        <mesh position={[0, 0, 0]} castShadow receiveShadow>
+        <mesh position={[0, 0, 0]}>
           <boxGeometry args={[0.7, 0.9, 0.015]} />
           <meshStandardMaterial color="#d4a574" roughness={0.9} />
         </mesh>
 
         {/* Folder thickness - papers inside */}
-        <mesh position={[0, 0, 0.025]} castShadow receiveShadow>
+        <mesh position={[0, 0, 0.025]}>
           <boxGeometry args={[0.68, 0.88, 0.04]} />
           <meshStandardMaterial color="#f5f5dc" roughness={0.85} />
         </mesh>
 
         {/* Top folder layer - slightly smaller */}
-        <mesh position={[0.02, 0.05, 0.048]} castShadow receiveShadow>
+        <mesh position={[0.02, 0.05, 0.048]}>
           <boxGeometry args={[0.68, 0.85, 0.012]} />
           <meshStandardMaterial color="#d4a574" roughness={0.9} />
         </mesh>

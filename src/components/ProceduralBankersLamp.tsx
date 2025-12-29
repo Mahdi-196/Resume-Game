@@ -76,17 +76,17 @@ export const ProceduralBankersLamp = ({
     <group position={position} rotation={rotation} onClick={onClick}>
       {/* Weighted base - stepped brass base */}
       {/* Bottom tier */}
-      <mesh position={[0, baseHeight * 0.15, 0]} material={materials.brass} castShadow receiveShadow>
+      <mesh position={[0, baseHeight * 0.15, 0]} material={materials.brass}>
         <cylinderGeometry args={[baseRadius * 1.2, baseRadius * 1.25, baseHeight * 0.3, 24]} />
       </mesh>
 
       {/* Middle tier */}
-      <mesh position={[0, baseHeight * 0.45, 0]} material={materials.brass} castShadow receiveShadow>
+      <mesh position={[0, baseHeight * 0.45, 0]} material={materials.brass}>
         <cylinderGeometry args={[baseRadius * 0.9, baseRadius * 1.0, baseHeight * 0.4, 24]} />
       </mesh>
 
       {/* Top tier */}
-      <mesh position={[0, baseHeight * 0.8, 0]} material={materials.brass} castShadow receiveShadow>
+      <mesh position={[0, baseHeight * 0.8, 0]} material={materials.brass}>
         <cylinderGeometry args={[baseRadius * 0.7, baseRadius * 0.8, baseHeight * 0.3, 24]} />
       </mesh>
 
@@ -107,7 +107,6 @@ export const ProceduralBankersLamp = ({
       <mesh
         position={[0, baseHeight + poleHeight / 2, 0]}
         material={materials.brass}
-        castShadow
       >
         <cylinderGeometry args={[poleRadius, poleRadius * 1.2, poleHeight, 12]} />
       </mesh>
@@ -125,7 +124,6 @@ export const ProceduralBankersLamp = ({
         position={[armLength / 2, baseHeight + poleHeight - 0.02 * scale, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.brass}
-        castShadow
       >
         <cylinderGeometry args={[armRadius, armRadius, armLength, 12]} />
       </mesh>
@@ -144,8 +142,6 @@ export const ProceduralBankersLamp = ({
         <mesh
           rotation={[0, 0, Math.PI / 2]}
           material={materials.greenGlass}
-          castShadow
-          receiveShadow
         >
           <capsuleGeometry args={[shadeRadius, shadeLength, 16, 24]} />
         </mesh>
@@ -172,7 +168,6 @@ export const ProceduralBankersLamp = ({
         <mesh
           position={[0, shadeRadius, 0]}
           material={materials.brass}
-          castShadow
         >
           <cylinderGeometry args={[0.025 * scale, 0.035 * scale, 0.04 * scale, 16]} />
         </mesh>
@@ -181,7 +176,6 @@ export const ProceduralBankersLamp = ({
         <mesh
           position={[0, shadeRadius * 0.4, 0]}
           material={materials.socket}
-          castShadow
         >
           <cylinderGeometry args={[bulbRadius * 0.6, bulbRadius * 0.7, bulbRadius * 0.8, 16]} />
         </mesh>
@@ -190,7 +184,6 @@ export const ProceduralBankersLamp = ({
         <mesh
           position={[0, 0, 0]}
           material={materials.bulb}
-          castShadow
         >
           <sphereGeometry args={[bulbRadius, 16, 16]} />
         </mesh>
@@ -208,7 +201,6 @@ export const ProceduralBankersLamp = ({
       <mesh
         position={[armLength + shadeLength / 2 + shadeRadius * 0.5, baseHeight + poleHeight - 0.02 * scale - shadeRadius * 1.5, 0]}
         material={materials.darkBrass}
-        castShadow
       >
         <cylinderGeometry args={[0.003 * scale, 0.003 * scale, shadeRadius * 1.2, 8]} />
       </mesh>
