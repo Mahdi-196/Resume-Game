@@ -435,7 +435,6 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       height: '100%'
     }}>
       <Canvas
-        shadows
         camera={{ position: [-2.5, 2.5, 4], fov: isMobile ? 85 : 75 }}
         gl={{
           antialias: true,

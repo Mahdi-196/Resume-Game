@@ -101,11 +101,11 @@ export const FilingCabinet = ({
 
               {/* Two brass handles side by side */}
               <mesh position={[-0.3, yPos, 0.32]}>
-                <cylinderGeometry args={[0.02, 0.02, 0.08]} />
+                <cylinderGeometry args={[0.02, 0.02, 0.08, 6]} />
                 <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
               </mesh>
               <mesh position={[0.3, yPos, 0.32]}>
-                <cylinderGeometry args={[0.02, 0.02, 0.08]} />
+                <cylinderGeometry args={[0.02, 0.02, 0.08, 6]} />
                 <meshStandardMaterial color="#b8860b" roughness={0.2} metalness={0.9} />
               </mesh>
 
