@@ -16,17 +16,14 @@ export const ProceduralMagnifyingGlass = ({
 }) => {
   // Shared materials for performance
   const materials = useMemo(() => ({
-    glass: new THREE.MeshPhysicalMaterial({
+    glass: new THREE.MeshStandardMaterial({
       color: "#e0f0ff",
       transparent: true,
       opacity: 0.3,
       roughness: 0.05,
-      metalness: 0.1,
-      transmission: 0.9,      // Glass-like transparency
-      thickness: 0.5,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      envMapIntensity: 1.5
+      metalness: 0.2,
+      emissive: "#e0f0ff",
+      emissiveIntensity: 0.05
     }),
     brass: new THREE.MeshStandardMaterial({
       color: "#b8860b",      // Polished brass rim

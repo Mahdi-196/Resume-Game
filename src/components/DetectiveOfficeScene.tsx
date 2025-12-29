@@ -115,9 +115,9 @@ export const DetectiveOfficeScene = ({
           <spotLight
             position={[-9.62, 2.31, -2.17]}
             target-position={[-8.5, 1.55, -4.0]}
-            intensity={18}
+            intensity={8}
             angle={1.6}
-            penumbra={0.6}
+            penumbra={0.2}
             color="#ffdb8c"
             distance={3}
             decay={1.8}
@@ -159,9 +159,9 @@ export const DetectiveOfficeScene = ({
       <spotLight
         position={[-8, 4, -5]}
         target-position={[-9.6, 2.2, -6.0]}
-        intensity={8}
+        intensity={4}
         angle={0.6}
-        penumbra={0.4}
+        penumbra={0.2}
         color="#fff5e6"
       />
 
