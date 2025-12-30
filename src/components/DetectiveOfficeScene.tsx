@@ -403,12 +403,12 @@ export const DetectiveOfficeScene = ({
       )}
 
       {/* Detective character - player controlled (hidden in first-person) */}
-      {/* Spawn position moved back for better starting view */}
+      {/* Spawn position far back near front wall for full room view */}
       {!showIntroDetective && (
         <group visible={false}>
           <DetectiveCharacter
             ref={playerCharacterRef}
-            position={[0, 0, 7]}
+            position={[0, 0, 9]}
             onInteraction={onInteraction}
             scale={0.8}
             autoRotate={false}
