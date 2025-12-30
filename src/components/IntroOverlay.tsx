@@ -10,47 +10,39 @@ interface IntroOverlayProps {
 }
 
 export const IntroOverlay = ({ onComplete, isManualTrigger = false }: IntroOverlayProps) => {
-  const [phase, setPhase] = useState<'hidden' | 'fadeIn' | 'show' | 'fadeOut'>('hidden');
+  const [phase, setPhase] = useState<'hidden' | 'fadeIn' | 'show' | 'fadeOut'>('show');
   const [lineExpanded, setLineExpanded] = useState(false);
   const [showText, setShowText] = useState(false);
 
   useEffect(() => {
     if (isManualTrigger) {
       // Manual trigger - show immediately and stay until skip
-      setPhase('fadeIn');
-      setTimeout(() => setLineExpanded(true), 300);
-      setTimeout(() => {
-        setShowText(true);
-        setPhase('show');
-      }, 600);
+      setPhase('show');
+      setLineExpanded(true);
+      setShowText(true);
       // No auto-close for manual trigger
       return;
     }
 
-    // Auto trigger - show after 5 seconds and auto-close after 3 seconds
-    const startTimer = setTimeout(() => {
-      setPhase('fadeIn');
-    }, 5000);
-
+    // Auto trigger - show immediately with animations, then auto-close after 4 seconds
+    // Start animations immediately
     const lineTimer = setTimeout(() => {
       setLineExpanded(true);
-    }, 5300);
+    }, 100);
 
     const textTimer = setTimeout(() => {
       setShowText(true);
-      setPhase('show');
-    }, 5600);
+    }, 300);
 
     const fadeOutTimer = setTimeout(() => {
       setPhase('fadeOut');
-    }, 8600);
+    }, 4000);
 
     const completeTimer = setTimeout(() => {
       onComplete();
-    }, 9500);
+    }, 5000);
 
     return () => {
-      clearTimeout(startTimer);
       clearTimeout(lineTimer);
       clearTimeout(textTimer);
       clearTimeout(fadeOutTimer);

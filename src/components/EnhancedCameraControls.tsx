@@ -39,7 +39,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       down: false
     });
     
-    const yaw = useRef(0);
+    const yaw = useRef(0); // Start facing north, will flip to south after intro
     const pitch = useRef(0);
     const isMouseLocked = useRef(false);
     const lookTarget = useRef(new THREE.Vector3(0, 0, -1));

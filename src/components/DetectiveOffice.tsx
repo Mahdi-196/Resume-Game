@@ -27,6 +27,7 @@ interface DetectiveOfficeProps {
   onCaseFileClick?: (caseFile: 'profile' | 'portfolio' | null) => void;
   selectedCaseFile?: 'profile' | 'portfolio' | null;
   overlayVisible?: boolean;
+  startCameraAnimation?: boolean;
 }
 
 export interface DetectiveOfficeRef {
@@ -34,7 +35,7 @@ export interface DetectiveOfficeRef {
 }
 
 // Main Detective Office Component
-export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficeProps>(({ onInteraction, onCaseFileClick, selectedCaseFile, overlayVisible = false }, ref) => {
+export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficeProps>(({ onInteraction, onCaseFileClick, selectedCaseFile, overlayVisible = false, startCameraAnimation = false }, ref) => {
   const [lampOn, setLampOn] = useState(true);
   const [showBoardContent, setShowBoardContent] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -286,8 +287,8 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
     console.log('Starting intro animation');
 
-    // Detective at (0, 0, -6.5) - Camera positioned behind and to side
-    const thirdPersonPos = new THREE.Vector3(-2.5, 2.5, -2.5);
+    // Detective at (0, 0, -6.5) - Camera in center of room, further away and higher
+    const thirdPersonPos = new THREE.Vector3(0, 6, 2);
     const thirdPersonTarget = new THREE.Vector3(0, 2.1, -6.5);
 
     // Set initial third person view
@@ -307,9 +308,9 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
     console.log('Zooming to first person...');
 
-    // First person position - spawn at character location facing the board (180°)
+    // First person position - spawn at character location facing the window initially
     const firstPersonPos = new THREE.Vector3(0, 2.3, -6.5);
-    const firstPersonTarget = new THREE.Vector3(0, 2.3, 3.5);
+    const firstPersonTarget = new THREE.Vector3(0, 2.3, -16.5); // Facing window (north)
 
     // Smooth zoom to first person
     await cameraControlsRef.current.setLookAt(
@@ -318,21 +319,35 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       true
     );
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     // Hide detective mesh
     setShowIntroDetective(false);
+
+    // Flip camera 180° to face the board (south)
+    const flippedTarget = new THREE.Vector3(0, 2.3, 3.5); // Facing board
+    await cameraControlsRef.current.setLookAt(
+      firstPersonPos.x, firstPersonPos.y, firstPersonPos.z,
+      flippedTarget.x, flippedTarget.y, flippedTarget.z,
+      true
+    );
+
     setIntroComplete(true);
     setIsTransitioning(false);
 
-    console.log('Intro animation complete');
+    console.log('Intro animation complete - camera flipped to face board');
   };
 
-  // Play intro animation on mount
+  // Play intro animation only after intro overlay completes
   useEffect(() => {
+    if (!startCameraAnimation) {
+      console.log('Waiting for intro overlay to complete...');
+      return;
+    }
+
     const checkAndStart = () => {
       if (cameraControlsRef.current && !hasPlayedIntro.current) {
-        console.log('Camera controls ready, starting intro');
+        console.log('Intro overlay complete, starting camera animation');
         playIntroAnimation();
         return true;
       }
@@ -356,12 +371,13 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
       return () => clearInterval(interval);
     }
-  }, []);
+  }, [startCameraAnimation]);
 
   useEffect(() => {
     const skipIntro = () => {
-      if (!introComplete && cameraControlsRef.current) {
+      if (!introComplete && cameraControlsRef.current && startCameraAnimation) {
         console.log('Skipping intro');
+        // Skip directly to final position facing the board
         cameraControlsRef.current.setLookAt(0, 2.3, -6.5, 0, 2.3, 3.5, false);
         setShowIntroDetective(false);
         setIntroComplete(true);
@@ -429,7 +445,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
       window.removeEventListener('keydown', handleKeyPress);
       window.removeEventListener('click', handleClick);
     };
-  }, [showBoardContent, isTransitioning, originalCameraState, isDetectiveMode, introComplete]);
+  }, [showBoardContent, isTransitioning, originalCameraState, isDetectiveMode, introComplete, startCameraAnimation]);
 
   return (
     <div className="w-full h-full bg-noir-shadow" style={{

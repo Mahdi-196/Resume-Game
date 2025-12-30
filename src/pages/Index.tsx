@@ -43,8 +43,12 @@ const Index = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  const [introOverlayComplete, setIntroOverlayComplete] = useState(false);
+
   const handleIntroComplete = () => {
     setShowIntro(false);
+    // Signal that intro overlay is done, camera animation can start
+    setIntroOverlayComplete(true);
   };
 
   const handleInteraction = (type: string, data?: any) => {
@@ -84,6 +88,7 @@ const Index = () => {
           onCaseFileClick={handleCaseFileClick}
           selectedCaseFile={selectedCaseFile}
           overlayVisible={selectedCaseFile !== null}
+          startCameraAnimation={introOverlayComplete}
         />
       </DetectiveErrorBoundary>
       <ResumeOverlay content={activeOverlay} onClose={handleCloseOverlay} />
