@@ -381,18 +381,19 @@ export const DetectiveOfficeScene = ({
       )}
 
       {/* Detective character visible during intro animation */}
+      {/* Positioned near back wall window to match spawn location */}
       {showIntroDetective && (
         <group>
           <DetectiveCharacter
-            position={[0, 0, 0]}
+            position={[0, 0, -8]}
             onInteraction={onInteraction}
             scale={1}
             autoRotate={false}
           />
-          {/* Spotlight on detective during intro */}
+          {/* Spotlight on detective during intro - adjusted for new position */}
           <spotLight
-            position={[3, 5, 5]}
-            target-position={[0, 2, 0]}
+            position={[3, 5, -5]}
+            target-position={[0, 2, -8]}
             intensity={3}
             angle={0.6}
             penumbra={0.5}
