@@ -381,19 +381,19 @@ export const DetectiveOfficeScene = ({
       )}
 
       {/* Detective character visible during intro animation */}
-      {/* Moved forward from back wall */}
+      {/* 20% larger and moved back for better visibility */}
       {showIntroDetective && (
         <group>
           <DetectiveCharacter
-            position={[0, 0, -2.5]}
+            position={[0, 0, -6.5]}
             onInteraction={onInteraction}
-            scale={1}
+            scale={1.2}
             autoRotate={false}
           />
           {/* Spotlight on detective during intro - adjusted for new position */}
           <spotLight
-            position={[3, 5, 0.5]}
-            target-position={[0, 2, -2.5]}
+            position={[3, 5, -3.5]}
+            target-position={[0, 2, -6.5]}
             intensity={3}
             angle={0.6}
             penumbra={0.5}
@@ -404,14 +404,14 @@ export const DetectiveOfficeScene = ({
       )}
 
       {/* Detective character - player controlled (hidden in first-person) */}
-      {/* Moved forward from back wall */}
+      {/* 20% larger and moved back to match intro position */}
       {!showIntroDetective && (
         <group visible={false}>
           <DetectiveCharacter
             ref={playerCharacterRef}
-            position={[0, 0, -2.5]}
+            position={[0, 0, -6.5]}
             onInteraction={onInteraction}
-            scale={0.8}
+            scale={0.96}
             autoRotate={false}
             isPlayerControlled={true}
           />
