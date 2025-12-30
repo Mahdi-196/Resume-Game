@@ -110,9 +110,9 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       if (isTransitioning || showBoardContent) return;
 
       // Set initial camera position and rotation only once on mount
-      // Spawn near back wall window, facing forward into the room
+      // Moved forward from back wall, facing into the room
       if (!hasInitialized.current) {
-        camera.position.set(0, 2.3, -8.5);
+        camera.position.set(0, 2.3, -3);
         camera.rotation.set(0, Math.PI, 0);
         hasInitialized.current = true;
       }
