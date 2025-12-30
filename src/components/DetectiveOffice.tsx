@@ -54,7 +54,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
   const cameraControlsRef = useRef<CameraControlsRef>(null);
   const playerCharacterRef = useRef<THREE.Group>(null);
-  const detectivePosition = new THREE.Vector3(0, 2.645, 0); // Detective eye height position (15% taller)
+  const detectivePosition = new THREE.Vector3(0, 2.645, -6.5); // Detective eye height position at character spawn
 
   // Mobile controls state
   const [isMobile, setIsMobile] = useState(isMobileDevice());
@@ -286,9 +286,9 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
     console.log('Starting intro animation');
 
-    // Detective at (0, 0, 0) - Camera positioned behind and to side
-    const thirdPersonPos = new THREE.Vector3(-2.5, 2.5, 4);
-    const thirdPersonTarget = new THREE.Vector3(0, 2.1, 0);
+    // Detective at (0, 0, -6.5) - Camera positioned behind and to side
+    const thirdPersonPos = new THREE.Vector3(-2.5, 2.5, -2.5);
+    const thirdPersonTarget = new THREE.Vector3(0, 2.1, -6.5);
 
     // Set initial third person view
     await cameraControlsRef.current.setLookAt(
@@ -307,9 +307,9 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
     console.log('Zooming to first person...');
 
-    // First person position
-    const firstPersonPos = new THREE.Vector3(0, 2.3, 0);
-    const firstPersonTarget = new THREE.Vector3(0, 2.3, 5);
+    // First person position - spawn at character location facing the board
+    const firstPersonPos = new THREE.Vector3(0, 2.3, -6.5);
+    const firstPersonTarget = new THREE.Vector3(0, 2.3, -1.5);
 
     // Smooth zoom to first person
     await cameraControlsRef.current.setLookAt(
@@ -362,7 +362,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     const skipIntro = () => {
       if (!introComplete && cameraControlsRef.current) {
         console.log('Skipping intro');
-        cameraControlsRef.current.setLookAt(0, 2.3, 0, 0, 2.3, 5, false);
+        cameraControlsRef.current.setLookAt(0, 2.3, -6.5, 0, 2.3, -1.5, false);
         setShowIntroDetective(false);
         setIntroComplete(true);
         setFadeOut(true);
