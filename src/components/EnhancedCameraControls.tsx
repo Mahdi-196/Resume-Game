@@ -110,8 +110,9 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       if (isTransitioning || showBoardContent) return;
 
       // Set initial camera position and rotation only once on mount
+      // Moved back significantly for better starting view
       if (!hasInitialized.current) {
-        camera.position.set(0, 2.3, 5);
+        camera.position.set(0, 2.3, 8.5);
         camera.rotation.set(0, 0, 0);
         hasInitialized.current = true;
       }
