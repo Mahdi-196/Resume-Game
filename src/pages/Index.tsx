@@ -12,13 +12,10 @@ const Index = () => {
   const [isManualTrigger, setIsManualTrigger] = useState(false);
   const keyPressTimesRef = useRef<number[]>([]);
 
-  // Check if this is the first visit
+  // Show intro on every page load
   useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisitedResume');
-    if (!hasVisited) {
-      setShowIntro(true);
-      setIsManualTrigger(false);
-    }
+    setShowIntro(true);
+    setIsManualTrigger(false);
   }, []);
 
   // Listen for triple '9' press to trigger intro
@@ -48,7 +45,6 @@ const Index = () => {
 
   const handleIntroComplete = () => {
     setShowIntro(false);
-    localStorage.setItem('hasVisitedResume', 'true');
   };
 
   const handleInteraction = (type: string, data?: any) => {
