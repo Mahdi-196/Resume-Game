@@ -307,9 +307,9 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
     console.log('Zooming to first person...');
 
-    // First person position - spawn at character location facing the board
+    // First person position - spawn at character location facing the board (180°)
     const firstPersonPos = new THREE.Vector3(0, 2.3, -6.5);
-    const firstPersonTarget = new THREE.Vector3(0, 2.3, -1.5);
+    const firstPersonTarget = new THREE.Vector3(0, 2.3, 3.5);
 
     // Smooth zoom to first person
     await cameraControlsRef.current.setLookAt(
@@ -362,7 +362,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     const skipIntro = () => {
       if (!introComplete && cameraControlsRef.current) {
         console.log('Skipping intro');
-        cameraControlsRef.current.setLookAt(0, 2.3, -6.5, 0, 2.3, -1.5, false);
+        cameraControlsRef.current.setLookAt(0, 2.3, -6.5, 0, 2.3, 3.5, false);
         setShowIntroDetective(false);
         setIntroComplete(true);
         setFadeOut(true);
