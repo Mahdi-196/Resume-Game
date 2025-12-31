@@ -168,4 +168,4 @@ tramp
 .vercel
 .turbo
 .next/
-.docusaurus/
+.docusaurus/*.zip
