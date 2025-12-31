@@ -42,7 +42,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       <Text
         position={[0, 1.9, 0.04]}
         fontSize={isMobile ? 0.18 : 0.16}
-        color={COLORS.copper}
+        color="#490000"
         anchorX="center"
         anchorY="middle"
         letterSpacing={0.03}
@@ -79,7 +79,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       <Text
         position={[0, -0.7, 0.04]}
         fontSize={isMobile ? 0.18 : 0.15}
-        color={COLORS.copper}
+        color="#490000"
         anchorX="center"
         anchorY="middle"
         fontWeight="bold"
@@ -129,6 +129,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
           color="#5A1F01"
           anchorX="center"
           anchorY="middle"
+          fontWeight="bold"
           material-depthWrite={false}
           material-toneMapped={false}
           renderOrder={1}
@@ -176,6 +177,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
           color="#5A1F01"
           anchorX="center"
           anchorY="middle"
+          fontWeight="bold"
           material-depthWrite={false}
           material-toneMapped={false}
           renderOrder={1}
@@ -188,7 +190,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       <Text
         position={[0, -2.1, 0.04]}
         fontSize={isMobile ? 0.18 : 0.15}
-        color={COLORS.copper}
+        color="#490000"
         anchorX="center"
         anchorY="middle"
         fontWeight="bold"
