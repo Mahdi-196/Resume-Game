@@ -15,7 +15,7 @@ interface EnhancedCameraControlsProps {
   touchLookRef?: React.MutableRefObject<{ deltaX: number; deltaY: number }>;
 }
 
-interface CameraControlsRef {
+export interface CameraControlsRef {
   camera: THREE.Camera;
   setLookAt: (
     posX: number, posY: number, posZ: number,
@@ -38,7 +38,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       right: false
     });
     
-    const yaw = useRef(0); // Start facing north, will flip to south after intro
+    const yaw = useRef(Math.PI); // Start facing south (toward board)
     const pitch = useRef(0);
     const isMouseLocked = useRef(false);
     const lookTarget = useRef(new THREE.Vector3(0, 0, -1));
@@ -63,6 +63,14 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       setYawPitch: (newYaw: number, newPitch: number) => {
         yaw.current = newYaw;
         pitch.current = newPitch;
+        // Immediately update camera look direction
+        const direction = new THREE.Vector3(
+          -Math.sin(yaw.current) * Math.cos(pitch.current),
+          Math.sin(pitch.current),
+          -Math.cos(yaw.current) * Math.cos(pitch.current)
+        );
+        lookTarget.current.copy(camera.position).add(direction);
+        camera.lookAt(lookTarget.current);
       },
       camera,
       setLookAt: async (posX: number, posY: number, posZ: number, targetX: number, targetY: number, targetZ: number, enableTransition?: boolean) => {
@@ -116,7 +124,7 @@ export const EnhancedCameraControls = forwardRef<CameraControlsRef, EnhancedCame
       // Spawn exactly at character position, 180° rotation facing the board
       if (!hasInitialized.current) {
         camera.position.set(0, 2.3, -6.5);
-        camera.rotation.set(0, Math.PI, 0);
+        // Don't set camera.rotation here - let yaw/pitch control it
         hasInitialized.current = true;
       }
       

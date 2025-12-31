@@ -88,7 +88,7 @@ export const IntroOverlay = ({ onComplete, isManualTrigger = false }: IntroOverl
 
           {/* Instructions */}
           <div className="text-detective-paper/90 text-2xl font-light max-w-2xl mx-auto">
-            <p>{isMobileDevice() ? 'Try clicking around' : 'WASD to move • Click R for board'}</p>
+            <p>{isMobileDevice() ? 'Click to zoom' : 'WASD • ESC • Click to zoom • R for board'}</p>
           </div>
         </div>
       </div>

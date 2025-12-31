@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
-import { EnhancedCameraControls } from './EnhancedCameraControls';
+import { EnhancedCameraControls, type CameraControlsRef } from './EnhancedCameraControls';
 import { DetectiveOfficeScene } from './DetectiveOfficeScene';
 import { Lighting } from './Lighting';
 import { VirtualJoystick } from './mobile/VirtualJoystick';
@@ -10,16 +10,6 @@ import { LandscapeLock } from './mobile/LandscapeLock';
 import { isMobileDevice } from '@/utils/detectMobile';
 import { NoirAudioManager } from './NoirAudioManager';
 
-interface CameraControlsRef {
-  camera: THREE.Camera;
-  setLookAt: (
-    posX: number, posY: number, posZ: number,
-    targetX: number, targetY: number, targetZ: number,
-    enableTransition?: boolean
-  ) => Promise<void>;
-  getTarget: (target: THREE.Vector3) => void;
-  lock: () => void;
-}
 
 interface DetectiveOfficeProps {
   onInteraction: (type: string, data?: unknown) => void;
@@ -39,7 +29,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
   const [showBoardContent, setShowBoardContent] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const isDetectiveMode = true; // Always in detective mode - flying mode removed
-  const [isViewingMap, setIsViewingMap] = useState(false);
+  const [_isViewingMap, setIsViewingMap] = useState(false);
   const [wasPointerLocked, setWasPointerLocked] = useState(false);
   const [originalCameraState, setOriginalCameraState] = useState<{
     position: THREE.Vector3;
@@ -54,7 +44,6 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
 
   const cameraControlsRef = useRef<CameraControlsRef>(null);
   const playerCharacterRef = useRef<THREE.Group>(null);
-  const detectivePosition = new THREE.Vector3(0, 2.645, -6.5); // Detective eye height position at character spawn
   const pointerLockRestoreTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Mobile controls state
@@ -124,7 +113,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     try {
       // Smooth zoom to board - closer on mobile for better readability
       const boardPosition = isMobile
-        ? new THREE.Vector3(0, 4.5, 1.5) // Very close for mobile devices for clear text
+        ? new THREE.Vector3(0, 4.5, 5.8) // Extremely close to board for mobile - almost touching
         : new THREE.Vector3(0, 4.5, 4.5); // Further back for desktop
       const boardTarget = new THREE.Vector3(0, 4.5, 9.9); // Board center
 

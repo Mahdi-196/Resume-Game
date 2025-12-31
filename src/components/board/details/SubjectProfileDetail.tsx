@@ -25,11 +25,12 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       </mesh>
       <Text
         position={[0, 2.5, 0.04]}
-        fontSize={isMobile ? 0.25 : 0.32}
+        fontSize={isMobile ? 0.35 : 0.32}
         color={COLORS.gold}
         anchorX="center"
         anchorY="middle"
-        letterSpacing={0.03}
+        letterSpacing={0.05}
+        fontWeight="bold"
       >
         SUBJECT PROFILE
       </Text>
@@ -37,22 +38,23 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* About Section */}
       <Text
         position={[0, 1.8, 0.04]}
-        fontSize={isMobile ? 0.13 : 0.15}
+        fontSize={isMobile ? 0.18 : 0.15}
         color={COLORS.copper}
         anchorX="center"
         anchorY="middle"
-        letterSpacing={0.02}
+        letterSpacing={0.03}
+        fontWeight="bold"
       >
         ABOUT ME
       </Text>
       <Text
         position={[0, 1.45, 0.04]}
-        fontSize={isMobile ? 0.09 : 0.11}
+        fontSize={isMobile ? 0.13 : 0.11}
         color={COLORS.darkBrown}
         anchorX="center"
         anchorY="top"
         maxWidth={isMobile ? 9 : 10}
-        lineHeight={1.5}
+        lineHeight={1.6}
         textAlign="center"
       >
         I'm a problem solver who happens to love infrastructure. With my AWS Solutions Architect certification and practical experience managing live production systems, I've found my sweet spot at the intersection of development and operations.
@@ -67,16 +69,17 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* Location */}
       <Text
         position={[-5, -0.2, 0.04]}
-        fontSize={isMobile ? 0.12 : 0.15}
+        fontSize={isMobile ? 0.18 : 0.15}
         color={COLORS.copper}
         anchorX="left"
         anchorY="middle"
+        fontWeight="bold"
       >
         LOCATION
       </Text>
       <Text
         position={[-5, -0.45, 0.04]}
-        fontSize={isMobile ? 0.09 : 0.11}
+        fontSize={isMobile ? 0.13 : 0.11}
         color={COLORS.darkBrown}
         anchorX="left"
         anchorY="middle"
@@ -85,7 +88,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       </Text>
       <Text
         position={[-5, -0.65, 0.04]}
-        fontSize={isMobile ? 0.09 : 0.11}
+        fontSize={isMobile ? 0.13 : 0.11}
         color={COLORS.darkBrown}
         anchorX="left"
         anchorY="middle"
@@ -96,10 +99,11 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* Certifications */}
       <Text
         position={[5, -0.2, 0.04]}
-        fontSize={isMobile ? 0.12 : 0.15}
+        fontSize={isMobile ? 0.18 : 0.15}
         color={COLORS.copper}
         anchorX="right"
         anchorY="middle"
+        fontWeight="bold"
       >
         CERTIFICATIONS
       </Text>
@@ -107,7 +111,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* AWS Certification */}
       <Text
         position={[5, -0.5, 0.04]}
-        fontSize={isMobile ? 0.09 : 0.11}
+        fontSize={isMobile ? 0.13 : 0.11}
         color={COLORS.darkBrown}
         anchorX="right"
         anchorY="middle"
@@ -116,7 +120,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       </Text>
       <Text
         position={[5, -0.7, 0.04]}
-        fontSize={isMobile ? 0.08 : 0.11}
+        fontSize={isMobile ? 0.11 : 0.11}
         color={COLORS.darkBrown}
         anchorX="right"
         anchorY="middle"
@@ -133,7 +137,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
         onPointerLeave={() => (document.body.style.cursor = 'auto')}
       >
         <Text
-          fontSize={isMobile ? 0.08 : 0.1}
+          fontSize={isMobile ? 0.11 : 0.1}
           color="#742B03"
           anchorX="right"
           anchorY="middle"
@@ -145,7 +149,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* ASU Software Engineering */}
       <Text
         position={[5, -1.2, 0.04]}
-        fontSize={isMobile ? 0.09 : 0.11}
+        fontSize={isMobile ? 0.13 : 0.11}
         color={COLORS.darkBrown}
         anchorX="right"
         anchorY="middle"
@@ -154,7 +158,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       </Text>
       <Text
         position={[5, -1.4, 0.04]}
-        fontSize={isMobile ? 0.08 : 0.11}
+        fontSize={isMobile ? 0.11 : 0.11}
         color={COLORS.darkBrown}
         anchorX="right"
         anchorY="middle"
@@ -163,7 +167,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       </Text>
       <Text
         position={[5, -1.6, 0.04]}
-        fontSize={isMobile ? 0.08 : 0.11}
+        fontSize={isMobile ? 0.11 : 0.11}
         color={COLORS.darkBrown}
         anchorX="right"
         anchorY="middle"
@@ -180,7 +184,7 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
         onPointerLeave={() => (document.body.style.cursor = 'auto')}
       >
         <Text
-          fontSize={isMobile ? 0.08 : 0.1}
+          fontSize={isMobile ? 0.11 : 0.1}
           color="#742B03"
           anchorX="right"
           anchorY="middle"
@@ -192,10 +196,11 @@ export const SubjectProfileDetail = ({ onBack }: DetailViewProps) => {
       {/* Contact Information */}
       <Text
         position={[0, -2.3, 0.04]}
-        fontSize={isMobile ? 0.12 : 0.15}
+        fontSize={isMobile ? 0.18 : 0.15}
         color={COLORS.copper}
         anchorX="center"
         anchorY="middle"
+        fontWeight="bold"
       >
         CONTACT INFORMATION
       </Text>
