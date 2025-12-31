@@ -100,7 +100,7 @@ export const ResiliNetProject = ({ zoomedPaper, onPaperZoom }: ResiliNetProjectP
       <Line points={[[-4.2, 1.4, 0.032], [4.2, 1.4, 0.032]]} color={COLORS.brass} lineWidth={1} />
 
       {/* Clickable link with hold animation */}
-      <LinkWithProgress position={[0, 1.15, 0.033]} />
+      <LinkWithProgress position={[0, 1.15, 0.033]} label="🔗 Code Repository" />
 
       {/* Single Paper - Smaller size */}
       <group
@@ -143,7 +143,7 @@ export const ResiliNetProject = ({ zoomedPaper, onPaperZoom }: ResiliNetProjectP
 
         {/* Tech stack */}
         <Text position={[0, 0.95, 0.002]} fontSize={0.13 * textScale} color={COLORS.primaryText} anchorX="center" anchorY="middle" letterSpacing={0.02}>
-          React • Node.js • Docker • Kubernetes • Terraform
+          React • Node.js • Docker • Terraform
         </Text>
 
         {/* Content */}

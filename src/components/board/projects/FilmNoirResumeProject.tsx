@@ -100,7 +100,7 @@ export const FilmNoirResumeProject = ({ zoomedPaper, onPaperZoom }: FilmNoirResu
       <Line points={[[-4.2, 1.4, 0.032], [4.2, 1.4, 0.032]]} color={COLORS.brass} lineWidth={1} />
 
       {/* Clickable link with hold animation */}
-      <LinkWithProgress position={[0, 1.15, 0.033]} url="https://github.com/Mahdi-196/Resume-Game" />
+      <LinkWithProgress position={[0, 1.15, 0.033]} url="https://github.com/Mahdi-196/Resume-Game" label="🔗 Code Repository" />
 
       {/* Single Paper - Smaller size, moved down */}
       <group
