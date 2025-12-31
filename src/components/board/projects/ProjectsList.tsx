@@ -57,12 +57,6 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
         <Text position={[0, 0.31, 0.05]} fontSize={0.1 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={3.5}>
           and intelligent task management
         </Text>
-        <Text position={[0, -0.05, 0.05]} fontSize={0.09 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          React • TypeScript • Node.js
-        </Text>
-        <Text position={[0, -0.22, 0.05]} fontSize={0.09 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          PostgreSQL • Redis • OpenAI
-        </Text>
         <PushPin position={[0, 1.5, 0.07]} radius={0.09} />
       </group>
 
@@ -105,12 +99,6 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
         </Text>
         <Text position={[-4.5, 0.25, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
           platform
-        </Text>
-        <Text position={[-4.5, -0.1, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          React • Node.js • Docker
-        </Text>
-        <Text position={[-4.5, -0.25, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          Kubernetes • Terraform
         </Text>
         <PushPin position={[-4.5, 1.3, 0.07]} />
       </group>
@@ -155,18 +143,12 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
         <Text position={[4.5, 0.25, 0.05]} fontSize={0.09 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.7}>
           Medical Assistant
         </Text>
-        <Text position={[4.5, -0.1, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          Next.js • AI/ML • AWS
-        </Text>
-        <Text position={[4.5, -0.25, 0.05]} fontSize={0.08 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          WebSocket • HIPAA
-        </Text>
         <PushPin position={[4.5, 1.3, 0.07]} />
       </group>
 
       {/* BOTTOM ROW - RespawnRoom Left, 3D Resume Middle, Side Projects Right */}
 
-      {/* Project 4 - RespawnRoom (Bottom Left - Smaller, Clickable) */}
+      {/* Project 4 - RespawnRoom (Bottom Left-Center - Smaller, Clickable) */}
       <group
         onClick={(e) => {
           e.stopPropagation();
@@ -179,43 +161,37 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
           document.body.style.cursor = 'auto';
         }}
       >
-        <mesh position={[-4, -2.1, 0.03]}>
+        <mesh position={[-2, -2.1, 0.03]}>
           <boxGeometry args={[2.5, 1.6, 0.03]} />
           <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
-        <mesh position={[-4, -1.3, 0.045]}>
+        <mesh position={[-2, -1.3, 0.045]}>
           <boxGeometry args={[2.5, 0.18, 0.025]} />
           <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
-        <mesh position={[-5.025, -1.3, 0.06]}>
+        <mesh position={[-3.025, -1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
           <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
-        <Text position={[-5.025, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        <Text position={[-3.025, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #004
         </Text>
-        <Text position={[-4, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        <Text position={[-2, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
           RespawnRoom
         </Text>
-        <Text position={[-4, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           Gaming community
         </Text>
-        <Text position={[-4, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           platform for events
         </Text>
-        <Text position={[-4, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[-2, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           and tournaments
         </Text>
-        <Text position={[-4, -2.4, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          React • GraphQL
-        </Text>
-        <Text position={[-4, -2.53, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          MongoDB • PubNub
-        </Text>
-        <PushPin position={[-4, -1.3, 0.07]} radius={0.07} />
+        <PushPin position={[-2, -1.3, 0.07]} radius={0.07} />
       </group>
 
-      {/* Project 5 - Film Noir Resume (Bottom Middle - Smaller, Clickable) */}
+      {/* Project 5 - Film Noir Resume (Bottom Right-Center - Smaller, Clickable) */}
       <group
         onClick={(e) => {
           e.stopPropagation();
@@ -228,40 +204,34 @@ export const ProjectsList = ({ onProjectSelect }: ProjectsListProps) => {
           document.body.style.cursor = 'auto';
         }}
       >
-        <mesh position={[0, -2.1, 0.03]}>
+        <mesh position={[2, -2.1, 0.03]}>
           <boxGeometry args={[2.5, 1.6, 0.03]} />
           <primitive object={SHARED_MATERIALS.manila} attach="material" />
         </mesh>
-        <mesh position={[0, -1.3, 0.045]}>
+        <mesh position={[2, -1.3, 0.045]}>
           <boxGeometry args={[2.5, 0.18, 0.025]} />
           <primitive object={SHARED_MATERIALS.manilaTab} attach="material" />
         </mesh>
-        <mesh position={[-1.025, -1.3, 0.06]}>
+        <mesh position={[0.975, -1.3, 0.06]}>
           <planeGeometry args={[0.45, 0.25]} />
           <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
         </mesh>
-        <Text position={[-1.025, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
+        <Text position={[0.975, -1.3, 0.07]} fontSize={0.13 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
           #005
         </Text>
-        <Text position={[0, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
+        <Text position={[2, -1.65, 0.05]} fontSize={0.16 * textScale} color={COLORS.darkBrown} anchorX="center" anchorY="middle">
           Film Noir Resume
         </Text>
-        <Text position={[0, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[2, -1.9, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           Built with Claude Code
         </Text>
-        <Text position={[0, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[2, -2.03, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           AI-assisted development
         </Text>
-        <Text position={[0, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
+        <Text position={[2, -2.16, 0.05]} fontSize={0.08 * textScale} color={COLORS.tertiaryText} anchorX="center" anchorY="middle" maxWidth={2.3}>
           showcase
         </Text>
-        <Text position={[0, -2.4, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          Claude Code • AI/ML
-        </Text>
-        <Text position={[0, -2.53, 0.05]} fontSize={0.075 * textScale} color={COLORS.brownText} anchorX="center" anchorY="middle">
-          React Three Fiber • R3F
-        </Text>
-        <PushPin position={[0, -1.3, 0.07]} radius={0.07} />
+        <PushPin position={[2, -1.3, 0.07]} radius={0.07} />
       </group>
 
     </>

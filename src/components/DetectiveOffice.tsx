@@ -124,7 +124,7 @@ export const DetectiveOffice = forwardRef<DetectiveOfficeRef, DetectiveOfficePro
     try {
       // Smooth zoom to board - closer on mobile for better readability
       const boardPosition = isMobile
-        ? new THREE.Vector3(0, 4.5, 3.5) // Closer for mobile devices
+        ? new THREE.Vector3(0, 4.5, 1.5) // Very close for mobile devices for clear text
         : new THREE.Vector3(0, 4.5, 4.5); // Further back for desktop
       const boardTarget = new THREE.Vector3(0, 4.5, 9.9); // Board center
 

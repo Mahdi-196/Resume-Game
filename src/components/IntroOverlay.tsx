@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { isMobileDevice } from '@/utils/detectMobile';
 
 /**
  * Intro overlay that appears on first visit
@@ -87,7 +88,7 @@ export const IntroOverlay = ({ onComplete, isManualTrigger = false }: IntroOverl
 
           {/* Instructions */}
           <div className="text-detective-paper/90 text-2xl font-light max-w-2xl mx-auto">
-            <p>WASD to move • Click R for board</p>
+            <p>{isMobileDevice() ? 'Try clicking around' : 'WASD to move • Click R for board'}</p>
           </div>
         </div>
       </div>

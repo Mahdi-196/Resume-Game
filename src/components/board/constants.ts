@@ -53,8 +53,8 @@ export const COLORS = {
 // Animation speeds
 export const ANIMATION = {
   fadeSpeed: {
-    preview: 8,
-    detail: 6,
+    preview: 20,  // Fast fade out to prevent overlap with detail headers
+    detail: 12,   // Quick fade in for smooth transition
   },
   opacityThreshold: 0.01,
 };

@@ -715,7 +715,7 @@ export const ResumeOverlay = ({ content, onClose }: ResumeOverlayProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-noir-shadow bg-opacity-90">
       <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card border-detective-brass m-4">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-          <CardTitle className="text-detective-glow">Detective's Dossier</CardTitle>
+          <CardTitle className="text-detective-glow">Interactive Portfolio</CardTitle>
           <Button 
             variant="ghost" 
             size="sm" 

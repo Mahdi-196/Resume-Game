@@ -81,7 +81,7 @@ export const ProjectsDetail = ({
             <primitive object={SHARED_MATERIALS.darkRed} attach="material" />
           </mesh>
           <Text position={[0, 2.5, 0.04]} fontSize={0.28 * textScale} color="#FFFFFF" anchorX="center" anchorY="middle">
-            CASE FILE #002: PROJECTS
+            CASE FILE #002
           </Text>
         </>
       )}

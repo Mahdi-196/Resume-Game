@@ -16,8 +16,8 @@ export const isMobileDevice = (): boolean => {
 
 /**
  * Get text scale multiplier based on device type
- * Returns 1.5x for mobile, 1x for desktop
+ * Returns 1.0x for mobile (no scaling), 1x for desktop
  */
 export const getTextScale = (): number => {
-  return isMobileDevice() ? 1.5 : 1.0;
+  return isMobileDevice() ? 1.0 : 1.0;
 };
